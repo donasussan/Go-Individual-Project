@@ -1,0 +1,75 @@
+/* static/style.css */
+
+/* Set a background color for the entire body */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+    font-family: Arial, sans-serif;
+}
+
+/* Center the container both horizontally and vertically */
+.container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Style the header text */
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Style the upload form */
+.upload-form {
+    text-align: center;
+}
+
+/* Style the file input */
+.file-input {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #fff;
+    width: 100%;
+    transition: border-color 0.3s ease-in-out;
+}
+
+/* Style the submit button */
+.submit-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #ddb635;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Add a hover effect to the submit button */
+.submit-button:hover {
+    background-color: #54ca89;
+}
+
+/* Style form error messages */
+.error-message {
+    color: #ff0000;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Style success messages */
+.success-message {
+    color: #008000;
+    font-size: 14px;
+    margin-top: 10px;
+}

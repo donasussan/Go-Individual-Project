@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>File Upload</title>
+	<link rel="stylesheet" type="text/css" href="/static/HomePage.css">
+</head>
+
+<body>
+	<div class="container">
+		<h1>Upload a File</h1>
+		<form method="POST" enctype="multipart/form-data" class=" upload-form" action="/upload">
+			<input type="file" name="file" accept=".csv" class="file-input">
+			<input type="submit" value="Upload" class="submit-button">
+		</form>
+	</div>
+</body>
+
+</html>
