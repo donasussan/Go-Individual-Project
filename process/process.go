@@ -9,10 +9,20 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 )
 
-// read CSV data from a file and return it as contacts
+var (
+	i                                           int
+	activityString                              string
+	activityDateX                               time.Time
+	activityDate1, activityDate2, activityDate3 time.Time
+	activityDate                                time.Time
+	flagMu                                      sync.Mutex
+	flag                                        int
+)
+
 func CSVread(filename string) ([]types.Contacts, error) {
 	file, err := os.Open(filename)
 	if err != nil {
@@ -51,15 +61,6 @@ func CSVread(filename string) ([]types.Contacts, error) {
 	return contacts, nil
 }
 
-var (
-	i                                           int
-	flag                                        int
-	activityString                              string
-	activityDateX                               time.Time
-	activityDate1, activityDate2, activityDate3 time.Time
-	activityDate                                time.Time
-)
-
 // generate activity dates
 func GenerateActivityDate() {
 	activityDate1 = activityDate.AddDate(0, 0, 1)
@@ -70,111 +71,111 @@ func GenerateActivityDate() {
 // generate activities for a given contact ID
 func GenerateActivity(p_id int) {
 	percent := rand.Intn(101)
+	addActivity := func(activityType int, date time.Time) {
+		activityString += fmt.Sprintf("(%d, %d, %d, \"%s\"),", p_id, i, activityType, date.Format("2006-01-02"))
+	}
+
 	if percent <= 80 {
 		if percent <= 30 {
-			activityString += fmt.Sprintf("(%d, %d, 1, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(1, activityDate)
 			activityDate = activityDate1
-			activityString += fmt.Sprintf("(%d, %d, 3, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(3, activityDate)
 		} else if percent <= 60 {
-			activityString += fmt.Sprintf("(%d, %d, 1, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(1, activityDate)
 			activityDate = activityDate1
-			activityString += fmt.Sprintf("(%d, %d, 3, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(3, activityDate)
 			activityDate = activityDate2
-			activityString += fmt.Sprintf("(%d, %d, 4, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(4, activityDate)
 		} else {
-			activityString += fmt.Sprintf("(%d, %d, 1, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(1, activityDate)
 			activityDate = activityDate1
-			activityString += fmt.Sprintf("(%d, %d, 3, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(3, activityDate)
 			activityDate = activityDate2
-			activityString += fmt.Sprintf("(%d, %d, 4, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(4, activityDate)
 			activityDate = activityDate3
-			activityString += fmt.Sprintf("(%d, %d, 7, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(7, activityDate)
 		}
 	} else if percent <= 90 {
 		if percent <= 82 {
-			activityString += fmt.Sprintf("(%d, %d, 1, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(1, activityDate)
 			activityDate = activityDate1
-			activityString += fmt.Sprintf("(%d, %d, 3, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(3, activityDate)
 			activityDate = activityDate2
-			activityString += fmt.Sprintf("(%d, %d, 3, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(3, activityDate)
 		} else if percent <= 84 {
-			activityString += fmt.Sprintf("(%d, %d, 1, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(1, activityDate)
 			activityDate = activityDate1
-			activityString += fmt.Sprintf("(%d, %d, 3, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(3, activityDate)
 			activityDate = activityDate2
-			activityString += fmt.Sprintf("(%d, %d, 3, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(3, activityDate)
 			activityDate = activityDate3
-			activityString += fmt.Sprintf("(%d, %d, 4, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(4, activityDate)
 		} else if percent <= 86 {
-			activityString += fmt.Sprintf("(%d, %d, 1, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(1, activityDate)
 			activityDate = activityDate1
-			activityString += fmt.Sprintf("(%d, %d, 3, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(3, activityDate)
 			activityDate = activityDate2
-			activityString += fmt.Sprintf("(%d, %d, 4, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(4, activityDate)
 			activityDate = activityDate3
-			activityString += fmt.Sprintf("(%d, %d, 3, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(3, activityDate)
 		} else if percent <= 88 {
-			activityString += fmt.Sprintf("(%d, %d, 1, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(1, activityDate)
 			activityDate = activityDate1
-			activityString += fmt.Sprintf("(%d, %d, 3, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
-			activityString += fmt.Sprintf("(%d, %d, 4, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(3, activityDate)
+			addActivity(4, activityDate)
 			activityDate = activityDate2
-			activityString += fmt.Sprintf("(%d, %d, 3, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(3, activityDate)
 			activityDate = activityDate3
-			activityString += fmt.Sprintf("(%d, %d, 4, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(4, activityDate)
 		} else if percent <= 89 {
-			activityString += fmt.Sprintf("(%d, %d, 1, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
-			activityString += fmt.Sprintf("(%d, %d, 3, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(1, activityDate)
+			addActivity(3, activityDate)
 			activityDate = activityDate1
-			activityString += fmt.Sprintf("(%d, %d, 4, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(4, activityDate)
 			activityDate = activityDate2
-			activityString += fmt.Sprintf("(%d, %d, 7, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(7, activityDate)
 			activityDate = activityDate3
-			activityString += fmt.Sprintf("(%d, %d, 3, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(3, activityDate)
 		} else {
-			activityString += fmt.Sprintf("(%d, %d, 1, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
-			activityDate = activityDate1
-			activityString += fmt.Sprintf("(%d, %d, 3, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
-			activityString += fmt.Sprintf("(%d, %d, 4, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
-			activityString += fmt.Sprintf("(%d, %d, 7, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(1, activityDate)
+			addActivity(3, activityDate)
+			addActivity(4, activityDate)
+			addActivity(7, activityDate)
 			activityDate = activityDate2
-			activityString += fmt.Sprintf("(%d, %d, 3, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(3, activityDate)
 			activityDate = activityDate3
-			activityString += fmt.Sprintf("(%d, %d, 4, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			addActivity(4, activityDate)
 		}
 	} else {
 		percent := rand.Intn(1001)
-		if percent <= 940 {
-			activityString += fmt.Sprintf("(%d, %d, 1, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+		if percent <= 960 {
+			addActivity(1, activityDate)
 		} else {
 			flag = 0
-			if percent <= 960 {
-				activityString += fmt.Sprintf("(%d, %d, 1, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+			if percent <= 970 {
 				activityDate = activityDate1
-				activityString += fmt.Sprintf("(%d, %d, 3, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+				addActivity(3, activityDate)
 				activityDate = activityDate2
-				activityString += fmt.Sprintf("(%d, %d, 4, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+				addActivity(4, activityDate)
 				activityDate = activityDate3
-				activityString += fmt.Sprintf("(%d, %d, 5, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
-			} else if percent <= 970 {
-				activityString += fmt.Sprintf("(%d, %d, 1, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
-				activityDate = activityDate1
-				activityString += fmt.Sprintf("(%d, %d, 3, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
-				activityDate = activityDate2
-				activityString += fmt.Sprintf("(%d, %d, 4, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
-				activityDate = activityDate3
-				activityString += fmt.Sprintf("(%d, %d, 6, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+				addActivity(5, activityDate)
 			} else if percent <= 980 {
-				activityString += fmt.Sprintf("(%d, %d, 1, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
 				activityDate = activityDate1
-				activityString += fmt.Sprintf("(%d, %d, 3, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+				addActivity(3, activityDate)
 				activityDate = activityDate2
-				activityString += fmt.Sprintf("(%d, %d, 4, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+				addActivity(4, activityDate)
 				activityDate = activityDate3
-				activityString += fmt.Sprintf("(%d, %d, 5, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
-				activityString += fmt.Sprintf("(%d, %d, 6, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+				addActivity(6, activityDate)
+			} else if percent <= 990 {
+				activityDate = activityDate1
+				addActivity(3, activityDate)
+				activityDate = activityDate2
+				addActivity(4, activityDate)
+				activityDate = activityDate3
+				addActivity(5, activityDate)
+				addActivity(6, activityDate)
 			} else {
-				activityString += fmt.Sprintf("(%d, %d, 2, \"%s\"),", p_id, i, activityDate.Format("2006-01-02"))
+				addActivity(2, activityDate)
 			}
 		}
 	}
@@ -197,9 +198,7 @@ func GenerateData(ID int) {
 		GenerateData(ID)
 	}
 }
-
 func MainData(ID int, contactsData types.Contacts) (types.ContactStatus, []types.ContactActivity, error) {
-	// logger, _ := logs.NewSimpleLogger("datalog.log")
 	activityDateX, _ = time.Parse("2006-01-02", "2023-01-01")
 	activityDate = activityDateX
 	GenerateActivityDate()
@@ -218,15 +217,28 @@ func MainData(ID int, contactsData types.Contacts) (types.ContactStatus, []types
 		Status:  flag,
 		Contact: contact,
 	}
-	MultiActivities, err := SeparateContactActivities(activityString, 4)
-	if err != nil {
-		return StatusContact, nil, err
-	}
-	// formattedActivities := formatContactActivities(MultiActivities)
+
+	//channel to receive separated contact activities
+	resultCh := make(chan []types.ContactActivity)
+
+	go RunSeparateContactActivities(activityString, 4, resultCh)
+
+	MultiActivities := <-resultCh
+
+	close(resultCh)
+
 	return StatusContact, MultiActivities, nil
 }
 
-// Separate contact activities string and give it to ContactActivity struct
+func RunSeparateContactActivities(activityString string, numColumns int, resultCh chan []types.ContactActivity) {
+	multiActivities, err := SeparateContactActivities(activityString, numColumns)
+	if err != nil {
+		fmt.Println("Error in SeparateContactActivities:", err)
+	}
+	resultCh <- multiActivities
+}
+
+// separate contact activities string and give it to ContactActivity struct
 func SeparateContactActivities(activityString string, numColumns int) ([]types.ContactActivity, error) {
 	logger, _ := logs.NewSimpleLogger("datalog.log")
 	activityStrings := strings.Split(activityString, "),(")
@@ -265,35 +277,3 @@ func SeparateContactActivities(activityString string, numColumns int) ([]types.C
 
 	return multiactivities, nil
 }
-
-// func SeparateContactActivities(activityString string, numColumns int) ([]types.ContactActivity, error) {
-// 	activityStrings := strings.Split(activityString, "),(")
-// 	var multiactivities []types.ContactActivity
-// 	for _, activityStr := range activityStrings {
-// 		activityStr = strings.Trim(activityStr, "()")
-// 		parts := strings.Split(activityStr, ", ")
-
-// 		if len(parts) >= numColumns {
-// 			contactID, err := strconv.Atoi(parts[0])
-// 			if err != nil {
-// 				return nil, err
-// 			}
-// 			campaignID, err := strconv.Atoi(parts[1])
-// 			if err != nil {
-// 				return nil, err
-// 			}
-// 			activityType, err := strconv.Atoi(parts[2])
-// 			if err != nil {
-// 				return nil, err
-// 			}
-// 			activity := types.ContactActivity{
-// 				Contactid:    contactID,
-// 				Campaignid:   campaignID,
-// 				Activitytype: activityType,
-// 				Activitydate: parts[3],
-// 			}
-// 			multiactivities = append(multiactivities, activity)
-// 		}
-// 	}
-// 	return multiactivities, nil
-// }

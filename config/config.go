@@ -48,18 +48,33 @@ type MySQLDatabase struct {
 	DSN string
 }
 
-func (m *MySQLDatabase) Connect() (*sql.DB, error) {
+func (m *MySQLDatabase) Connect(config *MySQLConfig) (*sql.DB, error) {
 	return sql.Open("mysql", m.DSN)
 }
 
-func (m *MySQLDatabase) Query(query string) error {
-	fmt.Println("Executing MySQL query:", query)
-	return nil
-}
+// func (m *MySQLDatabase) Query(query string) error {
+// 	fmt.Println("Executing MySQL query:", query)
+// 	return nil
+// }
 
 func (m *MySQLDatabase) Close() error {
 	fmt.Println("Closing MySQL connection")
 	return nil
+}
+func ConnectToMySQL() (*sql.DB, error) {
+	config, err := LoadMySQLConfigFromEnv()
+	if err != nil {
+		return nil, err
+	}
+
+	dsn := GenerateMySQLDSN(config)
+
+	db, err := sql.Open("mysql", dsn)
+	if err != nil {
+		return nil, err
+	}
+
+	return db, nil
 }
 
 type ClickHouseConfig struct {
@@ -93,7 +108,8 @@ func LoadClickHouseConfigFromEnv() (*ClickHouseConfig, error) {
 }
 
 func GenerateClickHouseDSN(config *ClickHouseConfig) string {
-	return fmt.Sprintf("tcp://%s:%s?username=%s&password=%s&database=%s", config.Hostname, config.Port, config.Username, config.Password, config.DBName)
+	return fmt.Sprintf("tcp://%s:%s?username=%s&password=%s&database=%s",
+		config.Hostname, config.Port, config.Username, config.Password, config.DBName)
 }
 
 type ClickHouseDatabase struct {
@@ -185,16 +201,23 @@ func NewKafkaConsumer(config *KafkaConfig, topic string) (sarama.Consumer, error
 	}
 	return consumer, nil
 }
-
-func ConsumeMessage(consumer sarama.Consumer, topic string) {
+func ConsumeMessage(consumer sarama.Consumer, topic string) []string {
 	partitionConsumer, err := consumer.ConsumePartition(topic, 0, sarama.OffsetOldest)
 	if err != nil {
 		fmt.Printf("Error creating partition consumer for %s: %v\n", topic, err)
-		return
+		return nil
 	}
 	defer partitionConsumer.Close()
+	var messages []string
 
 	for msg := range partitionConsumer.Messages() {
-		fmt.Printf("Received message from %s: %s\n", topic, string(msg.Value))
+		message := string(msg.Value)
+		messages = append(messages, message)
+
+		if message == "EOF" {
+			break
+		}
 	}
+
+	return messages
 }

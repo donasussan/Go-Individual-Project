@@ -2,6 +2,7 @@ package api
 
 import (
 	"datastream/config"
+	"datastream/database"
 	"datastream/logs"
 	"datastream/process"
 	"datastream/types"
@@ -28,8 +29,8 @@ func HomePageHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func Upload(w http.ResponseWriter, r *http.Request) {
-	logger, _ := logs.NewSimpleLogger("datalog.log")
 
+	logger, _ := logs.NewSimpleLogger("datalog.log")
 	file, header, err := r.FormFile("file")
 	if err != nil {
 		logger.Error(fmt.Sprintf("Error retrieving file: %v", err))
@@ -39,39 +40,51 @@ func Upload(w http.ResponseWriter, r *http.Request) {
 	defer file.Close()
 
 	filename := header.Filename
-
 	contacts, err := process.CSVread(filename)
 	if err != nil {
 		logger.Error(err.Error())
 		return
 	}
+	contactsStruct := ContactsStruct(contacts)
+	go activityProcess(contactsStruct)
+}
 
-	var contactsData []types.Contacts
+func ContactsStruct(contacts []types.Contacts) []types.Contacts {
+	var contactsStruct []types.Contacts
 
 	for _, contact := range contacts {
-		contactsData = append(contactsData, types.Contacts{
+		contactsStruct = append(contactsStruct, types.Contacts{
 			ID:      contact.ID,
 			Name:    contact.Name,
 			Email:   contact.Email,
 			Details: contact.Details,
 		})
 	}
-	go activityProcess(contactsData)
+
+	return contactsStruct
 }
 
 func activityProcess(contacts []types.Contacts) {
-	for _, contact := range contacts {
-		fmt.Printf("ID: %d\n", contact.ID)
 
+	for _, contact := range contacts {
 		statusContact, activitiesSlice, _ := process.MainData(contact.ID, contact)
-		ContactsData, _ := getContactsData(statusContact)
-		ActivityDetails := getActivityDetails(activitiesSlice)
-		uploadToKafka(ContactsData, ActivityDetails)
+		contactsData, _ := getContactsData(statusContact)
+		activityDetails := getActivityDetails(activitiesSlice)
+		go SendContactDataToKafka(contactsData, activityDetails)
+		go ReadKafkaData()
 	}
 }
-
+func SendContactDataToKafka(contactsData string, activityDetails string) {
+	logger, _ := logs.NewSimpleLogger("datalog.log")
+	var kafkaConfig config.KafkaConfig
+	kafkaStore := database.NewKafkaStore(kafkaConfig)
+	err := kafkaStore.InsertContact(contactsData, activityDetails)
+	if err != nil {
+		logger.Error(fmt.Sprintf("Error inserting contact data into Kafka: %v\n", err))
+	}
+}
 func getContactsData(statusContact types.ContactStatus) (string, string) {
-	statusInfo := fmt.Sprintf("(%d, %s,%s, %s, %d)\n", statusContact.Contact.ID, statusContact.Contact.Name,
+	statusInfo := fmt.Sprintf("(%d, %s,%s, %s, %d),", statusContact.Contact.ID, statusContact.Contact.Name,
 		statusContact.Contact.Email, statusContact.Contact.Details, statusContact.Status)
 	return statusInfo, ""
 }
@@ -79,58 +92,63 @@ func getContactsData(statusContact types.ContactStatus) (string, string) {
 func getActivityDetails(activities []types.ContactActivity) string {
 	var details string
 	for _, activity := range activities {
-		details += fmt.Sprintf("(%d, %d, %d, %s)\n", activity.Contactid, activity.Campaignid,
+		details += fmt.Sprintf("(%d, %d, %d, %s),", activity.Contactid, activity.Campaignid,
 			activity.Activitytype, activity.Activitydate)
 	}
 	return details
 }
+func ReadKafkaData() error {
+	logger, _ := logs.NewSimpleLogger("datalog.log")
+	configData, err := config.LoadKafkaConfigFromEnv()
+	if err != nil {
+		logger.Errorf(fmt.Sprintf("Error loading Kafka config: %v", err))
+		return err
+	}
+	consumer, err := config.NewKafkaConsumer(configData, configData.Topic1)
+	if err != nil {
+		logger.Errorf(fmt.Sprintf("Error creating Kafka consumer: %v", err))
+		return err
+	}
+	defer consumer.Close()
 
-func uploadToKafka(StatusContact string, Activities string) {
-	ConfigData, err := config.LoadKafkaConfigFromEnv()
-	if err != nil {
-		fmt.Printf("Error loading Kafka config: %v\n", err)
-		return
+	messages := config.ConsumeMessage(consumer, configData.Topic1)
+
+	if messages == nil {
+		logger.Error("No messages received from Kafka.")
+		return nil
 	}
-	producer1, producer2, err := config.NewKafkaProducers(ConfigData)
-	if err != nil {
-		fmt.Printf("Error creating Kafka producer: %v\n", err)
-		return
+	for _, message := range messages {
+		fmt.Println(message)
 	}
-	defer producer1.Close()
-	defer producer2.Close()
-	message1 := ""
-	message2 := ""
-	err1 := config.SendMessage(producer1, ConfigData.Topic1, message1)
-	if err1 != nil {
-		fmt.Printf("Error sending message to Topic1: %v\n", err1)
-	}
-	err2 := config.SendMessage(producer2, ConfigData.Topic2, message2)
-	if err2 != nil {
-		fmt.Printf("Error sending message to Topic2: %v\n", err2)
-	}
+	return nil
 }
 
-func TakeDataFromKafka() {
-	ConfigData, err := config.LoadKafkaConfigFromEnv()
-	consumer1, err := config.NewKafkaConsumer(ConfigData, ConfigData.Topic1)
-	if err != nil {
-		fmt.Printf("Error creating Kafka consumer for Topic1: %v\n", err)
-		return
-	}
-	defer consumer1.Close()
+// func SendContactDataToMySQL(messages []string) error {
+// 	//logger, _ := logs.NewSimpleLogger("datalog.log")
+// 	db, err := config.ConnectToMySQL()
+// 	//logger.Error(fmt.Println(db))
 
-	consumer2, err := config.NewKafkaConsumer(ConfigData, ConfigData.Topic2)
-	if err != nil {
-		fmt.Printf("Error creating Kafka consumer for Topic2: %v\n", err)
-		return
-	}
-	defer consumer2.Close()
+// 	if err != nil {
+// 		return fmt.Errorf("error connecting to MySQL: %v", err)
+// 	}
+// 	defer db.Close()
 
-	go config.ConsumeMessage(consumer1, ConfigData.Topic1)
-	go config.ConsumeMessage(consumer2, ConfigData.Topic2)
-	select {}
-}
-func ResultPageHandler() {
-}
-func GetDataFromClickHouse() {
-}
+// 	// Trim trailing commas from each element in the message slice
+// 	for i := range messages {
+// 		messages[i] = strings.TrimRight(messages[i], ",")
+
+// 		query := fmt.Sprintf("INSERT INTO contacts (Name, Email, Details, Status) VALUES %s;", messages)
+
+// 		// Execute the query with the message values
+// 		_, err = db.Exec(query)
+// 		if err != nil {
+// 			return fmt.Errorf("error executing MySQL query: %v", err)
+// 		}
+// 	}
+// 	return nil
+// }
+
+// func ResultPageHandler() {
+// }
+// func GetDataFromClickHouse() {
+// }
