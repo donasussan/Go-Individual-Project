@@ -56,8 +56,6 @@ func Upload(w http.ResponseWriter, r *http.Request) {
 			Details: contact.Details,
 		})
 	}
-
-	// Call the activityprocess function and pass contacts
 	go activityProcess(contactsData)
 }
 
@@ -65,24 +63,28 @@ func activityProcess(contacts []types.Contacts) {
 	for _, contact := range contacts {
 		fmt.Printf("ID: %d\n", contact.ID)
 
-		StatusContact, Activities, _ := process.MainData(contact.ID, contact)
-		fmt.Println(StatusContact)
-		fmt.Print(Activities)
-
+		statusContact, activitiesSlice, _ := process.MainData(contact.ID, contact)
+		ContactsData, _ := getContactsData(statusContact)
+		ActivityDetails := getActivityDetails(activitiesSlice)
+		uploadToKafka(ContactsData, ActivityDetails)
 	}
 }
 
-// func convertInput(input []string) []string {
-// 	var converted []string
+func getContactsData(statusContact types.ContactStatus) (string, string) {
+	statusInfo := fmt.Sprintf("(%d, %s,%s, %s, %d)\n", statusContact.Contact.ID, statusContact.Contact.Name,
+		statusContact.Contact.Email, statusContact.Contact.Details, statusContact.Status)
+	return statusInfo, ""
+}
 
-// 	for _, item := range input {
-// 		convertedItem := strings.ReplaceAll(strings.Trim(item, "{}"), " ", ", ")
-// 		convertedItem = "(" + convertedItem + ")"
-// 		converted = append(converted, convertedItem)
-// 	}
+func getActivityDetails(activities []types.ContactActivity) string {
+	var details string
+	for _, activity := range activities {
+		details += fmt.Sprintf("(%d, %d, %d, %s)\n", activity.Contactid, activity.Campaignid,
+			activity.Activitytype, activity.Activitydate)
+	}
+	return details
+}
 
-//		return converted
-//	}
 func uploadToKafka(StatusContact string, Activities string) {
 	ConfigData, err := config.LoadKafkaConfigFromEnv()
 	if err != nil {
