@@ -86,33 +86,6 @@ func (m *MySQLConnector) Close() error {
 	return nil
 }
 
-func NewKafkaConnector(config KafkaConfig) (*KafkaConnector, error) {
-
-	producer, err := sarama.NewSyncProducer([]string{config.Broker}, nil)
-	if err != nil {
-		return nil, err
-	}
-
-	consumer, err := sarama.NewConsumer([]string{config.Broker}, nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return &KafkaConnector{
-		config:   config,
-		Producer: producer,
-		Consumer: consumer,
-	}, nil
-}
-
-func (kc *KafkaConnector) Close() {
-	if kc.Producer != nil {
-		kc.Producer.Close()
-	}
-	if kc.Consumer != nil {
-		kc.Consumer.Close()
-	}
-}
 func (c ClickHouseConfig) GetDSN() string {
 	return fmt.Sprintf("tcp://%s:%s?username=%s&password=%s&database=%s",
 		c.Hostname,
