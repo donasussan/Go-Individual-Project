@@ -217,13 +217,12 @@ func MainData(ID int, contactsData types.Contacts) (types.ContactStatus, []types
 		Status:  flag,
 		Contact: contact,
 	}
-	resultCh := make(chan []types.ContactActivity, 4)
+	resultSeparateCh := make(chan []types.ContactActivity, 4)
 
-	go RunSeparateContactActivities(activityString, 4, resultCh)
+	go RunSeparateContactActivities(activityString, 4, resultSeparateCh)
 
-	MultiActivities := <-resultCh
-
-	close(resultCh)
+	MultiActivities := <-resultSeparateCh
+	close(resultSeparateCh)
 
 	return StatusContact, MultiActivities, nil
 }

@@ -61,8 +61,6 @@ func SendContactDataToMySQL(messages []string) error {
 		logs.NewLog.Error(fmt.Sprintf("error connecting to MySQL: %v", err))
 		return err
 	}
-	//db, err := config.ConnectToMySQL()
-	// db, err := MYSQLconn.Connect()
 	filteredMessages := make([]string, 0, len(messages))
 	for _, message := range messages {
 		if message != "EOF" {

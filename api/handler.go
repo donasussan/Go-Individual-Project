@@ -76,19 +76,18 @@ func ContactsStruct(contacts []types.Contacts) []types.Contacts {
 }
 
 func activityProcess(contacts []types.Contacts) {
-
 	for _, contact := range contacts {
 		statusContact, activitiesSlice, _ := process.MainData(contact.ID, contact)
 		contactsData, _ := getContactsData(statusContact)
 		activityDetails := getActivityDetails(activitiesSlice)
-		SendContactDataToKafka(contactsData, activityDetails)
+		SendDataToKafka(contactsData, activityDetails)
 
 	}
-	SendContactDataToKafka("EOF", "EOF")
+	SendDataToKafka("EOF", "EOF")
 	go database.ReadKafkaTopic1()
 	go database.ReadKafkaTopic2()
 }
-func SendContactDataToKafka(contactsData string, activityDetails string) {
+func SendDataToKafka(contactsData string, activityDetails string) {
 	err := database.InsertContact(contactsData, activityDetails)
 	if err != nil {
 		logs.NewLog.Error(fmt.Sprintf("Error inserting contact data into Kafka: %v\n", err))
