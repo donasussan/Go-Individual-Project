@@ -206,7 +206,7 @@ func MainData(ID int, contactsData types.Contacts) (types.ContactStatus, []types
 	flag = 1
 	activityString = ""
 	GenerateData(ID)
-	fmt.Println("Flag value:", flag)
+	fmt.Println(ID)
 	contact := types.Contacts{
 		ID:      contactsData.ID,
 		Name:    contactsData.Name,
@@ -217,9 +217,7 @@ func MainData(ID int, contactsData types.Contacts) (types.ContactStatus, []types
 		Status:  flag,
 		Contact: contact,
 	}
-
-	//channel to receive separated contact activities
-	resultCh := make(chan []types.ContactActivity)
+	resultCh := make(chan []types.ContactActivity, 4)
 
 	go RunSeparateContactActivities(activityString, 4, resultCh)
 
@@ -240,7 +238,6 @@ func RunSeparateContactActivities(activityString string, numColumns int, resultC
 
 // separate contact activities string and give it to ContactActivity struct
 func SeparateContactActivities(activityString string, numColumns int) ([]types.ContactActivity, error) {
-	logger, _ := logs.NewSimpleLogger("datalog.log")
 	activityStrings := strings.Split(activityString, "),(")
 	var multiactivities []types.ContactActivity
 	for _, activityStr := range activityStrings {
@@ -249,18 +246,18 @@ func SeparateContactActivities(activityString string, numColumns int) ([]types.C
 		if len(parts) >= numColumns {
 			contactID, err := strconv.Atoi(parts[0])
 			if err != nil {
-				logger.Error(fmt.Sprintf("Error converting ContactID: %v", err))
+				logs.NewLog.Error(fmt.Sprintf("Error converting ContactID: %v", err))
 				return nil, err
 			}
 			campaignID, err := strconv.Atoi(parts[1])
 			if err != nil {
-				logger.Error(fmt.Sprintf("Error converting CampaignID: %v", err))
+				logs.NewLog.Error(fmt.Sprintf("Error converting CampaignID: %v", err))
 				return nil, err
 			}
 
 			activityType, err := strconv.Atoi(parts[2])
 			if err != nil {
-				logger.Error(fmt.Sprintf("Error converting ActivityType: %v", err))
+				logs.NewLog.Error(fmt.Sprintf("Error converting ActivityType: %v", err))
 				return nil, err
 			}
 

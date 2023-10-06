@@ -2,13 +2,20 @@ package config
 
 import (
 	"database/sql"
+	"datastream/logs"
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/IBM/sarama"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
 )
+
+type DBConnector interface {
+	Connect() (*sql.DB, error)
+	Close() error
+}
 
 type MySQLConfig struct {
 	Username string
@@ -18,65 +25,21 @@ type MySQLConfig struct {
 	DBName   string
 }
 
-func LoadMySQLConfigFromEnv() (*MySQLConfig, error) {
-	if err := godotenv.Load(); err != nil {
-		return nil, fmt.Errorf("error loading .env file: %v", err)
-	}
-
-	dbUser := os.Getenv("DB_USER")
-	dbPassword := os.Getenv("DB_PASSWORD")
-	dbHost := os.Getenv("DB_HOST")
-	dbPort := os.Getenv("DB_PORT")
-	dbName := os.Getenv("DB_NAME")
-
-	config := &MySQLConfig{
-		Username: dbUser,
-		Password: dbPassword,
-		Hostname: dbHost,
-		Port:     dbPort,
-		DBName:   dbName,
-	}
-
-	return config, nil
+type MySQLConnector struct {
+	Config MySQLConfig
+	Db     *sql.DB
 }
 
-func GenerateMySQLDSN(config *MySQLConfig) string {
-	return fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", config.Username, config.Password, config.Hostname, config.Port, config.DBName)
+type KafkaConfig struct {
+	Broker string
+	Topic1 string
+	Topic2 string
 }
-
-type MySQLDatabase struct {
-	DSN string
+type KafkaConnector struct {
+	config   KafkaConfig
+	Producer sarama.SyncProducer
+	Consumer sarama.Consumer
 }
-
-func (m *MySQLDatabase) Connect(config *MySQLConfig) (*sql.DB, error) {
-	return sql.Open("mysql", m.DSN)
-}
-
-// func (m *MySQLDatabase) Query(query string) error {
-// 	fmt.Println("Executing MySQL query:", query)
-// 	return nil
-// }
-
-func (m *MySQLDatabase) Close() error {
-	fmt.Println("Closing MySQL connection")
-	return nil
-}
-func ConnectToMySQL() (*sql.DB, error) {
-	config, err := LoadMySQLConfigFromEnv()
-	if err != nil {
-		return nil, err
-	}
-
-	dsn := GenerateMySQLDSN(config)
-
-	db, err := sql.Open("mysql", dsn)
-	if err != nil {
-		return nil, err
-	}
-
-	return db, nil
-}
-
 type ClickHouseConfig struct {
 	Username string
 	Password string
@@ -85,98 +48,172 @@ type ClickHouseConfig struct {
 	DBName   string
 }
 
-func LoadClickHouseConfigFromEnv() (*ClickHouseConfig, error) {
-	if err := godotenv.Load(); err != nil {
-		return nil, fmt.Errorf("error loading .env file: %v", err)
-	}
-
-	dbUser := os.Getenv("CLICK_USERNAME")
-	dbPassword := os.Getenv("CLICK_PASSWORD")
-	dbHost := os.Getenv("CLICK_HOST")
-	dbPort := os.Getenv("CLICK_PORT")
-	dbName := os.Getenv("CLICK_DB_NAME")
-
-	config := &ClickHouseConfig{
-		Username: dbUser,
-		Password: dbPassword,
-		Hostname: dbHost,
-		Port:     dbPort,
-		DBName:   dbName,
-	}
-
-	return config, nil
+type ClickHouseConnector struct {
+	config ClickHouseConfig
+	db     *sql.DB
+}
+type DatabaseConfig interface {
+	GetConfig() map[string]string
 }
 
-func GenerateClickHouseDSN(config *ClickHouseConfig) string {
+func (m MySQLConfig) GetDSN() string {
+	return fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",
+		m.Username,
+		m.Password,
+		m.Hostname,
+		m.Port,
+		m.DBName)
+}
+
+func (m *MySQLConnector) Connect() (*sql.DB, error) {
+	dsn := m.Config.GetDSN()
+	db, err := sql.Open("mysql", dsn)
+	if err != nil {
+		logs.NewLog.Error(err.Error())
+		return nil, err
+	}
+	db.SetMaxOpenConns(100000)
+
+	m.Db = db
+	return db, nil
+}
+func (m *MySQLConnector) Close() error {
+	if m.Db != nil {
+		err := m.Db.Close()
+		m.Db = nil
+		return err
+	}
+	return nil
+}
+
+func NewKafkaConnector(config KafkaConfig) (*KafkaConnector, error) {
+
+	producer, err := sarama.NewSyncProducer([]string{config.Broker}, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	consumer, err := sarama.NewConsumer([]string{config.Broker}, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return &KafkaConnector{
+		config:   config,
+		Producer: producer,
+		Consumer: consumer,
+	}, nil
+}
+
+func (kc *KafkaConnector) Close() {
+	if kc.Producer != nil {
+		kc.Producer.Close()
+	}
+	if kc.Consumer != nil {
+		kc.Consumer.Close()
+	}
+}
+func (c ClickHouseConfig) GetDSN() string {
 	return fmt.Sprintf("tcp://%s:%s?username=%s&password=%s&database=%s",
-		config.Hostname, config.Port, config.Username, config.Password, config.DBName)
+		c.Hostname,
+		c.Port,
+		c.Username,
+		c.Password,
+		c.DBName)
 }
-
-type ClickHouseDatabase struct {
-	DSN  string
-	Conn *sql.DB
-}
-
-func (c *ClickHouseDatabase) Connect() error {
-	connect, err := sql.Open("clickhouse", c.DSN)
+func (c *ClickHouseConnector) Connect() (*sql.DB, error) {
+	DSN := c.config.GetDSN()
+	db, err := sql.Open("clickhouse", DSN)
 	if err != nil {
+		return nil, err
+	}
+
+	if err := db.Ping(); err != nil {
+		return nil, err
+	}
+	c.db = db
+	return db, nil
+}
+
+func (c *ClickHouseConnector) Close() error {
+	if c.db != nil {
+		err := c.db.Close()
+		c.db = nil
 		return err
 	}
-	c.Conn = connect
 	return nil
 }
 
-func (c *ClickHouseDatabase) Query(query string) error {
-	_, err := c.Conn.Exec(query)
-	if err != nil {
-		return err
-	}
-	fmt.Println("Executing ClickHouse query:", query)
-	return nil
-}
-
-func (c *ClickHouseDatabase) Close() error {
-	if c.Conn != nil {
-		err := c.Conn.Close()
-		if err != nil {
-			return err
-		}
-		fmt.Println("Closing ClickHouse connection")
-	}
-	return nil
-}
-
-type KafkaConfig struct {
-	Brokers string
-	Topic1  string
-	Topic2  string
-}
-
-func LoadKafkaConfigFromEnv() (*KafkaConfig, error) {
+func LoadDatabaseConfig(Database string) (DatabaseConfig, error) {
 	if err := godotenv.Load(); err != nil {
-		return nil, fmt.Errorf("error loading .env file: %v", err)
+		log.Fatalf("Error loading .env file: %v", err)
+		return nil, err
 	}
 
-	brokers := os.Getenv("KAFKA_BROKERS")
-	topic1 := os.Getenv("KAFKA_TOPIC1")
-	topic2 := os.Getenv("KAFKA_TOPIC2")
+	switch Database {
+	case "mysql":
+		mysqlConfig := MySQLConfig{
+			Username: os.Getenv("DB_USERNAME"),
+			Password: os.Getenv("DB_PASSWORD"),
+			Hostname: os.Getenv("DB_HOST"),
+			Port:     os.Getenv("DB_PORT"),
+			DBName:   os.Getenv("DB_NAME"),
+		}
+		return mysqlConfig, nil
+	case "kafka":
+		kafkaConfig := KafkaConfig{
+			Broker: os.Getenv("KAFKA_BROKER"),
+			Topic1: os.Getenv("KAFKA_TOPIC_CONTACTS"),
+			Topic2: os.Getenv("KAFKA_TOPIC_CONTACT_ACTIVITY"),
+		}
+		return kafkaConfig, nil
+	case "clickhouse":
+		clickHouseConfig := ClickHouseConfig{
+			Username: os.Getenv("CLICK_USERNAME"),
+			Password: os.Getenv("CLICK_PASSWORD"),
+			Hostname: os.Getenv("CLICK_HOST"),
+			Port:     os.Getenv("CLICK_PORT"),
+			DBName:   os.Getenv("CLICK_DB_NAME"),
+		}
+		return clickHouseConfig, nil
+	default:
+		return nil, fmt.Errorf("unsupported DB_TYPE: %s", Database)
 
-	config := &KafkaConfig{
-		Brokers: brokers,
-		Topic1:  topic1,
-		Topic2:  topic2,
 	}
 
-	return config, nil
+}
+func (m MySQLConfig) GetConfig() map[string]string {
+	return map[string]string{
+		"Username": m.Username,
+		"Password": m.Password,
+		"Hostname": m.Hostname,
+		"Port":     m.Port,
+		"DBName":   m.DBName,
+	}
+}
+func (c ClickHouseConfig) GetConfig() map[string]string {
+	return map[string]string{
+		"Username": c.Username,
+		"Password": c.Password,
+		"Hostname": c.Hostname,
+		"Port":     c.Port,
+		"DBName":   c.DBName,
+	}
+}
+func (k KafkaConfig) GetConfig() map[string]string {
+	return map[string]string{
+
+		"Broker": k.Broker,
+	}
 }
 
 func NewKafkaProducers(config *KafkaConfig) (sarama.SyncProducer, sarama.SyncProducer, error) {
-	producer1, err := sarama.NewSyncProducer([]string{config.Brokers}, nil)
+	producer1, err := sarama.NewSyncProducer([]string{config.Broker}, nil)
 	if err != nil {
 		return nil, nil, err
 	}
 
-	producer2, err := sarama.NewSyncProducer([]string{config.Brokers}, nil)
+	producer2, err := sarama.NewSyncProducer([]string{config.Broker}, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -195,7 +232,7 @@ func SendMessage(producer sarama.SyncProducer, topic string, message string) err
 }
 
 func NewKafkaConsumer(config *KafkaConfig, topic string) (sarama.Consumer, error) {
-	consumer, err := sarama.NewConsumer([]string{config.Brokers}, nil)
+	consumer, err := sarama.NewConsumer([]string{config.Broker}, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -204,7 +241,7 @@ func NewKafkaConsumer(config *KafkaConfig, topic string) (sarama.Consumer, error
 func ConsumeMessage(consumer sarama.Consumer, topic string) []string {
 	partitionConsumer, err := consumer.ConsumePartition(topic, 0, sarama.OffsetOldest)
 	if err != nil {
-		fmt.Printf("Error creating partition consumer for %s: %v\n", topic, err)
+		logs.NewLog.Error("Error creating partition consumer")
 		return nil
 	}
 	defer partitionConsumer.Close()
@@ -218,6 +255,5 @@ func ConsumeMessage(consumer sarama.Consumer, topic string) []string {
 			break
 		}
 	}
-
 	return messages
 }
