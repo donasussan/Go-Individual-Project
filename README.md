@@ -27,6 +27,8 @@ Here's an overview of the project's directory structure:
   - `config.go`: Stores configuration parameters.
 - `log/`: Handles project logging.
   - `log.go`: Configures logging for the application.
+- `process/`: Handles various processes for application.
+  - `process.go`: Configures processes like CSV file reading, Activity generation for the application.
 
 ## Prerequisites
 Before you begin, ensure you have met the following requirements:
