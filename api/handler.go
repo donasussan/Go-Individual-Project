@@ -1,7 +1,6 @@
 package api
 
 import (
-	"datastream/database"
 	"datastream/logs"
 	"datastream/process"
 	"datastream/types"
@@ -26,10 +25,8 @@ func HomePageHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
-
 func Upload(w http.ResponseWriter, r *http.Request) {
-
-	file, header, err := r.FormFile("file")
+	file, _, err := r.FormFile("file")
 	if err != nil {
 		logs.NewLog.Error(fmt.Sprintf("Error retrieving file: %v", err))
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
@@ -42,73 +39,66 @@ func Upload(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	defer tmpFile.Close()
-
 	_, err = io.Copy(tmpFile, file)
 	if err != nil {
 		logs.NewLog.Error(fmt.Sprintf("Error copying file content: %v", err))
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 	}
-
-	filename := header.Filename
-	contacts, err := process.CSVread(filename)
+	filePath := tmpFile.Name()
+	contacts, err := process.CSVReadToContactsStruct(filePath)
 	if err != nil {
 		logs.NewLog.Error(err.Error())
 		return
 	}
-	contactsStruct := ContactsStruct(contacts)
-	go activityProcess(contactsStruct)
-}
-
-func ContactsStruct(contacts []types.Contacts) []types.Contacts {
-	var contactsStruct []types.Contacts
-
-	for _, contact := range contacts {
-		contactsStruct = append(contactsStruct, types.Contacts{
-			ID:      contact.ID,
-			Name:    contact.Name,
-			Email:   contact.Email,
-			Details: contact.Details,
-		})
-	}
-
-	return contactsStruct
+	activityProcess(contacts)
 }
 
 func activityProcess(contacts []types.Contacts) {
+	contactCounter := 0
 	for _, contact := range contacts {
-		statusContact, activitiesSlice, _ := process.MainData(contact.ID, contact)
-		contactsData, _ := getContactsData(statusContact)
-		activityDetails := getActivityDetails(activitiesSlice)
-		SendDataToKafka(contactsData, activityDetails)
+		contactCounter++
+		statusContact, activitiesSlice, _ := process.ReturnContactsAndActivitiesStructs(contact.ID, contact)
+		contactsData, _ := getContactsDataString(statusContact)
+		activityDetails := getActivityDetailsString(activitiesSlice)
+		logs.NewLog.Info(fmt.Sprintf("Processing contact %d\n", contactCounter))
+		process.SendDataToKafkaProducers(contactsData, activityDetails)
+	}
+	process.SendDataToKafkaProducers("EOF", "EOF")
+	go process.SendConsumerContactsToMySQL()
+	go process.SendConsumerActivityToMySQL()
+}
 
-	}
-	SendDataToKafka("EOF", "EOF")
-	go database.ReadKafkaTopic1()
-	go database.ReadKafkaTopic2()
-}
-func SendDataToKafka(contactsData string, activityDetails string) {
-	err := database.InsertContact(contactsData, activityDetails)
-	if err != nil {
-		logs.NewLog.Error(fmt.Sprintf("Error inserting contact data into Kafka: %v\n", err))
-	}
-}
-func getContactsData(statusContact types.ContactStatus) (string, string) {
-	statusInfo := fmt.Sprintf("(%d, '%s','%s', '%s', %d),", statusContact.Contact.ID, statusContact.Contact.Name,
+func getContactsDataString(statusContact types.ContactStatus) (string, string) {
+	statusInfo := fmt.Sprintf("('%s', '%s','%s', '%s', %d),", statusContact.Contact.ID, statusContact.Contact.Name,
 		statusContact.Contact.Email, statusContact.Contact.Details, statusContact.Status)
 	return statusInfo, ""
 }
 
-func getActivityDetails(activities []types.ContactActivity) string {
+func getActivityDetailsString(activities []types.ContactActivity) string {
 	var details string
 	for _, activity := range activities {
-		details += fmt.Sprintf("(%d, %d, %d,%s),", activity.Contactid, activity.Campaignid,
+		details += fmt.Sprintf("('%s', %d, %d,%s),", activity.Contactid, activity.Campaignid,
 			activity.Activitytype, activity.Activitydate)
 	}
 	return details
 }
 
-// func ResultPageHandler() {
-// }
-// func GetDataFromClickHouse() {
-// }
+func ResultView(w http.ResponseWriter, r *http.Request) {
+	htmlFile, err := os.Open("templates/ResultPage.html")
+	if err != nil {
+		logs.NewLog.Error("Error reading HTML file: " + err.Error())
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
+	defer htmlFile.Close()
+
+	w.Header().Set("Content-Type", "text/html")
+
+	_, err = io.Copy(w, htmlFile)
+	if err != nil {
+		logs.NewLog.Error("Error serving HTML content: " + err.Error())
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
+}
