@@ -4,9 +4,11 @@ import (
 	"datastream/config"
 	"datastream/logs"
 	"fmt"
+	"os"
 
 	"github.com/IBM/sarama"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/joho/godotenv"
 )
 
 func NewKafkaProducers(config *config.KafkaConfig) (sarama.SyncProducer, sarama.SyncProducer, error) {
@@ -59,13 +61,42 @@ func ConsumeMessage(consumer sarama.Consumer, topic string) []string {
 	}
 	return messages
 }
-func ConnectMySQL() (*config.MySQLConnector, error) {
-	Database := "mysql"
-	configData, err := config.LoadDatabaseConfig(Database)
-	if err != nil {
-		logs.NewLog.Error(fmt.Sprintf("Error loading database config: %v", err))
+
+func LoadDatabaseConfig(Database string) (config.DatabaseConfig, error) {
+	if err := godotenv.Load(); err != nil {
+		logs.NewLog.Fatalf(fmt.Sprintf("Error loading .env file: %v", err))
+		return nil, err
 	}
-	mysqlConfig, _ := configData.(config.MySQLConfig)
-	mysqlConnector := config.MySQLConnector{Config: mysqlConfig}
-	return &mysqlConnector, nil
+
+	switch Database {
+	case "mysql":
+		mysqlConfig := config.MySQLConfig{
+			Username: os.Getenv("DB_USERNAME"),
+			Password: os.Getenv("DB_PASSWORD"),
+			Hostname: os.Getenv("DB_HOST"),
+			Port:     os.Getenv("DB_PORT"),
+			DBName:   os.Getenv("DB_NAME"),
+		}
+		return mysqlConfig, nil
+	case "kafka":
+		kafkaConfig := config.KafkaConfig{
+			Broker: os.Getenv("KAFKA_BROKER"),
+			Topic1: os.Getenv("KAFKA_TOPIC_CONTACTS"),
+			Topic2: os.Getenv("KAFKA_TOPIC_CONTACT_ACTIVITY"),
+		}
+		return kafkaConfig, nil
+	case "clickhouse":
+		clickHouseConfig := config.ClickHouseConfig{
+			Username: os.Getenv("CLICK_USERNAME"),
+			Password: os.Getenv("CLICK_PASSWORD"),
+			Hostname: os.Getenv("CLICK_HOST"),
+			Port:     os.Getenv("CLICK_PORT"),
+			DBName:   os.Getenv("CLICK_DB_NAME"),
+		}
+		return clickHouseConfig, nil
+	default:
+		return nil, fmt.Errorf("unsupported DB_TYPE: %s", Database)
+
+	}
+
 }

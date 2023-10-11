@@ -1,6 +1,7 @@
 package api
 
 import (
+	"datastream/config"
 	"datastream/logs"
 	"datastream/process"
 	"datastream/types"
@@ -55,6 +56,7 @@ func Upload(w http.ResponseWriter, r *http.Request) {
 }
 
 func activityProcess(contacts []types.Contacts) {
+	done := make(chan struct{})
 	contactCounter := 0
 	for _, contact := range contacts {
 		contactCounter++
@@ -62,13 +64,21 @@ func activityProcess(contacts []types.Contacts) {
 		contactsData, _ := getContactsDataString(statusContact)
 		activityDetails := getActivityDetailsString(activitiesSlice)
 		logs.NewLog.Info(fmt.Sprintf("Processing contact %d\n", contactCounter))
-		process.SendDataToKafkaProducers(contactsData, activityDetails)
+
+		go func() {
+			process.SendDataToKafkaProducers(contactsData, activityDetails)
+			done <- struct{}{}
+		}()
 	}
-	process.SendDataToKafkaProducers("EOF", "EOF")
+	for i := 0; i < contactCounter; i++ {
+		process.SendDataToKafkaProducers("EOF", "EOF")
+	}
+	for i := 0; i < contactCounter; i++ {
+		<-done
+	}
 	go process.SendConsumerContactsToMySQL()
 	go process.SendConsumerActivityToMySQL()
 }
-
 func getContactsDataString(statusContact types.ContactStatus) (string, string) {
 	statusInfo := fmt.Sprintf("('%s', '%s','%s', '%s', %d),", statusContact.Contact.ID, statusContact.Contact.Name,
 		statusContact.Contact.Email, statusContact.Contact.Details, statusContact.Status)
@@ -84,7 +94,7 @@ func getActivityDetailsString(activities []types.ContactActivity) string {
 	return details
 }
 
-func ResultView(w http.ResponseWriter, r *http.Request) {
+func QueryView(w http.ResponseWriter, r *http.Request) {
 	htmlFile, err := os.Open("templates/ResultPage.html")
 	if err != nil {
 		logs.NewLog.Error("Error reading HTML file: " + err.Error())
@@ -100,5 +110,58 @@ func ResultView(w http.ResponseWriter, r *http.Request) {
 		logs.NewLog.Error("Error serving HTML content: " + err.Error())
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
+	}
+}
+func DisplayTheQueryResult(w http.ResponseWriter, r *http.Request) {
+	results, err := process.DisplayQueryResults()
+	if err != nil {
+
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
+	htmlTemplate := `
+		<!DOCTYPE html>
+		<html>
+
+		<head>
+			<title>Query Results</title>
+		</head>
+
+		<body>
+			<h1>Query Results</h1>
+
+			<table border="1">
+				<tr>
+					<th>ID</th>
+					<th>Email</th>
+					<th>Country</th>
+				</tr>
+				{{range .Results}}
+				<tr>
+					<td>{{.ID}}</td>
+					<td>{{.Email}}</td>
+					<td>{{.Country}}</td>
+				</tr>
+				{{end}}
+			</table>
+		</body>
+
+		</html>`
+
+	tmpl, err := template.New("result").Parse(htmlTemplate)
+	if err != nil {
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
+
+	data := struct {
+		Results []config.ResultData
+	}{
+		Results: results,
+	}
+
+	err = tmpl.Execute(w, data)
+	if err != nil {
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	}
 }

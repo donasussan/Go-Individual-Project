@@ -4,16 +4,30 @@
 <head>
 	<title>Radio Button Example</title>
 	<link rel="stylesheet" type="text/css" href="ResultPage.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 <body>
-	<h1>Choose an Option</h1>
-
-	<div class="radio-container">
-		<input type="radio" id="Query" name="radioGroup" value="option1">
-		<label class="radio-label" for="option1">Option 1</label>
-	</div>
-
+	<h1>Query Page</h1>
+	<form action="/query" method="post">
+		<div class="radio-container">
+			<input type="radio" id="option1" name="radioGroup" value="Query">
+			<label class="radio-label" for="option1"> Filter based on Country(UK,US) from JSON - select contacts with
+				more than 30 opens?</label>
+		</div>
+		<button type="submit">Go</button>
+	</form>
 </body>
+<script>
+	$("form").submit(function (event) {
+		event.preventDefault();
+		console.log("Form submitted");
+		$.get("/query", function (data) {
+			$("#results-container").html(data);
+		});
+	});
+
+</script>
 
 </html>

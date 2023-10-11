@@ -4,12 +4,10 @@ import (
 	"database/sql"
 	"datastream/logs"
 	"fmt"
-	"log"
-	"os"
 
+	_ "github.com/ClickHouse/clickhouse-go"
 	"github.com/IBM/sarama"
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/joho/godotenv"
 )
 
 type DBConnector interface {
@@ -49,7 +47,7 @@ type ClickHouseConfig struct {
 }
 
 type ClickHouseConnector struct {
-	config ClickHouseConfig
+	Config ClickHouseConfig
 	db     *sql.DB
 }
 type DatabaseConfig interface {
@@ -95,7 +93,7 @@ func (c ClickHouseConfig) GetDSN() string {
 		c.DBName)
 }
 func (c *ClickHouseConnector) Connect() (*sql.DB, error) {
-	DSN := c.config.GetDSN()
+	DSN := c.Config.GetDSN()
 	db, err := sql.Open("clickhouse", DSN)
 	if err != nil {
 		return nil, err
@@ -117,44 +115,6 @@ func (c *ClickHouseConnector) Close() error {
 	return nil
 }
 
-func LoadDatabaseConfig(Database string) (DatabaseConfig, error) {
-	if err := godotenv.Load(); err != nil {
-		log.Fatalf("Error loading .env file: %v", err)
-		return nil, err
-	}
-
-	switch Database {
-	case "mysql":
-		mysqlConfig := MySQLConfig{
-			Username: os.Getenv("DB_USERNAME"),
-			Password: os.Getenv("DB_PASSWORD"),
-			Hostname: os.Getenv("DB_HOST"),
-			Port:     os.Getenv("DB_PORT"),
-			DBName:   os.Getenv("DB_NAME"),
-		}
-		return mysqlConfig, nil
-	case "kafka":
-		kafkaConfig := KafkaConfig{
-			Broker: os.Getenv("KAFKA_BROKER"),
-			Topic1: os.Getenv("KAFKA_TOPIC_CONTACTS"),
-			Topic2: os.Getenv("KAFKA_TOPIC_CONTACT_ACTIVITY"),
-		}
-		return kafkaConfig, nil
-	case "clickhouse":
-		clickHouseConfig := ClickHouseConfig{
-			Username: os.Getenv("CLICK_USERNAME"),
-			Password: os.Getenv("CLICK_PASSWORD"),
-			Hostname: os.Getenv("CLICK_HOST"),
-			Port:     os.Getenv("CLICK_PORT"),
-			DBName:   os.Getenv("CLICK_DB_NAME"),
-		}
-		return clickHouseConfig, nil
-	default:
-		return nil, fmt.Errorf("unsupported DB_TYPE: %s", Database)
-
-	}
-
-}
 func (m MySQLConfig) GetConfig() map[string]string {
 	return map[string]string{
 		"Username": m.Username,
@@ -178,4 +138,10 @@ func (k KafkaConfig) GetConfig() map[string]string {
 
 		"Broker": k.Broker,
 	}
+}
+
+type ResultData struct {
+	ID      string `json:"ID"`
+	Email   string `json:"Email"`
+	Country string `json:"Country"`
 }
