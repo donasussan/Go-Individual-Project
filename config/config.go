@@ -29,9 +29,9 @@ type MySQLConnector struct {
 }
 
 type KafkaConfig struct {
-	Broker string
-	Topic1 string
-	Topic2 string
+	Broker        string
+	ContactsTopic string
+	ActivityTopic string
 }
 type KafkaConnector struct {
 	config   KafkaConfig
@@ -133,6 +133,7 @@ func (c ClickHouseConfig) GetConfig() map[string]string {
 		"DBName":   c.DBName,
 	}
 }
+
 func (k KafkaConfig) GetConfig() map[string]string {
 	return map[string]string{
 

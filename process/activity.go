@@ -1,20 +1,14 @@
 package process
 
 import (
-	cryptoRand "crypto/rand"
 	"datastream/logs"
 	"datastream/types"
-	"encoding/csv"
 	"fmt"
-	"io"
 	"math/rand"
 	mathRand "math/rand"
-	"os"
 	"strconv"
 	"strings"
 	"time"
-
-	"github.com/google/uuid"
 )
 
 var (
@@ -25,69 +19,6 @@ var (
 	activityDate                                time.Time
 	flag                                        int
 )
-
-func CSVReadToContactsStruct(filename string) ([]types.Contacts, error) {
-	file, err := os.Open(filename)
-	if err != nil {
-		logs.NewLog.Error(fmt.Sprintf("failed to open file: %v", err))
-		return nil, err
-	}
-	defer file.Close()
-
-	reader := csv.NewReader(file)
-	contactsStruct := make([]types.Contacts, 0)
-
-	for lineNumber := 1; ; lineNumber++ {
-		record, err := reader.Read()
-		if err != nil {
-			if err == io.EOF {
-				break
-			}
-			logs.NewLog.Error(fmt.Sprintf("failed to read CSV: %v", err))
-			return nil, err
-		}
-		if len(record) != 3 {
-			logs.NewLog.Error(fmt.Sprintf("invalid number of columns in CSV record %d: %v", lineNumber, record))
-			return nil, fmt.Errorf("invalid number of columns in CSV record %d", lineNumber)
-		}
-		randomID, err := generateRandomID()
-		if err != nil {
-			logs.NewLog.Error(fmt.Sprintf("failed to generate random ID: %v", err))
-			return nil, err
-		}
-
-		name := record[0]
-		email := record[1]
-		details := record[2]
-		contact := types.Contacts{
-			ID:      randomID,
-			Name:    name,
-			Email:   email,
-			Details: details,
-		}
-		contactsStruct = append(contactsStruct, contact)
-	}
-
-	return contactsStruct, nil
-}
-
-// generateRandomID generates a random string ID.
-func generateRandomID() (string, error) {
-	uuidObj, err := uuid.NewRandom()
-	if err != nil {
-		return "", err
-	}
-
-	randomBytes := make([]byte, 8)
-	_, err = io.ReadFull(cryptoRand.Reader, randomBytes)
-	if err != nil {
-		return "", err
-	}
-
-	randomString := fmt.Sprintf("%s-%x", uuidObj, randomBytes)
-	randomString = strings.ReplaceAll(randomString, "-", "")
-	return randomString, nil
-}
 
 // generate activity dates
 func GenerateActivityDate() {

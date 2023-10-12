@@ -10,6 +10,9 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"strings"
+
+	"github.com/google/uuid"
 )
 
 func HomePageHandler(w http.ResponseWriter, r *http.Request) {
@@ -27,13 +30,16 @@ func HomePageHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 func Upload(w http.ResponseWriter, r *http.Request) {
-	file, _, err := r.FormFile("file")
+	uuid := uuid.New()
+
+	file, header, err := r.FormFile("file")
 	if err != nil {
 		logs.NewLog.Error(fmt.Sprintf("Error retrieving file: %v", err))
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 	}
-	tmpFile, err := os.CreateTemp("", "newuploaded-*.csv")
+	fileNameWithUUID := fmt.Sprintf("%s-%s", uuid, header.Filename)
+	tmpFile, err := os.CreateTemp("", fileNameWithUUID)
 	if err != nil {
 		logs.NewLog.Error(fmt.Sprintf("Error creating temporary file: %v", err))
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
@@ -52,10 +58,16 @@ func Upload(w http.ResponseWriter, r *http.Request) {
 		logs.NewLog.Error(err.Error())
 		return
 	}
-	activityProcess(contacts)
+	activityProcess(contacts, filePath)
+	http.Redirect(w, r, "/HomePage.html", http.StatusSeeOther)
 }
 
-func activityProcess(contacts []types.Contacts) {
+func activityProcess(contacts []types.Contacts, filePath string) {
+	filename := strings.ReplaceAll(filePath, "/", "")
+	topics := &config.KafkaConfig{
+		ContactsTopic: filename + "Contacts",
+		ActivityTopic: filename + "ContactsData",
+	}
 	done := make(chan struct{})
 	contactCounter := 0
 	for _, contact := range contacts {
@@ -66,18 +78,18 @@ func activityProcess(contacts []types.Contacts) {
 		logs.NewLog.Info(fmt.Sprintf("Processing contact %d\n", contactCounter))
 
 		go func() {
-			process.SendDataToKafkaProducers(contactsData, activityDetails)
+			process.SendDataToKafkaProducers(contactsData, activityDetails, topics)
 			done <- struct{}{}
 		}()
 	}
 	for i := 0; i < contactCounter; i++ {
-		process.SendDataToKafkaProducers("EOF", "EOF")
+		process.SendDataToKafkaProducers("EOF", "EOF", topics)
 	}
 	for i := 0; i < contactCounter; i++ {
 		<-done
 	}
-	go process.SendConsumerContactsToMySQL()
-	go process.SendConsumerActivityToMySQL()
+	process.SendConsumerContactsToMySQL(topics)
+	go process.SendConsumerActivityToMySQL(topics)
 }
 func getContactsDataString(statusContact types.ContactStatus) (string, string) {
 	statusInfo := fmt.Sprintf("('%s', '%s','%s', '%s', %d),", statusContact.Contact.ID, statusContact.Contact.Name,
@@ -113,7 +125,7 @@ func MultipleQueryView(w http.ResponseWriter, r *http.Request) {
 	}
 }
 func DisplayTheQueryResult(w http.ResponseWriter, r *http.Request) {
-	results, err := process.DisplayQueryResults()
+	results, err := process.GetQueryResultFromClickhouse()
 	if err != nil {
 		logs.NewLog.Error(fmt.Sprintf("Error getting Result%v", http.StatusInternalServerError))
 		return
@@ -135,70 +147,3 @@ func DisplayTheQueryResult(w http.ResponseWriter, r *http.Request) {
 		logs.NewLog.Error(fmt.Sprintf("Internal Server Error %v", http.StatusInternalServerError))
 	}
 }
-
-// func DisplayTheQueryResultFromClickhouse(w http.ResponseWriter, r *http.Request)  {
-// 	queryResult, _ := process.DisplayQueryResults()
-// 	jsonData, err := json.Marshal(queryResult)
-// 	if err != nil {
-// 		http.Error(w, err.Error(), http.StatusInternalServerError)
-// 		return
-// 	}
-
-// 	w.Header().Set("Content-Type", "application/json")
-// 	w.Write(jsonData)
-// 	return
-// }
-
-// func DisplayTheQueryResult(w http.ResponseWriter, r *http.Request) {
-// 	results, err := process.DisplayQueryResults()
-// 	if err != nil {
-
-// 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-// 		return
-// 	}
-// 	htmlTemplate := `
-// 		<!DOCTYPE html>
-// 		<html>
-
-// 		<head>
-// 			<title>Query Results</title>
-// 		</head>
-
-// 		<body>
-// 			<h1>Query Results</h1>
-
-// 			<table border="1">
-// 				<tr>
-// 					<th>ID</th>
-// 					<th>Email</th>
-// 					<th>Country</th>
-// 				</tr>
-// 				{{range .Results}}
-// 				<tr>
-// 					<td>{{.ID}}</td>
-// 					<td>{{.Email}}</td>
-// 					<td>{{.Country}}</td>
-// 				</tr>
-// 				{{end}}
-// 			</table>
-// 		</body>
-
-// 		</html>`
-
-// 	tmpl, err := template.New("result").Parse(htmlTemplate)
-// 	if err != nil {
-// 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-// 		return
-// 	}
-
-// 	data := struct {
-// 		Results []config.ResultData
-// 	}{
-// 		Results: results,
-// 	}
-
-// 	err = tmpl.Execute(w, data)
-// 	if err != nil {
-// 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-// 	}
-// }

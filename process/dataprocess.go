@@ -1,14 +1,80 @@
 package process
 
 import (
+	cryptoRand "crypto/rand"
 	"datastream/config"
 	"datastream/database"
 	"datastream/logs"
+	"datastream/types"
+	"encoding/csv"
 	"fmt"
+	"io"
+	"os"
 	"strings"
+
+	"github.com/google/uuid"
 )
 
-func SendDataToKafkaProducers(ContactsData string, ActivityData string) error {
+func generateRandomID() (string, error) {
+	uuidObj, err := uuid.NewRandom()
+	if err != nil {
+		return "", err
+	}
+	randomBytes := make([]byte, 8)
+	_, err = io.ReadFull(cryptoRand.Reader, randomBytes)
+	if err != nil {
+		return "", err
+	}
+	randomString := fmt.Sprintf("%s-%x", uuidObj, randomBytes)
+	randomString = strings.ReplaceAll(randomString, "-", "")
+	return randomString, nil
+}
+func CSVReadToContactsStruct(filename string) ([]types.Contacts, error) {
+	file, err := os.Open(filename)
+	if err != nil {
+		logs.NewLog.Error(fmt.Sprintf("failed to open file: %v", err))
+		return nil, err
+	}
+	defer file.Close()
+
+	reader := csv.NewReader(file)
+	contactsStruct := make([]types.Contacts, 0)
+
+	for lineNumber := 1; ; lineNumber++ {
+		record, err := reader.Read()
+		if err != nil {
+			if err == io.EOF {
+				break
+			}
+			logs.NewLog.Error(fmt.Sprintf("failed to read CSV: %v", err))
+			return nil, err
+		}
+		if len(record) != 3 {
+			logs.NewLog.Error(fmt.Sprintf("invalid number of columns in CSV record %d: %v", lineNumber, record))
+			return nil, err
+		}
+		randomID, err := generateRandomID()
+		if err != nil {
+			logs.NewLog.Error(fmt.Sprintf("failed to generate random ID: %v", err))
+			return nil, err
+		}
+
+		name := record[0]
+		email := record[1]
+		details := record[2]
+		contact := types.Contacts{
+			ID:      randomID,
+			Name:    name,
+			Email:   email,
+			Details: details,
+		}
+		contactsStruct = append(contactsStruct, contact)
+	}
+
+	return contactsStruct, err
+}
+
+func SendDataToKafkaProducers(ContactsData string, ActivityData string, topics *config.KafkaConfig) error {
 	configData, err := database.LoadDatabaseConfig("kafka")
 	if err != nil {
 		logs.NewLog.Fatalf(fmt.Sprintf("Error loading Kafka database config: %v", err))
@@ -18,6 +84,8 @@ func SendDataToKafkaProducers(ContactsData string, ActivityData string) error {
 	if !ok {
 		logs.NewLog.Error("Invalid database type: expected 'kafka'")
 	}
+	kafkaConfig.ContactsTopic = topics.ContactsTopic
+	kafkaConfig.ActivityTopic = topics.ActivityTopic
 	producer1, producer2, err := database.NewKafkaProducers(&kafkaConfig)
 	if err != nil {
 		logs.NewLog.Fatalf(fmt.Sprintf("Error creating Kafka producers: %v", err))
@@ -25,20 +93,19 @@ func SendDataToKafkaProducers(ContactsData string, ActivityData string) error {
 	}
 	defer producer1.Close()
 	defer producer2.Close()
-	err1 := database.SendMessage(producer1, kafkaConfig.Topic1, ContactsData)
+	err1 := database.SendMessage(producer1, kafkaConfig.ContactsTopic, ContactsData)
 	if err1 != nil {
 		logs.NewLog.Fatalf(fmt.Sprintf("Error sending message to Topic1: %v", err1))
 		return err1
 	}
-	err2 := database.SendMessage(producer2, kafkaConfig.Topic2, ActivityData)
+	err2 := database.SendMessage(producer2, kafkaConfig.ActivityTopic, ActivityData)
 	if err2 != nil {
 		logs.NewLog.Fatalf(fmt.Sprintf("Error sending message to Topic2: %v", err2))
 		return err2
 	}
 	return nil
 }
-
-func SendConsumerContactsToMySQL() error {
+func SendConsumerContactsToMySQL(topics *config.KafkaConfig) error {
 	Database := "kafka"
 	configData, err := database.LoadDatabaseConfig(Database)
 	if err != nil {
@@ -48,15 +115,14 @@ func SendConsumerContactsToMySQL() error {
 	kafkaConfig, ok := configData.(config.KafkaConfig)
 	if !ok {
 		logs.NewLog.Error("Error converting database config to KafkaConfig")
-		return fmt.Errorf("error converting database config to KafkaConfig")
 	}
-	consumer, err := database.NewKafkaConsumer(&kafkaConfig, kafkaConfig.Topic1)
+	consumer, err := database.NewKafkaConsumer(&kafkaConfig, topics.ContactsTopic)
 	if err != nil {
 		logs.NewLog.Errorf(fmt.Sprintf("Error creating Kafka consumer: %v", err))
 		return err
 	}
 	defer consumer.Close()
-	ContactMessages := database.ConsumeMessage(consumer, kafkaConfig.Topic1)
+	ContactMessages := database.ConsumeMessage(consumer, topics.ContactsTopic)
 	if ContactMessages == nil {
 		logs.NewLog.Error("No contact data received from Kafka.")
 		return nil
@@ -65,7 +131,7 @@ func SendConsumerContactsToMySQL() error {
 	return nil
 }
 
-func SendConsumerActivityToMySQL() error {
+func SendConsumerActivityToMySQL(topics *config.KafkaConfig) error {
 	Database := "kafka"
 	configData, err := database.LoadDatabaseConfig(Database)
 	if err != nil {
@@ -75,15 +141,14 @@ func SendConsumerActivityToMySQL() error {
 	kafkaConfig, ok := configData.(config.KafkaConfig)
 	if !ok {
 		logs.NewLog.Error("Error converting database config to KafkaConfig")
-		return fmt.Errorf("error converting database config to KafkaConfig")
 	}
-	consumer, err := database.NewKafkaConsumer(&kafkaConfig, kafkaConfig.Topic2)
+	consumer, err := database.NewKafkaConsumer(&kafkaConfig, topics.ActivityTopic)
 	if err != nil {
 		logs.NewLog.Errorf(fmt.Sprintf("Error creating Kafka consumer: %v", err))
 		return err
 	}
 	defer consumer.Close()
-	ActivityMessages := database.ConsumeMessage(consumer, kafkaConfig.Topic2)
+	ActivityMessages := database.ConsumeMessage(consumer, topics.ActivityTopic)
 	if ActivityMessages == nil {
 		logs.NewLog.Error("No activity data received from Kafka.")
 		return nil
@@ -99,7 +164,7 @@ func InsertContactDataToMySQL(messages []string) error {
 	}
 	db, err := mysqlConnector.Connect()
 	if err != nil {
-		logs.NewLog.Error(fmt.Sprintf("error connecting to MySQL: %v", err))
+		logs.NewLog.Error(fmt.Sprintf("error connecting to MySQL Database: %v", err))
 		return err
 	}
 	batchSize := 100
@@ -174,74 +239,46 @@ func InsertActivityDataToMySQL(messages []string) error {
 	return nil
 }
 
-func DisplayQueryResults() ([]config.ResultData, error) {
+func GetQueryResultFromClickhouse() ([]config.ResultData, error) {
 	clickhouseConnector, err := ConnectClickhouse()
-	if err != nil {
-		return nil, err
-	}
-	db, err := clickhouseConnector.Connect()
-	if err != nil {
-		return nil, err
-	}
-	defer db.Close()
-
-	subquery := "SELECT ContactID FROM contact_based_activity_summary WHERE opened >= 30"
-
-	subqueryRows, err := db.Query(subquery)
 	if err != nil {
 		logs.NewLog.Errorf(fmt.Sprint(err))
 		return nil, err
 	}
-	defer subqueryRows.Close()
-
-	results := make([]config.ResultData, 0)
-
-	for subqueryRows.Next() {
-		var contactID string
-		err := subqueryRows.Scan(&contactID)
+	db, err := clickhouseConnector.Connect()
+	if err != nil {
+		logs.NewLog.Errorf(fmt.Sprint(err))
+		return nil, err
+	}
+	defer db.Close()
+	query := "SELECT co.ID, co.Email, JSONExtractString(co.Details, 'country') AS Country FROM Contacts AS co " +
+		"WHERE (JSONExtractString(co.Details, 'country') IN ('USA', 'UK')) AND (co.ID IN" +
+		"(SELECT ContactID FROM dona_campaign.contact_based_activity_summary WHERE opened >= 30))"
+	rows, err := db.Query(query)
+	if err != nil {
+		logs.NewLog.Errorf(fmt.Sprint(err))
+		return nil, err
+	}
+	defer rows.Close()
+	var results []config.ResultData
+	for rows.Next() {
+		var ID, Email, Country string
+		err := rows.Scan(&ID, &Email, &Country)
 		if err != nil {
-			logs.NewLog.Errorf(fmt.Sprint(err))
-			return nil, err
+			logs.NewLog.Info("Cannot create a struct for this user")
+			continue
 		}
-
-		fmt.Printf("ContactID: %s\n", contactID)
-
-		query := fmt.Sprintf("SELECT ID, Email, JSONExtractString(Details, 'country') AS Country "+
-			"FROM Contacts WHERE ID = '%s' AND JSONExtractString(Details, 'country') IN ('USA', 'UK') LIMIT 5", contactID)
-
-		// fmt.Println(query)
-
-		rows, err := db.Query(query)
-
-		if err == nil {
-			if rows.Next() {
-				fmt.Println("hi")
-				var ID, Email, Country string
-				err := rows.Scan(&ID, &Email, &Country)
-				// fmt.Println(Country)
-				if err != nil {
-					logs.NewLog.Info("Cannot create struct for this user")
-					continue
-				}
-
-				fmt.Printf("ID: %s, Email: %s, Country: %s\n", ID, Email, Country)
-
-				result := config.ResultData{
-					ID:      ID,
-					Email:   Email,
-					Country: Country,
-				}
-				results = append(results, result)
-
-				rows.Close()
-			} else {
-				fmt.Println("continue")
-				continue
-			}
-		} else {
-			logs.NewLog.Info("User do not meet query criteria")
+		fmt.Printf("ID: %s, Email: %s, Country: %s\n", ID, Email, Country)
+		result := config.ResultData{
+			ID:      ID,
+			Email:   Email,
+			Country: Country,
 		}
+		results = append(results, result)
+	}
+	if err := rows.Err(); err != nil {
+		logs.NewLog.Errorf(fmt.Sprint(err))
+		return nil, err
 	}
 	return results, nil
-
 }
