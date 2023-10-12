@@ -94,8 +94,8 @@ func getActivityDetailsString(activities []types.ContactActivity) string {
 	return details
 }
 
-func QueryView(w http.ResponseWriter, r *http.Request) {
-	htmlFile, err := os.Open("templates/ResultPage.html")
+func MultipleQueryView(w http.ResponseWriter, r *http.Request) {
+	htmlFile, err := os.Open("templates/QueryView.html")
 	if err != nil {
 		logs.NewLog.Error("Error reading HTML file: " + err.Error())
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
@@ -115,42 +115,12 @@ func QueryView(w http.ResponseWriter, r *http.Request) {
 func DisplayTheQueryResult(w http.ResponseWriter, r *http.Request) {
 	results, err := process.DisplayQueryResults()
 	if err != nil {
-
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		logs.NewLog.Error(fmt.Sprintf("Error getting Result%v", http.StatusInternalServerError))
 		return
 	}
-	htmlTemplate := `
-		<!DOCTYPE html>
-		<html>
-
-		<head>
-			<title>Query Results</title>
-		</head>
-
-		<body>
-			<h1>Query Results</h1>
-
-			<table border="1">
-				<tr>
-					<th>ID</th>
-					<th>Email</th>
-					<th>Country</th>
-				</tr>
-				{{range .Results}}
-				<tr>
-					<td>{{.ID}}</td>
-					<td>{{.Email}}</td>
-					<td>{{.Country}}</td>
-				</tr>
-				{{end}}
-			</table>
-		</body>
-
-		</html>`
-
-	tmpl, err := template.New("result").Parse(htmlTemplate)
+	tmpl, err := template.ParseFiles("templates/ResultPage.html")
 	if err != nil {
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		logs.NewLog.Error(fmt.Sprintf("Error parsing html file%v", http.StatusInternalServerError))
 		return
 	}
 
@@ -162,6 +132,73 @@ func DisplayTheQueryResult(w http.ResponseWriter, r *http.Request) {
 
 	err = tmpl.Execute(w, data)
 	if err != nil {
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		logs.NewLog.Error(fmt.Sprintf("Internal Server Error %v", http.StatusInternalServerError))
 	}
 }
+
+// func DisplayTheQueryResultFromClickhouse(w http.ResponseWriter, r *http.Request)  {
+// 	queryResult, _ := process.DisplayQueryResults()
+// 	jsonData, err := json.Marshal(queryResult)
+// 	if err != nil {
+// 		http.Error(w, err.Error(), http.StatusInternalServerError)
+// 		return
+// 	}
+
+// 	w.Header().Set("Content-Type", "application/json")
+// 	w.Write(jsonData)
+// 	return
+// }
+
+// func DisplayTheQueryResult(w http.ResponseWriter, r *http.Request) {
+// 	results, err := process.DisplayQueryResults()
+// 	if err != nil {
+
+// 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+// 		return
+// 	}
+// 	htmlTemplate := `
+// 		<!DOCTYPE html>
+// 		<html>
+
+// 		<head>
+// 			<title>Query Results</title>
+// 		</head>
+
+// 		<body>
+// 			<h1>Query Results</h1>
+
+// 			<table border="1">
+// 				<tr>
+// 					<th>ID</th>
+// 					<th>Email</th>
+// 					<th>Country</th>
+// 				</tr>
+// 				{{range .Results}}
+// 				<tr>
+// 					<td>{{.ID}}</td>
+// 					<td>{{.Email}}</td>
+// 					<td>{{.Country}}</td>
+// 				</tr>
+// 				{{end}}
+// 			</table>
+// 		</body>
+
+// 		</html>`
+
+// 	tmpl, err := template.New("result").Parse(htmlTemplate)
+// 	if err != nil {
+// 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+// 		return
+// 	}
+
+// 	data := struct {
+// 		Results []config.ResultData
+// 	}{
+// 		Results: results,
+// 	}
+
+// 	err = tmpl.Execute(w, data)
+// 	if err != nil {
+// 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+// 	}
+// }

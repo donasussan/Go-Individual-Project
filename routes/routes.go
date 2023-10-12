@@ -8,6 +8,6 @@ import (
 func SetupRouter() {
 	http.HandleFunc("/", api.HomePageHandler)
 	http.HandleFunc("/upload", api.Upload)
-	http.HandleFunc("/Result", api.QueryView)
-	http.HandleFunc("/query", api.DisplayTheQueryResult)
+	http.HandleFunc("/query", api.MultipleQueryView)
+	http.HandleFunc("/result", api.DisplayTheQueryResult)
 }

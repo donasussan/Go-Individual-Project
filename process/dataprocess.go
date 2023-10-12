@@ -207,7 +207,7 @@ func DisplayQueryResults() ([]config.ResultData, error) {
 		fmt.Printf("ContactID: %s\n", contactID)
 
 		query := fmt.Sprintf("SELECT ID, Email, JSONExtractString(Details, 'country') AS Country "+
-			"FROM Contacts WHERE ID = '%s' AND JSONExtractString(Details, 'country') IN ('USA', 'UK')", contactID)
+			"FROM Contacts WHERE ID = '%s' AND JSONExtractString(Details, 'country') IN ('USA', 'UK') LIMIT 5", contactID)
 
 		// fmt.Println(query)
 
