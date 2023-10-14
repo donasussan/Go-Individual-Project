@@ -79,7 +79,7 @@ func TestSendMessageAndConsumeMessage(t *testing.T) {
 	if err != nil {
 		logs.NewLog.Error(fmt.Sprintf("Error creating Kafka producer: %v", err))
 	}
-	messageToSend := "Hello, Kafka!"
+	messageToSend := "Hello"
 	err = services.SendMessage(producer1, topic, messageToSend)
 	if err != nil {
 		logs.NewLog.Error(fmt.Sprintf("Error sending message: %v", err))

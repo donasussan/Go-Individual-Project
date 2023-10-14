@@ -67,9 +67,9 @@ func activityProcess(contacts []types.Contacts, filePath string) {
 	filename := strings.ReplaceAll(filePath, "/", "")
 	topics := &config.KafkaConfig{
 		ContactsTopic: filename + "Contacts",
-		ActivityTopic: filename + "ContactsData",
+		ActivityTopic: filename + "ACtivityData",
 	}
-	done := make(chan struct{})
+	ChannelCompleteKafka := make(chan struct{})
 	contactCounter := 0
 	for _, contact := range contacts {
 		contactCounter++
@@ -80,11 +80,11 @@ func activityProcess(contacts []types.Contacts, filePath string) {
 
 		go func() {
 			process.SendDataToKafkaProducers(contactsData, activityDetails, topics)
-			done <- struct{}{}
+			ChannelCompleteKafka <- struct{}{}
 		}()
 	}
 	for i := 0; i < contactCounter; i++ {
-		<-done
+		<-ChannelCompleteKafka
 	}
 	process.SendDataToKafkaProducers("EOF", "EOF", topics)
 	process.SendConsumerContactsToMySQL(topics)
@@ -95,7 +95,6 @@ func getContactsDataString(statusContact types.ContactStatus) (string, string) {
 		statusContact.Contact.Email, statusContact.Contact.Details, statusContact.Status)
 	return statusInfo, ""
 }
-
 func getActivityDetailsString(activities []types.ContactActivity) string {
 	var details string
 	for _, activity := range activities {
@@ -104,8 +103,7 @@ func getActivityDetailsString(activities []types.ContactActivity) string {
 	}
 	return details
 }
-
-func MultipleQueryView(w http.ResponseWriter, r *http.Request) {
+func QueryView(w http.ResponseWriter, r *http.Request) {
 	htmlFile, err := os.Open("templates/QueryView.html")
 	if err != nil {
 		logs.NewLog.Error("Error reading HTML file: " + err.Error())
@@ -113,9 +111,7 @@ func MultipleQueryView(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	defer htmlFile.Close()
-
 	w.Header().Set("Content-Type", "text/html")
-
 	_, err = io.Copy(w, htmlFile)
 	if err != nil {
 		logs.NewLog.Error("Error serving HTML content: " + err.Error())
