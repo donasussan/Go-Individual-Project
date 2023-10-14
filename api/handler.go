@@ -4,6 +4,7 @@ import (
 	"datastream/config"
 	"datastream/logs"
 	"datastream/process"
+	"datastream/services"
 	"datastream/types"
 	"fmt"
 	"html/template"
@@ -125,7 +126,7 @@ func MultipleQueryView(w http.ResponseWriter, r *http.Request) {
 	}
 }
 func DisplayTheQueryResult(w http.ResponseWriter, r *http.Request) {
-	results, err := process.GetQueryResultFromClickhouse()
+	results, err := services.GetQueryResultFromClickhouse()
 	if err != nil {
 		logs.NewLog.Error(fmt.Sprintf("Error getting Result%v", http.StatusInternalServerError))
 		return
