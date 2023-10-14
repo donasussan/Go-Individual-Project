@@ -253,7 +253,7 @@ func GetQueryResultFromClickhouse() ([]config.ResultData, error) {
 	defer db.Close()
 	query := "SELECT co.ID, co.Email, JSONExtractString(co.Details, 'country') AS Country FROM Contacts AS co " +
 		"WHERE (JSONExtractString(co.Details, 'country') IN ('USA', 'UK')) AND (co.ID IN" +
-		"(SELECT ContactID FROM dona_campaign.contact_based_activity_summary WHERE opened >= 30))"
+		"(SELECT ContactsID FROM dona_campaign.contact_activity WHERE opened >= 30))"
 	rows, err := db.Query(query)
 	if err != nil {
 		logs.NewLog.Errorf(fmt.Sprint(err))

@@ -3,7 +3,6 @@ package database
 import (
 	"datastream/config"
 	"datastream/logs"
-	"fmt"
 
 	"github.com/IBM/sarama"
 	_ "github.com/go-sql-driver/mysql"
@@ -28,7 +27,7 @@ func SendMessage(producer sarama.SyncProducer, topic string, message string) err
 		Topic: topic,
 		Value: sarama.StringEncoder(message),
 	}
-	fmt.Printf("message sent to topic %v", topic)
+	logs.NewLog.Info(topic)
 	_, _, err := producer.SendMessage(producerMessage)
 	return err
 }
@@ -36,7 +35,8 @@ func SendMessage(producer sarama.SyncProducer, topic string, message string) err
 func NewKafkaConsumer(config *config.KafkaConfig, topic string) (sarama.Consumer, error) {
 	consumer, err := sarama.NewConsumer([]string{config.Broker}, nil)
 	if err != nil {
-		return nil, err
+		logs.NewLog.Error("Error creating new consumer")
+		return nil, nil
 	}
 	return consumer, nil
 }

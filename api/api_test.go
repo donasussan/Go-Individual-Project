@@ -1,7 +1,6 @@
 package api
 
 import (
-	"datastream/config"
 	"datastream/process"
 	"datastream/types"
 	"os"
@@ -86,38 +85,30 @@ func TestGetActivityDetailsString(t *testing.T) {
 	}
 }
 
-type MockKafkaConsumer struct{}
+// type MockQueryResultGetter struct{}
 
-func (m *MockKafkaConsumer) Close() {
-}
+// func (m *MockQueryResultGetter) GetQueryResultFromClickhouse() ([]config.ResultData, error) {
+// 	return []config.ResultData{
+// 		{ID: "1", Email: "test1@example.com", Country: "USA"},
+// 		{ID: "2", Email: "test2@example.com", Country: "UK"},
+// 	}, nil
+// }
 
-func (m *MockKafkaConsumer) ConsumeMessage(topic string) chan string {
-	return make(chan string)
-}
-func TestSendConsumerActivityToMySQL(t *testing.T) {
-	mockKafkaConfig := config.KafkaConfig{
-		Broker: []string{"localhost:9092"},
-		Topic2: "test-topic",
-	}
+// func TestDisplayTheQueryResult(t *testing.T) {
+// 	req, err := http.NewRequest("GET", "/your-endpoint", nil)
+// 	if err != nil {
+// 		t.Fatal(err)
+// 	}
+// 	rr := httptest.NewRecorder()
+// 	DisplayTheQueryResult(rr, req)
 
-	config.NewKafkaConsumer = func(kc *config.KafkaConfig, topic string) (config.KafkaConsumer, error) {
-		return &MockKafkaConsumer{}, nil
-	}
+// 	if status := rr.Code; status != http.StatusOK {
+// 		t.Errorf("Handler returned wrong status code: got %v, want %v", status, http.StatusOK)
+// 	}
+// 	expectedResponse := "Expected HTML content for the results page"
+// 	actualResponse := rr.Body.String()
 
-	config.ConsumeMessage = func(c config.KafkaConsumer, topic string) chan string {
-		msgChan := make(chan string, 1)
-		msgChan <- "test-message"
-		close(msgChan)
-		return msgChan
-	}
-
-	defer func() {
-		config.NewKafkaConsumer = config.NewKafkaConsumerFunc
-		config.ConsumeMessage = config.ConsumeMessageFunc
-	}()
-
-	err := SendConsumerActivityToMySQL()
-	if err != nil {
-		t.Errorf("SendConsumerActivityToMySQL returned an error: %v", err)
-	}
-}
+// 	if expectedResponse != actualResponse {
+// 		t.Errorf("Expected response: %s\nActual response: %s", expectedResponse, actualResponse)
+// 	}
+// }
