@@ -33,7 +33,6 @@ func (l *SimpleLogger) Info(message string) {
 func (l *SimpleLogger) Warning(message string) {
 	l.warningLogger.Println(message)
 }
-
 func (l *SimpleLogger) Error(message string) {
 	l.errorLogger.Println(message)
 }
@@ -41,9 +40,6 @@ func (l *SimpleLogger) Fatalf(message string) {
 	l.errorLogger.Println(message)
 }
 func (l *SimpleLogger) Errorf(message string) {
-	l.errorLogger.Println(message)
-}
-func (l *SimpleLogger) Infof(message string) {
 	l.errorLogger.Println(message)
 }
 

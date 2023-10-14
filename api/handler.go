@@ -67,7 +67,7 @@ func activityProcess(contacts []types.Contacts, filePath string) {
 	filename := strings.ReplaceAll(filePath, "/", "")
 	topics := &config.KafkaConfig{
 		ContactsTopic: filename + "Contacts",
-		ActivityTopic: filename + "ACtivityData",
+		ActivityTopic: filename + "ActivityData",
 	}
 	ChannelCompleteKafka := make(chan struct{})
 	contactCounter := 0
