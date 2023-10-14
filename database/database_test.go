@@ -3,6 +3,7 @@ package database
 import (
 	"datastream/config"
 	"datastream/logs"
+	"datastream/services"
 	"fmt"
 	"os"
 	"testing"
@@ -70,20 +71,20 @@ func TestSendMessageAndConsumeMessage(t *testing.T) {
 		Broker: "localhost:9092",
 	}
 	topic := "test_topic"
-	consumer, err := NewKafkaConsumer(testConfig, topic)
+	consumer, err := services.NewKafkaConsumer(testConfig, topic)
 	if err != nil {
 		logs.NewLog.Error(fmt.Sprintf("Error creating Kafka consumer: %v", err))
 	}
-	producer1, _, err := NewKafkaProducers(testConfig)
+	producer1, _, err := services.NewKafkaProducers(testConfig)
 	if err != nil {
 		logs.NewLog.Error(fmt.Sprintf("Error creating Kafka producer: %v", err))
 	}
 	messageToSend := "Hello, Kafka!"
-	err = SendMessage(producer1, topic, messageToSend)
+	err = services.SendMessage(producer1, topic, messageToSend)
 	if err != nil {
 		logs.NewLog.Error(fmt.Sprintf("Error sending message: %v", err))
 	}
-	receivedMessages := ConsumeMessage(consumer, topic)
+	receivedMessages := services.ConsumeMessage(consumer, topic)
 	expectedMessage := messageToSend
 
 	if len(receivedMessages) != 1 {
