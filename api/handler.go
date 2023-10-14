@@ -84,11 +84,9 @@ func activityProcess(contacts []types.Contacts, filePath string) {
 		}()
 	}
 	for i := 0; i < contactCounter; i++ {
-		process.SendDataToKafkaProducers("EOF", "EOF", topics)
-	}
-	for i := 0; i < contactCounter; i++ {
 		<-done
 	}
+	process.SendDataToKafkaProducers("EOF", "EOF", topics)
 	process.SendConsumerContactsToMySQL(topics)
 	go process.SendConsumerActivityToMySQL(topics)
 }
@@ -136,7 +134,6 @@ func DisplayTheQueryResult(w http.ResponseWriter, r *http.Request) {
 		logs.NewLog.Error(fmt.Sprintf("Error parsing html file%v", http.StatusInternalServerError))
 		return
 	}
-
 	data := struct {
 		Results []config.ResultData
 	}{

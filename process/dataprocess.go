@@ -59,7 +59,6 @@ func CSVReadToContactsStruct(filename string) ([]types.Contacts, error) {
 			logs.NewLog.Error(fmt.Sprintf("failed to generate random ID: %v", err))
 			return nil, err
 		}
-
 		name := record[0]
 		email := record[1]
 		details := record[2]
