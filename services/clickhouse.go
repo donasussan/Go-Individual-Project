@@ -1,6 +1,7 @@
 package services
 
 import (
+	"database/sql"
 	"datastream/config"
 	"datastream/database"
 	"datastream/logs"
@@ -17,7 +18,7 @@ func ConnectClickhouse() (*config.ClickHouseConnector, error) {
 	clickhouseConnector := config.ClickHouseConnector{Config: clickhouseConfig}
 	return &clickhouseConnector, nil
 }
-func GetQueryResultFromClickhouse() ([]config.ResultData, error) {
+func GetQueryResultFromClickhouse(query string) (*sql.Rows, error) {
 	clickhouseConnector, err := ConnectClickhouse()
 	if err != nil {
 		logs.NewLog.Errorf(fmt.Sprint(err))
@@ -29,34 +30,10 @@ func GetQueryResultFromClickhouse() ([]config.ResultData, error) {
 		return nil, err
 	}
 	defer db.Close()
-	query := "SELECT co.ID, co.Email, JSONExtractString(co.Details, 'country') AS Country FROM Contacts AS co " +
-		"WHERE (JSONExtractString(co.Details, 'country') IN ('USA', 'UK')) AND (co.ID IN" +
-		"(SELECT ContactsID FROM dona_campaign.contact_activity WHERE opened >= 30))"
 	rows, err := db.Query(query)
 	if err != nil {
 		logs.NewLog.Errorf(fmt.Sprint(err))
 		return nil, err
 	}
-	defer rows.Close()
-	var results []config.ResultData
-	for rows.Next() {
-		var ID, Email, Country string
-		err := rows.Scan(&ID, &Email, &Country)
-		if err != nil {
-			logs.NewLog.Info("Cannot create a struct for this user")
-			continue
-		}
-		fmt.Printf("ID: %s, Email: %s, Country: %s\n", ID, Email, Country)
-		result := config.ResultData{
-			ID:      ID,
-			Email:   Email,
-			Country: Country,
-		}
-		results = append(results, result)
-	}
-	if err := rows.Err(); err != nil {
-		logs.NewLog.Errorf(fmt.Sprint(err))
-		return nil, err
-	}
-	return results, nil
+	return rows, nil
 }

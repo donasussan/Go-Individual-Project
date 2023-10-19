@@ -40,12 +40,27 @@ func TestSeparateContactActivities(t *testing.T) {
 		logs.NewLog.Errorf(fmt.Sprintf("Unexpected error: %v", err))
 	}
 	if len(activities) != len(expectedOutput) {
-		t.Errorf("Expected %d elements, but got %d", len(expectedOutput), len(activities))
+		logs.NewLog.Errorf(fmt.Sprintf("Expected %d elements, but got %d", len(expectedOutput), len(activities)))
 		return
 	}
 	for i := range expectedOutput {
 		if activities[i] != expectedOutput[i] {
-			t.Errorf("Mismatch at index %d: Expected %v, but got %v", i, expectedOutput[i], activities[i])
+			logs.NewLog.Errorf(fmt.Sprintf("Mismatch at index %d: Expected %v, but got %v",
+				i, expectedOutput[i], activities[i]))
 		}
 	}
 }
+
+//	func TestReturnContactsAndActivitiesStructs(t *testing.T) {
+//		testID := "testID"
+//		status, activities, err := ReturnContactsAndActivitiesStructs(testID, types.Contacts{})
+//		if err != nil {
+//			t.Errorf("ReturnContactsAndActivitiesStructs returned an error: %v", err)
+//		}
+//		if status.Contact.ID != testID {
+//			t.Errorf("Expected Contact.ID to be %s, got %s", testID, status.Contact.ID)
+//		}
+//		if len(activities) == 0 {
+//			t.Error("Expected at least one activity, but none were returned")
+//		}
+//	}

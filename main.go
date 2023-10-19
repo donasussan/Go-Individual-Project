@@ -1,9 +1,8 @@
 package main
 
 import (
-	route "datastream/routes"
-
 	"datastream/logs"
+	"datastream/routes"
 	"net/http"
 )
 
@@ -12,7 +11,6 @@ func main() {
 	defer logs.CloseLog()
 	fs := http.FileServer(http.Dir("static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
-	route.SetupRouter()
+	routes.SetupRouter()
 	http.ListenAndServe(":8080", nil)
-
 }

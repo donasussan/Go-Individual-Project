@@ -10,9 +10,12 @@
 	<div class="container">
 		<h1>Upload a File</h1>
 		<form method="POST" enctype="multipart/form-data" class=" upload-form" action="/upload">
-			<input type="file" name="file" accept=".csv" class="file-input">
+			<input type="file" name="uploadedfile" id="uploadedfile" accept=".csv" class="file-input" required>
 			<input type="submit" value="Upload" class="submit-button">
 		</form>
+		{{if .Error}}
+		<p style="color: red;">Error: {{.Error}}</p>
+		{{end}}
 		<a href="query">Show Query Page</a>
 	</div>
 </body>

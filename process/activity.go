@@ -20,14 +20,12 @@ var (
 	flag                                        int
 )
 
-// generate activity dates
 func GenerateActivityDate() {
 	activityDate1 = activityDate.AddDate(0, 0, 1)
 	activityDate2 = activityDate1.AddDate(0, 0, 2)
 	activityDate3 = activityDate2.AddDate(0, 0, 3)
 }
 
-// generate activities for a given contact ID
 func GenerateActivity(p_id string) {
 	percent := mathRand.Intn(101)
 	addActivity := func(activityType int, date time.Time) {
@@ -140,8 +138,7 @@ func GenerateActivity(p_id string) {
 	}
 }
 
-// generate whole data for a given contact ID (flag setting, campaign id increments)
-func GenerateData(ID string) {
+func ControlGenerateActivityFunction(ID string) {
 	i++
 	if i%10 == 0 {
 		activityDateX = activityDateX.AddDate(0, 1, 0)
@@ -154,10 +151,10 @@ func GenerateData(ID string) {
 	if i == 100 || flag == 0 {
 		activityString = activityString[:len(activityString)-1]
 	} else {
-		GenerateData(ID)
+		ControlGenerateActivityFunction(ID)
 	}
 }
-func ReturnContactsAndActivitiesStructs(ID string, contactsData types.Contacts) (types.ContactStatus, []types.ContactActivity,
+func ReturnContactsAndActivitiesStructs(contactsData types.Contacts) (types.ContactStatus, []types.ContactActivity,
 	error) {
 	activityDateX, _ = time.Parse("2006-01-02", "2023-01-01")
 	activityDate = activityDateX
@@ -165,7 +162,7 @@ func ReturnContactsAndActivitiesStructs(ID string, contactsData types.Contacts) 
 	i = 0
 	flag = 1
 	activityString = ""
-	GenerateData(ID)
+	ControlGenerateActivityFunction(contactsData.ID)
 	contact := types.Contacts{
 		ID:      contactsData.ID,
 		Name:    contactsData.Name,
@@ -177,12 +174,9 @@ func ReturnContactsAndActivitiesStructs(ID string, contactsData types.Contacts) 
 		Contact: contact,
 	}
 	resultSeparateCh := make(chan []types.ContactActivity, 4)
-
 	go RunSeparateContactActivities(activityString, 4, resultSeparateCh)
-
 	MultiActivities := <-resultSeparateCh
 	close(resultSeparateCh)
-
 	return StatusContact, MultiActivities, nil
 }
 
@@ -194,7 +188,6 @@ func RunSeparateContactActivities(activityString string, numColumns int, resultC
 	resultCh <- multiActivities
 }
 
-// separate contact activities string and give it to ContactActivity struct
 func SeparateContactActivities(activityString string, numColumns int) ([]types.ContactActivity, error) {
 	activityStrings := strings.Split(activityString, "),(")
 	var multiactivities []types.ContactActivity
@@ -212,11 +205,18 @@ func SeparateContactActivities(activityString string, numColumns int) ([]types.C
 				logs.NewLog.Error(fmt.Sprintf("Error converting ActivityType: %v", err))
 				return nil, err
 			}
+			activitydateStr := parts[3]
+			activitydateStr = strings.Trim(activitydateStr, `"`)
+			fmt.Println(activitydateStr)
+			layout := "2006-01-02"
+			activitydate, _ := time.Parse(layout, activitydateStr)
+			fmt.Println("final", activitydate)
+
 			activity := types.ContactActivity{
 				Contactid:    parts[0],
 				Campaignid:   campaignID,
 				Activitytype: activityType,
-				Activitydate: parts[3],
+				Activitydate: activitydate,
 			}
 			multiactivities = append(multiactivities, activity)
 		}

@@ -29,7 +29,9 @@ func LoadDatabaseConfig(Database string) (config.DatabaseConfig, error) {
 	case "kafka":
 
 		kafkaConfig := config.KafkaConfig{
-			Broker: os.Getenv("KAFKA_BROKER"),
+			Broker:        os.Getenv("KAFKA_BROKER"),
+			ContactsTopic: os.Getenv("KAFKA_CONTACTS_TOPICS"),
+			ActivityTopic: os.Getenv("KAFKA_ACTIVITY_TOPICS"),
 		}
 		return kafkaConfig, nil
 	case "clickhouse":

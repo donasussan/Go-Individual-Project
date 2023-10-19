@@ -1,7 +1,6 @@
 package api
 
 import (
-	"datastream/config"
 	"datastream/logs"
 	"datastream/process"
 	"datastream/services"
@@ -11,133 +10,185 @@ import (
 	"io"
 	"net/http"
 	"os"
-	"strings"
+	"path/filepath"
 
 	"github.com/google/uuid"
 )
 
-func HomePageHandler(w http.ResponseWriter, r *http.Request) {
-	tmpl, err := template.ParseFiles("templates/HomePage.html")
-	if err != nil {
-		logs.NewLog.Error(err.Error())
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
+var ModifyHomePage = template.Must(template.ParseFiles("templates/HomePage.html"))
 
-	err = tmpl.Execute(w, nil)
+func ParsefileHTMLtemplates(htmlpage string) *template.Template {
+	tmpl, err := template.ParseFiles(htmlpage)
+	if err != nil {
+		logs.NewLog.Error(fmt.Sprintf("Error parsing html file: %v", err))
+		return nil
+	}
+	return tmpl
+}
+
+func HomePageHandler(w http.ResponseWriter, r *http.Request) {
+	tmpl := ParsefileHTMLtemplates("templates/HomePage.html")
+	err := tmpl.Execute(w, nil)
 	if err != nil {
 		logs.NewLog.Error(err.Error())
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
 func Upload(w http.ResponseWriter, r *http.Request) {
-	uuid := uuid.New()
-
-	file, header, err := r.FormFile("file")
+	uploadedFile, header, err := r.FormFile("uploadedfile")
 	if err != nil {
 		logs.NewLog.Error(fmt.Sprintf("Error retrieving file: %v", err))
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 	}
-	fileNameWithUUID := fmt.Sprintf("%s-%s", uuid, header.Filename)
-	tmpFile, err := os.CreateTemp("", fileNameWithUUID)
+	defer uploadedFile.Close()
+	fileNameWithUUID := fmt.Sprintf("%s-%s", uuid.New(), header.Filename)
+	filePath := filepath.Join("/home/user/go_learn/data_stream/uploadfiles", fileNameWithUUID)
+	outputFile, err := os.Create(filePath)
 	if err != nil {
-		logs.NewLog.Error(fmt.Sprintf("Error creating temporary file: %v", err))
+		logs.NewLog.Error(fmt.Sprintf("Error creating the file: %v", err))
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 	}
-	defer tmpFile.Close()
-	_, err = io.Copy(tmpFile, file)
+	defer outputFile.Close()
+	written, err := io.Copy(outputFile, uploadedFile)
 	if err != nil {
 		logs.NewLog.Error(fmt.Sprintf("Error copying file content: %v", err))
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 	}
-	filePath := tmpFile.Name()
-	contacts, err := process.CSVReadToContactsStruct(filePath)
+	if written != header.Size {
+		logs.NewLog.Error("Data copy verification failed: Number of bytes copied does not match the original file size")
+	} else {
+		logs.NewLog.Info(fmt.Sprintf("Copied %d bytes", written))
+	}
+	err = process.ValidateUploadedFileFormat(filePath)
 	if err != nil {
-		logs.NewLog.Error(err.Error())
+		data := struct {
+			Error string
+		}{
+			Error: err.Error(),
+		}
+		ModifyHomePage.ExecuteTemplate(w, "HomePage.html", data)
 		return
 	}
-	activityProcess(contacts, filePath)
+	go func() {
+		err := process.CSVReadToDataInsertion(filePath, 100)
+		if err != nil {
+			data := struct {
+				Error string
+			}{
+				Error: err.Error(),
+			}
+			ModifyHomePage.ExecuteTemplate(w, "HomePage.html", data)
+			return
+		}
+	}()
 	http.Redirect(w, r, "/HomePage.html", http.StatusSeeOther)
 }
 
-func activityProcess(contacts []types.Contacts, filePath string) {
-	filename := strings.ReplaceAll(filePath, "/", "")
-	topics := &config.KafkaConfig{
-		ContactsTopic: filename + "Contacts",
-		ActivityTopic: filename + "ActivityData",
-	}
-	ChannelCompleteKafka := make(chan struct{})
-	contactCounter := 0
-	for _, contact := range contacts {
-		contactCounter++
-		statusContact, activitiesSlice, _ := process.ReturnContactsAndActivitiesStructs(contact.ID, contact)
-		contactsData, _ := getContactsDataString(statusContact)
-		activityDetails := getActivityDetailsString(activitiesSlice)
-		logs.NewLog.Info(fmt.Sprintf("Processing contact %d\n", contactCounter))
-
-		go func() {
-			process.SendDataToKafkaProducers(contactsData, activityDetails, topics)
-			ChannelCompleteKafka <- struct{}{}
-		}()
-	}
-	for i := 0; i < contactCounter; i++ {
-		<-ChannelCompleteKafka
-	}
-	process.SendDataToKafkaProducers("EOF", "EOF", topics)
-	process.SendConsumerContactsToMySQL(topics)
-	go process.SendConsumerActivityToMySQL(topics)
-}
-func getContactsDataString(statusContact types.ContactStatus) (string, string) {
-	statusInfo := fmt.Sprintf("('%s', '%s','%s', '%s', %d),", statusContact.Contact.ID, statusContact.Contact.Name,
-		statusContact.Contact.Email, statusContact.Contact.Details, statusContact.Status)
-	return statusInfo, ""
-}
-func getActivityDetailsString(activities []types.ContactActivity) string {
-	var details string
-	for _, activity := range activities {
-		details += fmt.Sprintf("('%s', %d, %d,%s),", activity.Contactid, activity.Campaignid,
-			activity.Activitytype, activity.Activitydate)
-	}
-	return details
-}
 func QueryView(w http.ResponseWriter, r *http.Request) {
-	htmlFile, err := os.Open("templates/QueryView.html")
+	tmpl := ParsefileHTMLtemplates("templates/QueryView.html")
+	err := tmpl.Execute(w, nil)
 	if err != nil {
-		logs.NewLog.Error("Error reading HTML file: " + err.Error())
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		return
-	}
-	defer htmlFile.Close()
-	w.Header().Set("Content-Type", "text/html")
-	_, err = io.Copy(w, htmlFile)
-	if err != nil {
-		logs.NewLog.Error("Error serving HTML content: " + err.Error())
+		logs.NewLog.Error("Error executing HTML template: " + err.Error())
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 	}
 }
-func DisplayTheQueryResult(w http.ResponseWriter, r *http.Request) {
-	results, err := services.GetQueryResultFromClickhouse()
+func EntireQueryDisplay(w http.ResponseWriter, r *http.Request) {
+	results, err := GetEntireResultData()
 	if err != nil {
 		logs.NewLog.Error(fmt.Sprintf("Error getting Result%v", http.StatusInternalServerError))
 		return
 	}
-	tmpl, err := template.ParseFiles("templates/ResultPage.html")
-	if err != nil {
-		logs.NewLog.Error(fmt.Sprintf("Error parsing html file%v", http.StatusInternalServerError))
-		return
-	}
+	tmpl := ParsefileHTMLtemplates("templates/ResultPage.html")
 	data := struct {
-		Results []config.ResultData
+		Results []types.ResultData
 	}{
 		Results: results,
 	}
-
 	err = tmpl.Execute(w, data)
 	if err != nil {
 		logs.NewLog.Error(fmt.Sprintf("Internal Server Error %v", http.StatusInternalServerError))
 	}
+}
+
+func RefreshQuery(w http.ResponseWriter, r *http.Request) {
+	tmpl := ParsefileHTMLtemplates("templates/QueryView.html")
+	results, err := GetCountOfPeople()
+	if err != nil {
+		logs.NewLog.Error(fmt.Sprintf("Error getting Result %v", http.StatusInternalServerError))
+		return
+	}
+	data := struct {
+		Results []types.Count
+	}{
+		Results: results,
+	}
+	err = tmpl.Execute(w, data)
+	if err != nil {
+		logs.NewLog.Error(fmt.Sprintf("Internal Server Error %v", http.StatusInternalServerError))
+	}
+
+}
+
+func GetCountOfPeople() ([]types.Count, error) {
+	query := "SELECT COUNT(*) AS CountOfPeople FROM Contacts AS co " +
+		"WHERE (JSONExtractString(co.Details, 'country') IN ('USA', 'UK')) " +
+		"AND (co.ID IN (SELECT ContactsID " +
+		"FROM dona_campaign.contact_activity WHERE opened >= 30))"
+	rows, err := services.GetQueryResultFromClickhouse(query)
+	if err != nil {
+		logs.NewLog.Error(fmt.Sprint("Error getting clickhouse Query", err))
+	}
+	var results []types.Count
+	for rows.Next() {
+		var Count int
+		rows.Scan(&Count)
+		fmt.Printf("Count: %d\n", Count)
+		result := types.Count{
+			Count: Count,
+		}
+		results = append(results, result)
+	}
+	if err := rows.Err(); err != nil {
+		logs.NewLog.Errorf(fmt.Sprint(err))
+		return nil, err
+	}
+	return results, nil
+}
+
+func GetEntireResultData() ([]types.ResultData, error) {
+	query := "SELECT co.ID, co.Email, JSONExtractString(co.Details, 'country') AS Country " +
+		"FROM Contacts AS co " +
+		"WHERE (JSONExtractString(co.Details, 'country') IN ('USA', 'UK')) " +
+		"AND (co.ID IN (SELECT ContactsID " +
+		"FROM dona_campaign.contact_activity WHERE opened >= 30))"
+
+	rows, err := services.GetQueryResultFromClickhouse(query)
+	if err != nil {
+		logs.NewLog.Error(fmt.Sprint("Error getting clickhouse Query", err))
+	}
+	var results []types.ResultData
+	for rows.Next() {
+		var ID, Email, Country string
+		err := rows.Scan(&ID, &Email, &Country)
+		if err != nil {
+			logs.NewLog.Info("Cannot create a struct for this user")
+			continue
+		}
+		fmt.Printf("ID: %s, Email: %s, Country: %s\n", ID, Email, Country)
+		result := types.ResultData{
+			ID:      ID,
+			Email:   Email,
+			Country: Country,
+		}
+		results = append(results, result)
+	}
+	if err := rows.Err(); err != nil {
+		logs.NewLog.Errorf(fmt.Sprint(err))
+		return nil, err
+	}
+	return results, nil
 }

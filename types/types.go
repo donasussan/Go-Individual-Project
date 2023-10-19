@@ -1,8 +1,6 @@
 package types
 
-import (
-	"fmt"
-)
+import "time"
 
 type Contacts struct {
 	Name    string
@@ -11,7 +9,7 @@ type Contacts struct {
 	ID      string
 }
 type ContactActivity struct {
-	Activitydate string
+	Activitydate time.Time
 	Contactid    string
 	Campaignid   int
 	Activitytype int
@@ -22,10 +20,11 @@ type ContactStatus struct {
 	Status  int
 }
 
-type QueryOutput struct {
+type ResultData struct {
+	ID      string `json:"ID"`
+	Email   string `json:"Email"`
+	Country string `json:"Country"`
 }
-
-func (ca *ContactActivity) StringConv() string {
-	return fmt.Sprintf("Contactid: %s, Campaignid: %d, Activitytype: %d, Activitydate: %s",
-		ca.Contactid, ca.Campaignid, ca.Activitytype, ca.Activitydate)
+type Count struct {
+	Count int
 }

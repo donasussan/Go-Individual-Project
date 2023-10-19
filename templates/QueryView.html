@@ -1,23 +1,34 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-	<title>Radio Button Example</title>
-	<link rel="stylesheet" type="text/css" href="ResultPage.css">
+<html>
 
+<head>
+	<title>Query Table</title>
 </head>
 
 <body>
-	<h1>Query Page</h1>
-	<form action="/result" method="post">
-		<div class="radio-container">
-			<input type="radio" id="option1" name="radioGroup" value="Query">
-			<label class="radio-label" for="option1"> Filter based on Country(UK,US) from JSON - select contacts with
-				more than 30 opens?</label>
-		</div>
-		<button type="submit">Go</button>
+	<h1>Query Table</h1>
+	<table>
+		<tr>
+			<th>Query</th>
+			<th>Count</th>
+		</tr>
+		<tr>
+			<td>UK, US creators with at least 30 opens</td>
+			<td id="query1Count">
+				{{range .Results}}
+				{{.Count}}
+				{{end}}
+			</td>
+		</tr>
+		<tr>
+			<td><a href="/result">See Details</a></td>
+		</tr>
+	</table>
+	<form method="post" action="/refreshQuery">
+		<button type="submit">Refresh</button>
 	</form>
 </body>
-
 
 </html>

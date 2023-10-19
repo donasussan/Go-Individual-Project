@@ -146,3 +146,5 @@ type ResultData struct {
 	Email   string `json:"Email"`
 	Country string `json:"Country"`
 }
+type Count struct {
+}
