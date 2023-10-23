@@ -207,11 +207,8 @@ func SeparateContactActivities(activityString string, numColumns int) ([]types.C
 			}
 			activitydateStr := parts[3]
 			activitydateStr = strings.Trim(activitydateStr, `"`)
-			fmt.Println(activitydateStr)
 			layout := "2006-01-02"
 			activitydate, _ := time.Parse(layout, activitydateStr)
-			fmt.Println("final", activitydate)
-
 			activity := types.ContactActivity{
 				Contactid:    parts[0],
 				Campaignid:   campaignID,

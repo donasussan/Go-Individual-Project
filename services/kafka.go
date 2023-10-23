@@ -47,7 +47,6 @@ func KafkaConfigAndCreateConsumer() (sarama.Consumer, config.KafkaConfig, error)
 		logs.NewLog.Errorf(fmt.Sprintf("Error creating Kafka consumer: %v", err))
 		return nil, config.KafkaConfig{}, err
 	}
-
 	return consumer, kafkaConfig, nil
 }
 
@@ -75,10 +74,10 @@ func SendMessage(producer sarama.SyncProducer, topic string, message string) err
 		Topic: topic,
 		Value: sarama.StringEncoder(message),
 	}
-	logs.NewLog.Info(topic)
 	_, _, err := producer.SendMessage(producerMessage)
 	return err
 }
+
 func ConsumeMessage(consumer sarama.Consumer, topic string) {
 	partitionConsumer, err := consumer.ConsumePartition(topic, 0, sarama.OffsetOldest)
 	if err != nil {

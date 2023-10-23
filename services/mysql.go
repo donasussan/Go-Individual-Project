@@ -29,9 +29,6 @@ func InsertContactDataToMySQL(messages []string, table string) error {
 	batchSize := 100
 	contactsInserted := 0
 	for _, message := range messages {
-		if message == "EOF" {
-			break
-		}
 		message = strings.TrimRight(message, ",")
 		query := fmt.Sprintf("INSERT INTO %s (ID, Name, Email, Details, Status) VALUES %s;", table, message)
 		_, err = db.Exec(query)
@@ -63,8 +60,6 @@ func InsertActivityDataToMySQL(messages []string, table string) error {
 	for _, message := range filteredMessages {
 		query := fmt.Sprintf("INSERT INTO %s (ContactsID, CampaignID, ActivityType,ActivityDate)VALUES %s;",
 			table, message)
-		fmt.Println(query)
-
 		_, err = db.Exec(query)
 		if err != nil {
 			logs.NewLog.Errorf(fmt.Sprintf("error executing MySQL query: %v", err))

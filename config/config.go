@@ -140,11 +140,3 @@ func (k KafkaConfig) GetConfig() map[string]string {
 		"Broker": k.Broker,
 	}
 }
-
-type ResultData struct {
-	ID      string `json:"ID"`
-	Email   string `json:"Email"`
-	Country string `json:"Country"`
-}
-type Count struct {
-}

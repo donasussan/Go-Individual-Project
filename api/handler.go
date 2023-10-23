@@ -72,17 +72,9 @@ func Upload(w http.ResponseWriter, r *http.Request) {
 		ModifyHomePage.ExecuteTemplate(w, "HomePage.html", data)
 		return
 	}
+
 	go func() {
-		err := process.CSVReadToDataInsertion(filePath, 100)
-		if err != nil {
-			data := struct {
-				Error string
-			}{
-				Error: err.Error(),
-			}
-			ModifyHomePage.ExecuteTemplate(w, "HomePage.html", data)
-			return
-		}
+		process.CSVReadToDataInsertion(filePath, 100)
 	}()
 	http.Redirect(w, r, "/HomePage.html", http.StatusSeeOther)
 }
@@ -137,7 +129,7 @@ func GetCountOfPeople() ([]types.Count, error) {
 	query := "SELECT COUNT(*) AS CountOfPeople FROM Contacts AS co " +
 		"WHERE (JSONExtractString(co.Details, 'country') IN ('USA', 'UK')) " +
 		"AND (co.ID IN (SELECT ContactsID " +
-		"FROM dona_campaign.contact_activity WHERE opened >= 30))"
+		"FROM dona_campaign.ContactActivity WHERE opened >= 30))"
 	rows, err := services.GetQueryResultFromClickhouse(query)
 	if err != nil {
 		logs.NewLog.Error(fmt.Sprint("Error getting clickhouse Query", err))
@@ -146,7 +138,6 @@ func GetCountOfPeople() ([]types.Count, error) {
 	for rows.Next() {
 		var Count int
 		rows.Scan(&Count)
-		fmt.Printf("Count: %d\n", Count)
 		result := types.Count{
 			Count: Count,
 		}
@@ -164,7 +155,7 @@ func GetEntireResultData() ([]types.ResultData, error) {
 		"FROM Contacts AS co " +
 		"WHERE (JSONExtractString(co.Details, 'country') IN ('USA', 'UK')) " +
 		"AND (co.ID IN (SELECT ContactsID " +
-		"FROM dona_campaign.contact_activity WHERE opened >= 30))"
+		"FROM dona_campaign.ContactActivity WHERE opened >= 30))"
 
 	rows, err := services.GetQueryResultFromClickhouse(query)
 	if err != nil {

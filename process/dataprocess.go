@@ -80,6 +80,27 @@ func getFileType(filename string) string {
 	}
 	return "Invalid File Type"
 }
+func isValidName(name string) bool {
+	if len(name) == 0 {
+		return false
+	}
+	for _, char := range name {
+		if !unicode.IsLetter(char) && !unicode.IsSpace(char) {
+			return false
+		}
+	}
+	return true
+}
+func isValidEmail(email string) bool {
+	emailPattern := `^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`
+	validEmail := regexp.MustCompile(emailPattern)
+	return validEmail.MatchString(email)
+}
+func isValidDetails(details string) bool {
+	detailsPattern := `^\{"dob": "\d{4}-\d{2}-\d{2}", "city": "[A-Za-z0-9 ]+", "country": "[A-Za-z0-9 ]+"\}$`
+	validDetails := regexp.MustCompile(detailsPattern)
+	return validDetails.MatchString(details)
+}
 func validateCSVRecord(lineNumber int, record []string) error {
 	if len(record) != 3 {
 		logs.NewLog.Error(fmt.Sprintf("invalid number of columns in CSV record %d: %v", lineNumber, record))
@@ -154,10 +175,7 @@ func CSVReadToDataInsertion(filename string, batchSize int) error {
 	}
 	wg.Wait()
 	go SendKafkaConsumerActivityToMySQL()
-	err1 := SendKafkaConsumerContactsToMySQL()
-	if err1 != nil {
-		logs.NewLog.Error(fmt.Sprint("Error extracting data from consumer", err))
-	}
+	SendKafkaConsumerContactsToMySQL()
 	return err
 }
 func printContactsBatch(batch []types.Contacts, lineNumber int) {
@@ -182,8 +200,6 @@ func getContactsDataString(statusContact types.ContactStatus) (string, string) {
 func getActivityDetailsString(activities []types.ContactActivity) string {
 	var details string
 	for _, activity := range activities {
-		// details += fmt.Sprintf("('%s', %d, %d, '%s'),", activity.Contactid, activity.Campaignid,
-		// 	activity.Activitytype, activity.Activitydate.Format("2006-01-02 15:04:05"))
 		details += fmt.Sprintf("('%s', %d, %d, '%s'),", activity.Contactid, activity.Campaignid,
 			activity.Activitytype, activity.Activitydate.Format("2006-01-02 15:04:05"))
 
@@ -229,25 +245,4 @@ func SendKafkaConsumerActivityToMySQL() error {
 	defer consumer.Close()
 	services.ConsumeMessage(consumer, kafkaConfig.ActivityTopic)
 	return nil
-}
-func isValidName(name string) bool {
-	if len(name) == 0 {
-		return false
-	}
-	for _, char := range name {
-		if !unicode.IsLetter(char) && !unicode.IsSpace(char) {
-			return false
-		}
-	}
-	return true
-}
-func isValidEmail(email string) bool {
-	emailPattern := `^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`
-	validEmail := regexp.MustCompile(emailPattern)
-	return validEmail.MatchString(email)
-}
-func isValidDetails(details string) bool {
-	detailsPattern := `^\{"dob": "\d{4}-\d{2}-\d{2}", "city": "[A-Za-z0-9 ]+", "country": "[A-Za-z0-9 ]+"\}$`
-	validDetails := regexp.MustCompile(detailsPattern)
-	return validDetails.MatchString(details)
 }

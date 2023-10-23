@@ -9,8 +9,8 @@ import (
 )
 
 func ConnectClickhouse() (*config.ClickHouseConnector, error) {
-	Database := "clickhouse"
-	configData, err := database.LoadDatabaseConfig(Database)
+
+	configData, err := database.LoadDatabaseConfig("clickhouse")
 	if err != nil {
 		logs.NewLog.Error(fmt.Sprintf("Error loading database config: %v", err))
 	}
