@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Query Results</title>
+	<link rel="stylesheet" type="text/css" href="/static/QueryView.css">
+
+</head>
+
+<body>
+	<h1>Query Results</h1>
+	<table border="1">
+		<tr>
+			<th>ID</th>
+			<th>Email</th>
+			<th>Country</th>
+		</tr>
+		{{range .Results}}
+		<tr>
+			<td>{{.ID}}</td>
+			<td>{{.Email}}</td>
+			<td>{{.Country}}</td>
+		</tr>
+		{{end}}
+	</table>
+</body>
+
+</html>

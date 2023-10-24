@@ -95,14 +95,12 @@ func ConsumeMessage(consumer sarama.Consumer, topic string) {
 
 		if messageCount%100 == 0 {
 			if strings.Contains(topic, "contacts") {
-				fmt.Println("contact")
 				err := InsertContactDataToMySQL(messages, "Contacts")
 				messages = make([]string, 0)
 				if err != nil {
 					logs.NewLog.Errorf(fmt.Sprintf("Error inserting contact data into MySQL: %v", err))
 				}
 			} else {
-				fmt.Println("activity")
 				err := InsertActivityDataToMySQL(messages, "ContactActivity")
 				messages = make([]string, 0)
 				if err != nil {

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<html>
+
+<head>
+	<title>Query Table</title>
+	<link rel="stylesheet" type="text/css" href="/static/QueryView.css">
+
+</head>
+
+<body>
+	<h1>Query Table</h1>
+	<table>
+		<tr>
+			<th>Query</th>
+			<th>Count</th>
+		</tr>
+		<tr>
+			<td>UK, US creators with at least 30 opens</td>
+			<td id="query1Count">
+				{{range .Results}}
+				{{.Count}}
+				{{end}}
+			</td>
+		</tr>
+		<tr>
+			<td><a href="/result">See Details</a></td>
+		</tr>
+	</table>
+	<form method="post" action="/refreshQuery">
+		<button type="submit">Refresh</button>
+	</form>
+</body>
+
+</html>

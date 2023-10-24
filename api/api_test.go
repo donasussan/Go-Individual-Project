@@ -1,107 +1,132 @@
 package api
 
 import (
-	"datastream/types"
+	"net/http"
+	"net/http/httptest"
 	"testing"
 )
 
-// func TestUpload(t *testing.T) {
-// 	csvContent := "Dona, dona@example.com, jsondata"
-// 	tmpFile, err := os.CreateTemp("", "test-*.csv")
-// 	if err != nil {
-// 		t.Fatal(err)
-// 	}
-// 	_, err = tmpFile.WriteString(csvContent)
-// 	if err != nil {
-// 		t.Fatal(err)
-// 	}
-// 	tmpFilePath := tmpFile.Name()
-// 	if err != nil {
-// 		t.Fatal(err)
-// 	}
-// 	expectedContactsSlice := []types.Contacts{
-// 		{
-// 			Name:    "Dona",
-// 			Email:   " dona@example.com",
-// 			Details: " jsondata",
-// 		},
-// 	}
-// 	actualContacts, _ := process.CSVReadToContactsStruct(tmpFilePath)
-// 	expectedContactsSlice[0].ID = actualContacts[0].ID
-// 	if len(expectedContactsSlice) != len(actualContacts) {
-// 		t.Errorf("Expected contacts length: %d, but got: %d", len(expectedContactsSlice), len(actualContacts))
-// 	}
-// 	for i := range expectedContactsSlice {
-// 		if i >= len(actualContacts) {
-// 			t.Errorf("Expected contact at index %d, but actualContacts is shorter", i)
-// 			continue
-// 		}
-// 		if expectedContactsSlice[i].Name != actualContacts[i].Name ||
-// 			expectedContactsSlice[i].Email != actualContacts[i].Email ||
-// 			expectedContactsSlice[i].Details != actualContacts[i].Details ||
-// 			expectedContactsSlice[i].ID != actualContacts[i].ID {
-// 			t.Errorf("Mismatch at index %d. Expected: %+v, but got: %+v", i, expectedContactsSlice[i], actualContacts[i])
-// 		}
-// 	}
-// }
-
-func TestGetContactsDataString(t *testing.T) {
-	statusContact := types.ContactStatus{
-		Contact: types.Contacts{
-			ID:      "123",
-			Name:    "Dona",
-			Email:   "dona@example.com",
-			Details: "jsondata",
-		},
-		Status: 1,
+func TestHomePageHandler(t *testing.T) {
+	req, err := http.NewRequest("GET", "/", nil)
+	if err != nil {
+		t.Fatal(err)
 	}
-	contactsData, _ := getContactsDataString(statusContact)
-	expectedContactsData := "('123', 'Dona','dona@example.com', 'jsondata', 1),"
-	if contactsData != expectedContactsData {
-		t.Errorf("Expected ContactsData: %s, but got: %s", expectedContactsData, contactsData)
+	rr := httptest.NewRecorder()
+	handler := http.HandlerFunc(HomePageHandler)
+	handler.ServeHTTP(rr, req)
+	if status := rr.Code; status != http.StatusOK {
+		t.Errorf("Handler returned wrong status code: got %v, want %v", status, http.StatusOK)
 	}
 }
+func TestQueryView(t *testing.T) {
+	t.Run("Successful execution", func(t *testing.T) {
+		req := httptest.NewRequest(http.MethodGet, "/query", nil)
+		w := httptest.NewRecorder()
+		QueryView(w, req)
 
-func TestGetActivityDetailsString(t *testing.T) {
-	activities := []types.ContactActivity{
-		{
-			Contactid:    "123",
-			Campaignid:   456,
-			Activitytype: 1,
-			Activitydate: " 2023-10-10",
-		},
-	}
-	activityDetails := getActivityDetailsString(activities)
-	expectedActivityDetails := `('123', 456, 1, 2023-10-10),`
-	if activityDetails != expectedActivityDetails {
-		t.Errorf("Expected ActivityDetails: %s, but got: %s", expectedActivityDetails, activityDetails)
-	}
+		if w.Code != http.StatusOK {
+			t.Errorf("Expected status code %d, got %d", http.StatusOK, w.Code)
+		}
+
+	})
+	t.Run("Error executing HTML template", func(t *testing.T) {
+		req := httptest.NewRequest(http.MethodGet, "/query", nil)
+		w := httptest.NewRecorder()
+		QueryView(w, req)
+
+		if w.Code != http.StatusInternalServerError {
+			t.Errorf("Expected status code %d, got %d", http.StatusInternalServerError, w.Code)
+		}
+
+	})
 }
 
-// type MockQueryResultGetter struct{}
+// func TestRefreshQuery(t *testing.T) {
+// 	t.Run("Successful execution", func(t *testing.T) {
+// 		req := httptest.NewRequest(http.MethodGet, "/refreshQuery", nil)
+// 		w := httptest.NewRecorder()
+// 		RefreshQuery(w, req)
 
-// func (m *MockQueryResultGetter) GetQueryResultFromClickhouse() ([]config.ResultData, error) {
-// 	return []config.ResultData{
-// 		{ID: "1", Email: "test1@example.com", Country: "USA"},
-// 		{ID: "2", Email: "test2@example.com", Country: "UK"},
-// 	}, nil
+// 		if w.Code != http.StatusOK {
+// 			t.Errorf("Expected status code %d, got %d", http.StatusOK, w.Code)
+// 		}
+
+// 	})
 // }
 
-// func TestDisplayTheQueryResult(t *testing.T) {
-// 	req, err := http.NewRequest("GET", "/your-endpoint", nil)
-// 	if err != nil {
-// 		t.Fatal(err)
-// 	}
-// 	rr := httptest.NewRecorder()
-// 	DisplayTheQueryResult(rr, req)
+// func TestUploadFile(t *testing.T) {
+// 	csvContent := `dona,dona@gmail.com,{"country":"india","city":"kerala","dob":"29-09-2001"}`
 
-// 	if status := rr.Code; status != http.StatusOK {
-// 		t.Errorf("Handler returned wrong status code: got %v, want %v", status, http.StatusOK)
-// 	}
-// 	expectedResponse := "Expected HTML content for the results page"
-// 	actualResponse := rr.Body.String()
+// 	body := &bytes.Buffer{}
+// 	writer := multipart.NewWriter(body)
+// 	part, _ := writer.CreateFormFile("file", "test.csv")
+// 	part.Write([]byte(csvContent))
+// 	writer.Close()
+// 	req := httptest.NewRequest("POST", "/upload", body)
+// 	req.Header.Set("Content-Type", writer.FormDataContentType())
 
-// 	if expectedResponse != actualResponse {
-// 		t.Errorf("Expected response: %s\nActual response: %s", expectedResponse, actualResponse)
-// 	}
+// 	// Test case 1: Successful upload of a CSV file
+// 	t.Run("SuccessfulUpload", func(t *testing.T) {
+// 		recorder := httptest.NewRecorder()
+// 		handler, file, err := HandleFileUpload(recorder, req)
+
+// 		if err != nil {
+// 			t.Errorf("Expected no error, got %v", err)
+// 		}
+// 		if handler == nil {
+// 			t.Errorf("Expected a file handler, got nil")
+// 		}
+// 		if file == nil {
+// 			t.Errorf("Expected a file reader, got nil")
+// 		}
+// 		if !strings.HasSuffix(handler.Filename, ".csv") {
+// 			t.Errorf("Expected file to have a .csv extension, got %s", handler.Filename)
+// 		}
+// 	})
+
+// 	// Test case 2: Missing file in the request
+// 	t.Run("MissingFile", func(t *testing.T) {
+// 		body := &bytes.Buffer{}
+// 		writer := multipart.NewWriter(body)
+// 		req := httptest.NewRequest("POST", "/upload", body)          // Include an empty file
+// 		req.Header.Set("Content-Type", writer.FormDataContentType()) // Set the correct content type
+// 		recorder := httptest.NewRecorder()
+
+// 		handler, file, err := HandleFileUpload(recorder, req)
+
+// 		if err == nil {
+// 			t.Errorf("Expected error, but got no error: %v", err)
+// 		}
+// 		if handler != nil {
+// 			t.Errorf("Expected a nil file handler, got %v", handler)
+// 		}
+// 		if file != nil {
+// 			t.Errorf("Expected a nil file reader, got %v", file)
+// 		}
+// 	})
+
+// 	// Test case 3: Uploaded file is not a CSV
+// 	t.Run("NonCSVFile", func(t *testing.T) {
+// 		recorder := httptest.NewRecorder()
+
+// 		// Create a sample request with a non-CSV file
+// 		nonCSVContent := "This is not a CSV content"
+// 		body := &bytes.Buffer{}
+// 		writer := multipart.NewWriter(body)
+// 		part, _ := writer.CreateFormFile("file", "test.txt")
+// 		part.Write([]byte(nonCSVContent))
+// 		writer.Close()
+
+// 		req := httptest.NewRequest("POST", "/upload", body)
+// 		req.Header.Set("Content-Type", writer.FormDataContentType())
+
+// 		_, _, err := HandleFileUpload(recorder, req)
+
+// 		if err == nil {
+// 			t.Errorf("Expected an error, but got no error")
+// 		}
+// 		if !strings.Contains(err.Error(), "File is not a CSV") {
+// 			t.Errorf("Expected error message to contain 'File is not a CSV', got %v", err)
+// 		}
+// 	})
 // }

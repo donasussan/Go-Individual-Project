@@ -175,6 +175,7 @@ func CSVReadToDataInsertion(filename string, batchSize int) error {
 	}
 	wg.Wait()
 	go SendKafkaConsumerActivityToMySQL()
+
 	SendKafkaConsumerContactsToMySQL()
 	return err
 }
