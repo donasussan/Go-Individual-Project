@@ -27,9 +27,9 @@ func NewKafkaConsumer(config *config.KafkaConfig, topic string) (sarama.Consumer
 	consumer, err := sarama.NewConsumer([]string{config.Broker}, nil)
 	if err != nil {
 		logs.NewLog.Error("Error creating new consumer")
-		return nil, nil
+		return nil, err
 	}
-	return consumer, nil
+	return consumer, err
 }
 func KafkaConfigAndCreateConsumer() (sarama.Consumer, config.KafkaConfig, error) {
 	configData, err := database.LoadDatabaseConfig("kafka")

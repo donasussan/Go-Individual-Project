@@ -11,6 +11,7 @@ import (
 func ConnectClickhouse() (*config.ClickHouseConnector, error) {
 
 	configData, err := database.LoadDatabaseConfig("clickhouse")
+	fmt.Println(configData)
 	if err != nil {
 		logs.NewLog.Error(fmt.Sprintf("Error loading database config: %v", err))
 	}

@@ -73,7 +73,7 @@ func HandleFileUpload(w http.ResponseWriter, r *http.Request) {
 	} else {
 		logs.NewLog.Info(fmt.Sprintf("Copied %d bytes", written))
 	}
-	err = ProcessUploadedFile(w, filePath)
+	err = process.ValidateUploadedFileFormat(filePath)
 	if err != nil {
 		data := struct {
 			Error string
@@ -83,17 +83,6 @@ func HandleFileUpload(w http.ResponseWriter, r *http.Request) {
 		ModifyHomePage.ExecuteTemplate(w, "HomePage.html", data)
 		return
 	}
-	http.Redirect(w, r, "/HomePage.html", http.StatusSeeOther)
-}
-
-func ProcessUploadedFile(w http.ResponseWriter, filePath string) error {
-	// Validate the uploaded file format
-	err := process.ValidateUploadedFileFormat(filePath)
-	if err != nil {
-		return err
-	}
-
-	// Perform further processing in a goroutine
 	go func() {
 		err := process.CSVReadToDataInsertion(filePath, 100)
 		if err != nil {
@@ -101,18 +90,9 @@ func ProcessUploadedFile(w http.ResponseWriter, filePath string) error {
 		}
 	}()
 
-	return nil
+	http.Redirect(w, r, "/HomePage.html", http.StatusSeeOther)
 }
 
-func QueryView(w http.ResponseWriter, r *http.Request) {
-	tmpl := ParsefileHTMLtemplates("templates/QueryView.html")
-	err := tmpl.Execute(w, nil)
-	if err != nil {
-		logs.NewLog.Error("Error executing HTML template: " + err.Error())
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		return
-	}
-}
 func EntireQueryDisplay(w http.ResponseWriter, r *http.Request) {
 	results, err := GetEntireResultData()
 	if err != nil {

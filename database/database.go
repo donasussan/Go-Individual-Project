@@ -11,7 +11,7 @@ import (
 )
 
 func LoadDatabaseConfig(Database string) (config.DatabaseConfig, error) {
-	if err := godotenv.Load(); err != nil {
+	if err := godotenv.Load("/home/user/go_learn/data_stream/.env"); err != nil {
 		logs.NewLog.Fatalf(fmt.Sprintf("Error loading .env file: %v", err))
 		return nil, err
 	}

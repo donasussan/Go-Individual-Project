@@ -1,0 +1,47 @@
+[INFO] 2023/10/25 11:35:12 log.go:30: Log File Created
+[ERROR] 2023/10/25 11:35:12 log.go:37: file does not exist: non_existent_file.csv
+[INFO] 2023/10/25 12:07:56 log.go:30: Log File Created
+[ERROR] 2023/10/25 12:07:56 log.go:37: file does not exist: non_existent_file.csv
+[ERROR] 2023/10/25 12:07:56 log.go:37: file is empty: /home/user/go_learn/data_stream/sampledata/nodata.csv
+[ERROR] 2023/10/25 12:07:56 log.go:37: unsupported file type, please upload .csv file
+
+[INFO] 2023/10/25 12:13:07 log.go:30: Log File Created
+[ERROR] 2023/10/25 12:13:07 log.go:37: file does not exist: non_existent_file.csv
+[ERROR] 2023/10/25 12:13:07 log.go:37: file is empty: /home/user/go_learn/data_stream/sampledata/nodata.csv
+[ERROR] 2023/10/25 12:13:07 log.go:37: unsupported file type, please upload .csv file
+
+[INFO] 2023/10/25 12:16:23 log.go:30: Log File Created
+[ERROR] 2023/10/25 12:16:23 log.go:37: invalid number of columns in CSV record 2: [Name Email]
+[ERROR] 2023/10/25 12:16:23 log.go:37: invalid name in CSV record 3: 
+[ERROR] 2023/10/25 12:16:23 log.go:37: invalid email in CSV record 4: invalid-email
+[ERROR] 2023/10/25 12:16:23 log.go:37: invalid details in CSV record 5: 
+[INFO] 2023/10/25 12:18:27 log.go:30: Log File Created
+[ERROR] 2023/10/25 12:18:27 log.go:37: invalid number of columns in CSV record 2: [Name Email]
+[ERROR] 2023/10/25 12:18:27 log.go:37: invalid name in CSV record 3: 
+[ERROR] 2023/10/25 12:18:27 log.go:37: invalid email in CSV record 4: invalid-email
+[ERROR] 2023/10/25 12:18:27 log.go:37: invalid details in CSV record 5: 
+[INFO] 2023/10/25 13:32:44 log.go:30: Log File Created
+[ERROR] 2023/10/25 13:32:44 log.go:37: file does not exist: non_existent_file.csv
+[ERROR] 2023/10/25 13:32:44 log.go:37: file is empty: /home/user/go_learn/data_stream/sampledata/nodata.csv
+[ERROR] 2023/10/25 13:32:44 log.go:37: unsupported file type, please upload .csv file
+
+[INFO] 2023/10/25 13:32:44 log.go:30: Log File Created
+[ERROR] 2023/10/25 13:32:44 log.go:37: invalid number of columns in CSV record 2: [Name Email]
+[ERROR] 2023/10/25 13:32:44 log.go:37: invalid name in CSV record 3: 
+[ERROR] 2023/10/25 13:32:44 log.go:37: invalid email in CSV record 4: invalid-email
+[ERROR] 2023/10/25 13:32:44 log.go:37: invalid details in CSV record 5: 
+[INFO] 2023/10/25 14:57:06 log.go:30: Log File Created
+[ERROR] 2023/10/25 14:57:06 log.go:37: file does not exist: non_existent_file.csv
+[ERROR] 2023/10/25 14:57:06 log.go:37: file is empty: /home/user/go_learn/data_stream/sampledata/nodata.csv
+[ERROR] 2023/10/25 14:57:06 log.go:37: unsupported file type, please upload .csv file
+
+[INFO] 2023/10/25 14:57:06 log.go:30: Log File Created
+[ERROR] 2023/10/25 14:57:06 log.go:37: invalid number of columns in CSV record 2: [Name Email]
+[ERROR] 2023/10/25 14:57:06 log.go:37: invalid name in CSV record 3: 
+[ERROR] 2023/10/25 14:57:06 log.go:37: invalid email in CSV record 4: invalid-email
+[ERROR] 2023/10/25 14:57:06 log.go:37: invalid details in CSV record 5: 
+[INFO] 2023/10/25 14:57:36 log.go:30: Log File Created
+[ERROR] 2023/10/25 14:57:36 log.go:37: file does not exist: non_existent_file.csv
+[ERROR] 2023/10/25 14:57:36 log.go:37: file is empty: /home/user/go_learn/data_stream/sampledata/nodata.csv
+[ERROR] 2023/10/25 14:57:36 log.go:37: unsupported file type, please upload .csv file
+

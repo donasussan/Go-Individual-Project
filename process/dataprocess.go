@@ -67,7 +67,7 @@ func ValidateUploadedFileFormat(filename string) error {
 			return err
 		}
 	default:
-		err := fmt.Sprint("unsupported file type, please upload .csv file")
+		err := fmt.Sprintln("unsupported file type, please upload .csv file")
 		logs.NewLog.Error(err)
 		return errors.New(err)
 	}
@@ -101,24 +101,33 @@ func isValidDetails(details string) bool {
 	validDetails := regexp.MustCompile(detailsPattern)
 	return validDetails.MatchString(details)
 }
-func validateCSVRecord(lineNumber int, record []string) error {
+func validateCSVRecord(lineNumber int, record []string) []error {
+	var errors []error
+
 	if len(record) != 3 {
 		logs.NewLog.Error(fmt.Sprintf("invalid number of columns in CSV record %d: %v", lineNumber, record))
-		return nil
+		errors = append(errors, fmt.Errorf("invalid number of columns in CSV record %d: %v", lineNumber, record))
+		return errors
 	}
 	name := record[0]
 	email := record[1]
 	details := record[2]
 	if !isValidName(name) {
 		logs.NewLog.Error(fmt.Sprintf("invalid name in CSV record %d: %s", lineNumber, name))
+		errors = append(errors, fmt.Errorf("invalid name in CSV record %d: %s", lineNumber, name))
+
 	}
 	if !isValidEmail(email) {
 		logs.NewLog.Error(fmt.Sprintf("invalid email in CSV record %d: %s", lineNumber, email))
+		errors = append(errors, fmt.Errorf("invalid email in CSV record %d: %s", lineNumber, email))
+
 	}
 	if !isValidDetails(details) {
 		logs.NewLog.Error(fmt.Sprintf("invalid details in CSV record %d: %s", lineNumber, details))
+		errors = append(errors, fmt.Errorf("invalid details in CSV record %d: %s", lineNumber, details))
+
 	}
-	return nil
+	return errors
 }
 func CSVReadToDataInsertion(filename string, batchSize int) error {
 	uploadedfile, err := os.Open(filename)
@@ -137,10 +146,8 @@ func CSVReadToDataInsertion(filename string, batchSize int) error {
 			logs.NewLog.Error(fmt.Sprintf("failed to read CSV: %v", err))
 			return err
 		}
-		if err := validateCSVRecord(lineNumber, record); err != nil {
-			logs.NewLog.Error(err.Error())
-			return err
-		}
+		validateCSVRecord(lineNumber, record)
+
 		name := record[0]
 		email := record[1]
 		details := record[2]

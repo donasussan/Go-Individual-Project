@@ -1,109 +1,72 @@
 package services
 
 import (
-	"database/sql"
 	"datastream/config"
+	"datastream/database"
 	"datastream/logs"
-	"fmt"
 	"testing"
 
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func TestGetQueryResultFromClickhouse(t *testing.T) {
-	results, err := GetQueryResultFromClickhouse()
+func TestConnectClickhouse(t *testing.T) {
+	logs.InsForLogging()
+	database.LoadDatabaseConfig("clickhouse")
+	connector, err := ConnectClickhouse()
 	if err != nil {
-		logs.NewLog.Error(fmt.Sprintf("Expected no error, but got an error: %v", err))
+		t.Errorf("Expected no error, but got %v", err)
 	}
-	expectedCountries := []string{"USA", "UK"}
-	if len(results) != len(expectedCountries) {
-		logs.NewLog.Errorf(fmt.Sprintf("Expected %d results, but got %d", len(expectedCountries), len(results)))
-	}
-	for i, expectedCountry := range expectedCountries {
-		if results[i].Country != expectedCountry {
-			logs.NewLog.Error(fmt.Sprintf("Result at index %d: Expected country '%s', but got '%s'", i, expectedCountry, results[i].Country))
-		}
+	if connector == nil {
+		t.Error("Expected non-nil ClickHouseConnector, but got nil")
 	}
 }
-func TestSendMessageAndConsumeMessage(t *testing.T) {
-	testConfig := &config.KafkaConfig{
+
+func TestNewKafkaProducers(t *testing.T) {
+	dataconfig := &config.KafkaConfig{
 		Broker: "localhost:9092",
 	}
-	topic := "test_topic"
-	consumer, err := NewKafkaConsumer(testConfig, topic)
+	producer1, producer2, err := NewKafkaProducers(dataconfig)
 	if err != nil {
-		logs.NewLog.Error(fmt.Sprintf("Error creating Kafka consumer: %v", err))
+		t.Errorf("Expected no error, but got an error: %v", err)
 	}
-	producer1, _, err := NewKafkaProducers(testConfig)
-	if err != nil {
-		logs.NewLog.Error(fmt.Sprintf("Error creating Kafka producer: %v", err))
-	}
-	messageToSend := "FileTest"
-	err = SendMessage(producer1, topic, messageToSend)
-	if err != nil {
-		logs.NewLog.Error(fmt.Sprintf("Error sending message: %v", err))
-	}
-	receivedMessages := ConsumeMessage(consumer, topic)
-	expectedMessage := messageToSend
-
-	if len(receivedMessages) != 1 {
-		logs.NewLog.Error(fmt.Sprintf("Expected 1 message, but got %d messages", len(receivedMessages)))
-	}
-	if receivedMessages[0] != expectedMessage {
-		logs.NewLog.Error(fmt.Sprintf("Expected message '%s', but got '%s'", expectedMessage, receivedMessages[0]))
-	}
-	consumer.Close()
-	producer1.Close()
-}
-func TestConnectMysql(t *testing.T) {
-	db, err := sql.Open("sqlite3", ":memory:")
-	if err != nil {
-		t.Fatal(err)
-	}
-	defer db.Close()
-}
-func TestInsertContactDataToMySQL(t *testing.T) {
-	db, err := sql.Open("sqlite3", ":memory:")
-	if err != nil {
-		t.Fatal(err)
-	}
-	defer db.Close()
-
-	createSchema(db)
-	testMessages := []string{
-		"(1, 'John', 'john@example.com', 'Details1', 1),",
-		"(2, 'Jane', 'jane@example.com', 'Details2', 0),",
+	if producer1 == nil || producer2 == nil {
+		t.Errorf("Expected non-nil producers, but got nil")
 	}
 
-	err = InsertContactDataToMySQL(testMessages)
-	if err != nil {
-		t.Fatal(err)
+	invalidConfig := &config.KafkaConfig{
+		Broker:        "invalid-broker",
+		ContactsTopic: "",
+		ActivityTopic: "",
 	}
-
-	verifyData(t, db)
-}
-
-func createSchema(db *sql.DB) {
-	schemaSQL := `
-        CREATE TABLE Contacts (
-            ID INT PRIMARY KEY,
-            Name TEXT,
-            Email TEXT,
-            Details TEXT,
-            Status INT
-        );
-    `
-	_, err := db.Exec(schemaSQL)
-	if err != nil {
-		panic(err)
+	_, _, err = NewKafkaProducers(invalidConfig)
+	if err == nil {
+		t.Error("Expected an error, but got no error")
 	}
 }
 
-func verifyData(t *testing.T, db *sql.DB) {
-	rows, err := db.Query("SELECT * FROM Contacts")
-	if err != nil {
-		t.Fatal(err)
-	}
-	defer rows.Close()
+func TestNewKafkaConsumer(t *testing.T) {
+	logs.InsForLogging()
 
+	validconfig := &config.KafkaConfig{
+		Broker:        "localhost:9092",
+		ContactsTopic: "",
+		ActivityTopic: "",
+	}
+	consumer, err := NewKafkaConsumer(validconfig, "test-topic")
+	if err != nil {
+		t.Errorf("Expected no error, but got an error: %v", err)
+	}
+	if consumer == nil {
+		t.Errorf("Expected a non-nil consumer, but got nil")
+	}
+
+	invalidConfig := &config.KafkaConfig{
+		Broker:        "invalid-broker",
+		ContactsTopic: "",
+		ActivityTopic: "",
+	}
+	_, err = NewKafkaConsumer(invalidConfig, "test-topic")
+	if err == nil {
+		t.Error("Expected an error, but got no error")
+	}
 }

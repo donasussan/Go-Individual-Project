@@ -197,18 +197,20 @@ func SeparateContactActivities(activityString string, numColumns int) ([]types.C
 		if len(parts) >= numColumns {
 			campaignID, err := strconv.Atoi(parts[1])
 			if err != nil {
-				logs.NewLog.Error(fmt.Sprintf("Error converting CampaignID: %v", err))
+				//logs.NewLog.Error(fmt.Sprintf("Error converting CampaignID: %v", err))
 				return nil, err
 			}
 			activityType, err := strconv.Atoi(parts[2])
 			if err != nil {
-				logs.NewLog.Error(fmt.Sprintf("Error converting ActivityType: %v", err))
+				//	logs.NewLog.Error(fmt.Sprintf("Error converting ActivityType: %v", err))
 				return nil, err
 			}
 			activitydateStr := parts[3]
+			fmt.Println(activitydateStr)
 			activitydateStr = strings.Trim(activitydateStr, `"`)
 			layout := "2006-01-02"
 			activitydate, _ := time.Parse(layout, activitydateStr)
+			fmt.Println(activitydate)
 			activity := types.ContactActivity{
 				Contactid:    parts[0],
 				Campaignid:   campaignID,

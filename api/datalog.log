@@ -1,0 +1,106 @@
+[INFO] 2023/10/25 13:38:29 log.go:30: Log File Created
+[INFO] 2023/10/25 13:38:29 log.go:30: Copied 18 bytes
+[ERROR] 2023/10/25 13:38:29 log.go:37: unsupported file type, please upload .csv file
+
+[INFO] 2023/10/25 13:38:29 log.go:30: Copied 0 bytes
+[ERROR] 2023/10/25 13:38:29 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/7a72a46e-9448-475e-b945-3e58ebb98bb5-empty.txt
+[INFO] 2023/10/25 13:38:29 log.go:30: Copied 15 bytes
+[ERROR] 2023/10/25 13:38:29 log.go:37: unsupported file type, please upload .csv file
+
+[INFO] 2023/10/25 13:38:29 log.go:30: Copied 18 bytes
+[ERROR] 2023/10/25 13:38:29 log.go:37: unsupported file type, please upload .csv file
+
+[INFO] 2023/10/25 13:38:29 log.go:30: Copied 18 bytes
+[ERROR] 2023/10/25 13:38:29 log.go:37: unsupported file type, please upload .csv file
+
+[INFO] 2023/10/25 13:38:29 log.go:30: Copied 18 bytes
+[ERROR] 2023/10/25 13:38:29 log.go:37: unsupported file type, please upload .csv file
+
+[INFO] 2023/10/25 13:38:29 log.go:30: Copied 18 bytes
+[ERROR] 2023/10/25 13:38:29 log.go:37: unsupported file type, please upload .csv file
+
+[INFO] 2023/10/25 13:38:29 log.go:30: Copied 18 bytes
+[ERROR] 2023/10/25 13:38:29 log.go:37: unsupported file type, please upload .csv file
+
+[ERROR] 2023/10/25 13:38:29 log.go:37: Error retrieving file: http: no such file
+[INFO] 2023/10/25 13:38:29 log.go:30: Copied 18 bytes
+[ERROR] 2023/10/25 13:38:29 log.go:37: unsupported file type, please upload .csv file
+
+[INFO] 2023/10/25 13:41:10 log.go:30: Log File Created
+[INFO] 2023/10/25 13:41:10 log.go:30: Copied 18 bytes
+[INFO] 2023/10/25 13:41:10 log.go:30: Copied 0 bytes
+[ERROR] 2023/10/25 13:41:10 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/4998ffa4-65bf-421e-bc43-4488f47e9a96-nodata.csv
+[INFO] 2023/10/25 13:41:10 log.go:30: Copied 15 bytes
+[ERROR] 2023/10/25 13:41:10 log.go:37: unsupported file type, please upload .csv file
+
+[ERROR] 2023/10/25 13:41:10 log.go:37: invalid number of columns in CSV record 1: [Test file contents]
+[INFO] 2023/10/25 13:41:25 log.go:30: Log File Created
+[INFO] 2023/10/25 13:41:25 log.go:30: Copied 18 bytes
+[ERROR] 2023/10/25 13:41:25 log.go:37: invalid number of columns in CSV record 1: [Test file contents]
+[INFO] 2023/10/25 13:45:56 log.go:30: Log File Created
+[INFO] 2023/10/25 13:45:56 log.go:30: Copied 96 bytes
+[INFO] 2023/10/25 13:45:56 log.go:30: Copied 0 bytes
+[ERROR] 2023/10/25 13:45:56 log.go:37: failed to read CSV: parse error on line 1, column 23: bare " in non-quoted-field
+[ERROR] 2023/10/25 13:45:56 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/33f310a8-36e3-4d05-9aaa-c60b0cffd216-nodata.csv
+[ERROR] 2023/10/25 13:45:56 log.go:37: Error processing uploaded file: parse error on line 1, column 23: bare " in non-quoted-field
+[INFO] 2023/10/25 13:45:56 log.go:30: Copied 15 bytes
+[ERROR] 2023/10/25 13:45:56 log.go:37: unsupported file type, please upload .csv file
+
+[INFO] 2023/10/25 13:45:56 log.go:30: Copied 18 bytes
+[ERROR] 2023/10/25 13:45:56 log.go:37: unsupported file type, please upload .csv file
+
+[INFO] 2023/10/25 13:45:56 log.go:30: Copied 18 bytes
+[ERROR] 2023/10/25 13:45:56 log.go:37: unsupported file type, please upload .csv file
+
+[INFO] 2023/10/25 13:45:56 log.go:30: Copied 96 bytes
+[ERROR] 2023/10/25 13:45:56 log.go:37: unsupported file type, please upload .csv file
+
+[ERROR] 2023/10/25 13:45:56 log.go:37: Error retrieving file: http: no such file
+[INFO] 2023/10/25 13:46:16 log.go:30: Log File Created
+[INFO] 2023/10/25 13:46:16 log.go:30: Copied 96 bytes
+[ERROR] 2023/10/25 13:46:16 log.go:37: failed to read CSV: parse error on line 1, column 23: bare " in non-quoted-field
+[ERROR] 2023/10/25 13:46:16 log.go:37: Error processing uploaded file: parse error on line 1, column 23: bare " in non-quoted-field
+[INFO] 2023/10/25 13:46:16 log.go:30: Copied 15 bytes
+[ERROR] 2023/10/25 13:46:16 log.go:37: unsupported file type, please upload .csv file
+
+[INFO] 2023/10/25 13:46:16 log.go:30: Copied 18 bytes
+[ERROR] 2023/10/25 13:46:16 log.go:37: unsupported file type, please upload .csv file
+
+[INFO] 2023/10/25 13:46:16 log.go:30: Copied 18 bytes
+[ERROR] 2023/10/25 13:46:16 log.go:37: unsupported file type, please upload .csv file
+
+[INFO] 2023/10/25 13:46:16 log.go:30: Copied 96 bytes
+[ERROR] 2023/10/25 13:46:16 log.go:37: unsupported file type, please upload .csv file
+
+[ERROR] 2023/10/25 13:46:16 log.go:37: Error retrieving file: http: no such file
+[INFO] 2023/10/25 15:08:54 log.go:30: Log File Created
+[INFO] 2023/10/25 15:08:54 log.go:30: Copied 96 bytes
+[INFO] 2023/10/25 15:08:54 log.go:30: Copied 18 bytes
+[ERROR] 2023/10/25 15:08:54 log.go:37: unsupported file type, please upload .csv file
+
+[INFO] 2023/10/25 15:08:54 log.go:30: Copied 18 bytes
+[ERROR] 2023/10/25 15:08:54 log.go:37: unsupported file type, please upload .csv file
+
+[INFO] 2023/10/25 15:08:54 log.go:30: Copied 96 bytes
+[ERROR] 2023/10/25 15:08:54 log.go:37: unsupported file type, please upload .csv file
+
+[ERROR] 2023/10/25 15:08:54 log.go:37: Error retrieving file: http: no such file
+[INFO] 2023/10/25 15:45:49 log.go:30: Log File Created
+[INFO] 2023/10/25 15:45:49 log.go:30: Copied 19 bytes
+[INFO] 2023/10/25 15:52:19 log.go:30: Log File Created
+[INFO] 2023/10/25 15:52:19 log.go:30: Copied 0 bytes
+[ERROR] 2023/10/25 15:52:19 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/c62d83e9-bf76-4aa6-aab4-4cd2ead38490-nodata.csv
+[INFO] 2023/10/25 15:54:56 log.go:30: Log File Created
+[INFO] 2023/10/25 15:54:56 log.go:30: Copied 0 bytes
+[ERROR] 2023/10/25 15:54:56 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/9294bc28-dfff-4d73-a64e-ac1e9cb97511-nodata.csv
+[INFO] 2023/10/25 15:56:48 log.go:30: Log File Created
+[INFO] 2023/10/25 15:56:48 log.go:30: Copied 0 bytes
+[ERROR] 2023/10/25 15:56:48 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/f00da331-846b-4d90-9ef5-457c78e56767-nodata.csv
+[INFO] 2023/10/25 15:58:19 log.go:30: Log File Created
+[INFO] 2023/10/25 15:58:19 log.go:30: Copied 0 bytes
+[ERROR] 2023/10/25 15:58:19 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/0e6cc024-1884-4410-a740-f3d2d65e1601-nodata.csv
+[INFO] 2023/10/25 15:59:16 log.go:30: Log File Created
+[INFO] 2023/10/25 15:59:16 log.go:30: Copied 19 bytes
+[ERROR] 2023/10/25 15:59:16 log.go:37: invalid number of columns in CSV record 1: [Sample file content]
+[INFO] 2023/10/25 16:02:00 log.go:30: Log File Created
+[INFO] 2023/10/25 16:02:00 log.go:30: Copied 115 bytes

@@ -1,8 +1,12 @@
 package api
 
 import (
+	"bytes"
+	"datastream/logs"
+	"mime/multipart"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 )
 
@@ -18,115 +22,96 @@ func TestHomePageHandler(t *testing.T) {
 		t.Errorf("Handler returned wrong status code: got %v, want %v", status, http.StatusOK)
 	}
 }
-func TestQueryView(t *testing.T) {
+
+func TestRefreshQuery(t *testing.T) {
 	t.Run("Successful execution", func(t *testing.T) {
-		req := httptest.NewRequest(http.MethodGet, "/query", nil)
+		req := httptest.NewRequest(http.MethodGet, "/refreshQuery", nil)
 		w := httptest.NewRecorder()
-		QueryView(w, req)
+		RefreshQuery(w, req)
 
 		if w.Code != http.StatusOK {
 			t.Errorf("Expected status code %d, got %d", http.StatusOK, w.Code)
 		}
 
 	})
-	t.Run("Error executing HTML template", func(t *testing.T) {
-		req := httptest.NewRequest(http.MethodGet, "/query", nil)
-		w := httptest.NewRecorder()
-		QueryView(w, req)
-
-		if w.Code != http.StatusInternalServerError {
-			t.Errorf("Expected status code %d, got %d", http.StatusInternalServerError, w.Code)
-		}
-
-	})
 }
+func TestHandleFileUpload_Success(t *testing.T) {
+	logs.InsForLogging()
 
-// func TestRefreshQuery(t *testing.T) {
-// 	t.Run("Successful execution", func(t *testing.T) {
-// 		req := httptest.NewRequest(http.MethodGet, "/refreshQuery", nil)
-// 		w := httptest.NewRecorder()
-// 		RefreshQuery(w, req)
+	requestBody := &bytes.Buffer{}
+	writer := multipart.NewWriter(requestBody)
+	part, _ := writer.CreateFormFile("uploadedfile", "/home/user/go_learn/data_stream/sampledata/sample.csv")
+	fileContent := []byte("name,email,details\nDona,dona@gmail.com,\"{\"\"dob\"\": \"\"1990-12-05\"\", \"\"city\"\": \"\"City2\"\", \"\"country\"\": \"\"Country2\"\"}\"\n")
+	part.Write(fileContent)
+	writer.Close()
 
-// 		if w.Code != http.StatusOK {
-// 			t.Errorf("Expected status code %d, got %d", http.StatusOK, w.Code)
-// 		}
+	req, err := http.NewRequest("POST", "/upload", requestBody)
+	if err != nil {
+		t.Fatal(err)
+	}
+	req.Header.Set("Content-Type", writer.FormDataContentType())
 
-// 	})
-// }
+	rr := httptest.NewRecorder()
 
-// func TestUploadFile(t *testing.T) {
-// 	csvContent := `dona,dona@gmail.com,{"country":"india","city":"kerala","dob":"29-09-2001"}`
+	HandleFileUpload(rr, req)
 
-// 	body := &bytes.Buffer{}
-// 	writer := multipart.NewWriter(body)
-// 	part, _ := writer.CreateFormFile("file", "test.csv")
-// 	part.Write([]byte(csvContent))
-// 	writer.Close()
-// 	req := httptest.NewRequest("POST", "/upload", body)
-// 	req.Header.Set("Content-Type", writer.FormDataContentType())
+	if rr.Code != http.StatusSeeOther {
+		t.Errorf("Expected status code %d, got %d", http.StatusSeeOther, rr.Code)
+	}
 
-// 	// Test case 1: Successful upload of a CSV file
-// 	t.Run("SuccessfulUpload", func(t *testing.T) {
-// 		recorder := httptest.NewRecorder()
-// 		handler, file, err := HandleFileUpload(recorder, req)
+}
+func TestHandleFileUpload_EmptyFile(t *testing.T) {
+	logs.InsForLogging()
+	requestBody := &bytes.Buffer{}
+	writer := multipart.NewWriter(requestBody)
+	part, _ := writer.CreateFormFile("uploadedfile", "/home/user/go_learn/data_stream/sampledata/nodata.csv")
+	fileContent := []byte("")
+	part.Write(fileContent)
+	writer.Close()
+	req, err := http.NewRequest("POST", "/upload", requestBody)
+	if err != nil {
+		t.Fatal(err)
+	}
+	req.Header.Set("Content-Type", writer.FormDataContentType())
+	rr := httptest.NewRecorder()
+	HandleFileUpload(rr, req)
+	expectedErrorMessage := "file is empty"
+	if !strings.Contains(rr.Body.String(), expectedErrorMessage) {
+		t.Errorf("Expected error message '%s' not found in the response body", expectedErrorMessage)
+	}
+}
+func TestHandleFileUpload_InvalidFileName(t *testing.T) {
+	logs.InsForLogging()
 
-// 		if err != nil {
-// 			t.Errorf("Expected no error, got %v", err)
-// 		}
-// 		if handler == nil {
-// 			t.Errorf("Expected a file handler, got nil")
-// 		}
-// 		if file == nil {
-// 			t.Errorf("Expected a file reader, got nil")
-// 		}
-// 		if !strings.HasSuffix(handler.Filename, ".csv") {
-// 			t.Errorf("Expected file to have a .csv extension, got %s", handler.Filename)
-// 		}
-// 	})
+	requestBody := &bytes.Buffer{}
+	writer := multipart.NewWriter(requestBody)
+	part, _ := writer.CreateFormFile("uploadedfile", "inva!id.csv")
+	fileContent := []byte("name,email,details\nDona,dona@gmail.com,\"{\"\"dob\"\": \"\"1990-12-05\"\", \"\"city\"\": \"\"City2\"\", \"\"country\"\": \"\"Country2\"\"}\"\n")
+	part.Write(fileContent)
+	writer.Close()
 
-// 	// Test case 2: Missing file in the request
-// 	t.Run("MissingFile", func(t *testing.T) {
-// 		body := &bytes.Buffer{}
-// 		writer := multipart.NewWriter(body)
-// 		req := httptest.NewRequest("POST", "/upload", body)          // Include an empty file
-// 		req.Header.Set("Content-Type", writer.FormDataContentType()) // Set the correct content type
-// 		recorder := httptest.NewRecorder()
+	req, err := http.NewRequest("POST", "/upload", requestBody)
+	if err != nil {
+		t.Fatal(err)
+	}
+	req.Header.Set("Content-Type", writer.FormDataContentType())
 
-// 		handler, file, err := HandleFileUpload(recorder, req)
+	rr := httptest.NewRecorder()
 
-// 		if err == nil {
-// 			t.Errorf("Expected error, but got no error: %v", err)
-// 		}
-// 		if handler != nil {
-// 			t.Errorf("Expected a nil file handler, got %v", handler)
-// 		}
-// 		if file != nil {
-// 			t.Errorf("Expected a nil file reader, got %v", file)
-// 		}
-// 	})
+	HandleFileUpload(rr, req)
 
-// 	// Test case 3: Uploaded file is not a CSV
-// 	t.Run("NonCSVFile", func(t *testing.T) {
-// 		recorder := httptest.NewRecorder()
+	if rr.Code != http.StatusBadRequest {
+		t.Errorf("Expected status code %d, got %d", http.StatusBadRequest, rr.Code)
+	}
+}
+func TestEntireQueryDisplay(t *testing.T) {
+	req := httptest.NewRequest("GET", "/path", nil)
 
-// 		// Create a sample request with a non-CSV file
-// 		nonCSVContent := "This is not a CSV content"
-// 		body := &bytes.Buffer{}
-// 		writer := multipart.NewWriter(body)
-// 		part, _ := writer.CreateFormFile("file", "test.txt")
-// 		part.Write([]byte(nonCSVContent))
-// 		writer.Close()
+	rr := httptest.NewRecorder()
+	EntireQueryDisplay(rr, req)
 
-// 		req := httptest.NewRequest("POST", "/upload", body)
-// 		req.Header.Set("Content-Type", writer.FormDataContentType())
+	if rr.Code != http.StatusOK {
+		t.Errorf("Expected status %d, but got %d", http.StatusOK, rr.Code)
+	}
 
-// 		_, _, err := HandleFileUpload(recorder, req)
-
-// 		if err == nil {
-// 			t.Errorf("Expected an error, but got no error")
-// 		}
-// 		if !strings.Contains(err.Error(), "File is not a CSV") {
-// 			t.Errorf("Expected error message to contain 'File is not a CSV', got %v", err)
-// 		}
-// 	})
-// }
+}

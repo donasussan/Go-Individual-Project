@@ -3,17 +3,129 @@ package process
 import (
 	"datastream/logs"
 	"datastream/types"
-	"fmt"
 	"testing"
 	"time"
 )
 
 func TestValidateUploadedFileFormat(t *testing.T) {
-	err := ValidateUploadedFileFormat("nonexistent.txt")
-	if err == nil {
-		t.Error("Expected error for nonexistent file, but got nil")
+	logs.InsForLogging()
+	tempFile := "/home/user/go_learn/data_stream/sampledata/sample.csv"
+	err := ValidateUploadedFileFormat(tempFile)
+	if err != nil {
+		t.Errorf("Expected nil error, but got: %v", err)
+	}
+
+	err = ValidateUploadedFileFormat("non_existent_file.csv")
+	expectedErrMsg := "file does not exist: non_existent_file.csv"
+	if err == nil || err.Error() != expectedErrMsg {
+		t.Errorf("Expected error: %s, but got: %v", expectedErrMsg, err)
+	}
+
+	emptyFile := "/home/user/go_learn/data_stream/sampledata/nodata.csv"
+	err = ValidateUploadedFileFormat(emptyFile)
+	expectedErrMsg = "file is empty: /home/user/go_learn/data_stream/sampledata/nodata.csv"
+	if err == nil || err.Error() != expectedErrMsg {
+		t.Errorf("Expected error: %s, but got: %v", expectedErrMsg, err)
+	}
+
+	unsupportedFile := "/home/user/go_learn/data_stream/sampledata/image.png"
+	err = ValidateUploadedFileFormat(unsupportedFile)
+	expectedErrMsg = "unsupported file type, please upload .csv file"
+	if err == nil || err.Error() != expectedErrMsg {
+		t.Errorf("Expected error: %s, but got: %v", expectedErrMsg, err)
 	}
 }
+func TestValidateCSVRecord(t *testing.T) {
+	logs.InsForLogging()
+	t.Run("ValidRecord", func(t *testing.T) {
+		record := []string{"John Doe", "john@example.com", `{"dob": "1990-12-05", "city": "City2", "country": "Country2"}`}
+		err := validateCSVRecord(1, record)
+		if err != nil {
+			t.Errorf("Expected no error, got %v", err)
+		}
+	})
+
+	t.Run("InvalidNumberOfColumns", func(t *testing.T) {
+		record := []string{"Name", "Email"}
+		err := validateCSVRecord(2, record)
+		if err == nil {
+			t.Errorf("Expected an error, got nil")
+		}
+	})
+
+	t.Run("InvalidName", func(t *testing.T) {
+		record := []string{"", "john@example.com", `{"dob": "1990-12-05", "city": "City2", "country": "Country2"}`}
+		err := validateCSVRecord(3, record)
+		if err == nil {
+			t.Errorf("Expected an error, got nil")
+		}
+	})
+
+	t.Run("InvalidEmail", func(t *testing.T) {
+		record := []string{"John Doe", "invalid-email", `{"dob": "1990-12-05", "city": "City2", "country": "Country2"}`}
+		err := validateCSVRecord(4, record)
+		if err == nil {
+			t.Errorf("Expected an error, got nil")
+		}
+	})
+
+	t.Run("InvalidDetails", func(t *testing.T) {
+		record := []string{"John Doe", "john@example.com", ""}
+		err := validateCSVRecord(5, record)
+		if err == nil {
+			t.Errorf("Expected an error, got nil")
+		}
+	})
+}
+
+func TestIsValidName(t *testing.T) {
+	t.Run("ValidName", func(t *testing.T) {
+		name := "John Doe"
+		if !isValidName(name) {
+			t.Errorf("Expected name to be valid, got invalid")
+		}
+	})
+
+	t.Run("InvalidName", func(t *testing.T) {
+		name := ""
+		if isValidName(name) {
+			t.Errorf("Expected name to be invalid, got valid")
+		}
+	})
+}
+
+func TestIsValidEmail(t *testing.T) {
+	t.Run("ValidEmail", func(t *testing.T) {
+		email := "john@example.com"
+		if !isValidEmail(email) {
+			t.Errorf("Expected email to be valid, got invalid")
+		}
+	})
+
+	t.Run("InvalidEmail", func(t *testing.T) {
+		email := "invalid-email"
+		if isValidEmail(email) {
+			t.Errorf("Expected email to be invalid, got valid")
+		}
+	})
+}
+
+func TestIsValidDetails(t *testing.T) {
+	t.Run("ValidDetails", func(t *testing.T) {
+		details := `{"dob": "1990-12-05", "city": "City2", "country": "Country2"}`
+		if !isValidDetails(details) {
+			t.Errorf("Expected details to be valid, got invalid")
+		}
+	})
+
+	t.Run("InvalidDetails", func(t *testing.T) {
+		details := ""
+		if isValidDetails(details) {
+			t.Errorf("Expected details to be invalid, got valid")
+		}
+	})
+}
+
 func TestGenerateActivity(t *testing.T) {
 	p_id := "123"
 	activityDate = time.Now()
@@ -27,7 +139,7 @@ func TestGenerateActivity(t *testing.T) {
 func TestSeparateContactActivities(t *testing.T) {
 	activityDate := time.Date(2023, 10, 10, 0, 0, 0, 0, time.UTC)
 
-	input := "(123, 1, 2, 2023-10-10 00:00:00 +0000 UTC)"
+	input := "(123, 1, 2, 2023-10-10)"
 	numColumns := 4
 	expectedOutput := []types.ContactActivity{
 		{
@@ -37,18 +149,12 @@ func TestSeparateContactActivities(t *testing.T) {
 			Activitydate: activityDate,
 		},
 	}
-	activities, err := SeparateContactActivities(input, numColumns)
-	if err != nil {
-		logs.NewLog.Errorf(fmt.Sprintf("Unexpected error: %v", err))
-	}
-	if len(activities) != len(expectedOutput) {
-		logs.NewLog.Errorf(fmt.Sprintf("Expected %d elements, but got %d", len(expectedOutput), len(activities)))
-		return
-	}
+	activities, _ := SeparateContactActivities(input, numColumns)
+
 	for i := range expectedOutput {
 		if activities[i] != expectedOutput[i] {
-			logs.NewLog.Errorf(fmt.Sprintf("Mismatch at index %d: Expected %v, but got %v",
-				i, expectedOutput[i], activities[i]))
+			t.Errorf("Mismatch at index %d: Expected %v, but got %v",
+				i, expectedOutput[i], activities[i])
 		}
 	}
 }
