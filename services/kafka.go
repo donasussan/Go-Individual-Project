@@ -94,14 +94,21 @@ func ConsumeMessage(consumer sarama.Consumer, topic string) {
 		messageCount++
 
 		if messageCount%100 == 0 {
+			db, err := EstablishMySQLConnection()
+			if err != nil {
+				logs.NewLog.Error(fmt.Sprintf("Error establishing MySQL connection %v", err))
+			}
+			defer db.Close()
 			if strings.Contains(topic, "contacts") {
-				err := InsertContactDataToMySQL(messages, "Contacts")
+				query := "INSERT INTO Contacts(ID, Name, Email, Details, Status) VALUES"
+				err := InsertDataToMySQL(messages, query, db)
 				messages = make([]string, 0)
 				if err != nil {
 					logs.NewLog.Errorf(fmt.Sprintf("Error inserting contact data into MySQL: %v", err))
 				}
 			} else {
-				err := InsertActivityDataToMySQL(messages, "ContactActivity")
+				query := "INSERT INTO ContactActivity (ContactsID, CampaignID, ActivityType,ActivityDate)VALUES"
+				err := InsertDataToMySQL(messages, query, db)
 				messages = make([]string, 0)
 				if err != nil {
 					logs.NewLog.Errorf(fmt.Sprintf("Error inserting activity data into MySQL: %v", err))

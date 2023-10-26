@@ -20,3 +20,72 @@
 [ERROR] 2023/10/25 16:54:14 log.go:37: Error creating new consumer
 [INFO] 2023/10/25 17:21:27 log.go:30: Log File Created
 [ERROR] 2023/10/25 17:21:28 log.go:37: Error creating new consumer
+[INFO] 2023/10/26 10:21:25 log.go:30: Log File Created
+[ERROR] 2023/10/26 10:21:25 log.go:43: code: 60, message: Table dona_campaign.some_table does not exist
+[ERROR] 2023/10/26 10:21:25 log.go:43: code: 60, message: Table dona_campaign.some_table does not exist
+[ERROR] 2023/10/26 10:21:25 log.go:43: code: 60, message: Table dona_campaign.some_table does not exist
+[ERROR] 2023/10/26 10:21:25 log.go:43: code: 60, message: Table dona_campaign.non_existent_table does not exist
+[INFO] 2023/10/26 10:22:07 log.go:30: Log File Created
+[ERROR] 2023/10/26 10:22:07 log.go:43: code: 60, message: Table dona_campaign.non_existent_table does not exist
+[INFO] 2023/10/26 10:22:53 log.go:30: Log File Created
+[INFO] 2023/10/26 10:22:54 log.go:30: Log File Created
+[ERROR] 2023/10/26 10:22:54 log.go:37: Error creating new consumer
+[INFO] 2023/10/26 10:22:54 log.go:30: Log File Created
+[ERROR] 2023/10/26 10:22:54 log.go:43: code: 60, message: Table dona_campaign.non_existent_table does not exist
+[INFO] 2023/10/26 10:23:08 log.go:30: Log File Created
+[INFO] 2023/10/26 10:23:09 log.go:30: Log File Created
+[ERROR] 2023/10/26 10:23:10 log.go:37: Error creating new consumer
+[INFO] 2023/10/26 10:23:10 log.go:30: Log File Created
+[ERROR] 2023/10/26 10:23:10 log.go:43: code: 60, message: Table dona_campaign.non_existent_table does not exist
+[INFO] 2023/10/26 10:23:33 log.go:30: Log File Created
+[INFO] 2023/10/26 10:23:38 log.go:30: Log File Created
+[ERROR] 2023/10/26 10:23:38 log.go:37: Error creating new consumer
+[INFO] 2023/10/26 10:23:40 log.go:30: Log File Created
+[ERROR] 2023/10/26 10:23:40 log.go:43: code: 60, message: Table dona_campaign.non_existent_table does not exist
+[INFO] 2023/10/26 10:23:55 log.go:30: Log File Created
+[ERROR] 2023/10/26 10:23:55 log.go:43: code: 60, message: Table dona_campaign.non_existent_table does not exist
+[INFO] 2023/10/26 10:25:40 log.go:30: Log File Created
+[ERROR] 2023/10/26 10:25:40 log.go:43: code: 60, message: Table dona_campaign.non_existent_table does not exist
+[INFO] 2023/10/26 11:32:16 log.go:30: Log File Created
+[ERROR] 2023/10/26 11:32:16 log.go:43: near "error_query": syntax error
+[ERROR] 2023/10/26 11:32:16 log.go:43: no such table: mock_test_data
+[INFO] 2023/10/26 12:23:00 log.go:30: Log File Created
+[ERROR] 2023/10/26 12:23:00 log.go:43: near "error_query": syntax error
+[INFO] 2023/10/26 17:09:24 log.go:30: Log File Created
+[ERROR] 2023/10/26 17:09:24 log.go:43: error executing MySQL query: Error 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table VALUES message1' at line 1
+[ERROR] 2023/10/26 17:09:24 log.go:43: error executing MySQL query: Error 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table VALUES message2' at line 1
+[ERROR] 2023/10/26 17:09:24 log.go:43: error executing MySQL query: Error 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table VALUES message1' at line 1
+[ERROR] 2023/10/26 17:09:24 log.go:43: error executing MySQL query: Error 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table VALUES message2' at line 1
+[ERROR] 2023/10/26 17:09:24 log.go:43: error executing MySQL query: Error 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table VALUES message1' at line 1
+[ERROR] 2023/10/26 17:09:24 log.go:43: error executing MySQL query: Error 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table VALUES message2' at line 1
+[INFO] 2023/10/26 17:17:16 log.go:30: Log File Created
+[ERROR] 2023/10/26 17:17:16 log.go:43: error executing MySQL query: Error 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'message1' at line 1
+[ERROR] 2023/10/26 17:17:16 log.go:43: error executing MySQL query: Error 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'message2' at line 1
+[INFO] 2023/10/26 17:22:59 log.go:30: Log File Created
+[INFO] 2023/10/26 17:24:21 log.go:30: Log File Created
+[INFO] 2023/10/26 17:24:49 log.go:30: Log File Created
+[INFO] 2023/10/26 17:25:06 log.go:30: Log File Created
+[INFO] 2023/10/26 17:25:24 log.go:30: Log File Created
+[INFO] 2023/10/26 17:25:46 log.go:30: Log File Created
+[INFO] 2023/10/26 17:25:58 log.go:30: Log File Created
+[ERROR] 2023/10/26 17:25:58 log.go:43: error executing MySQL query: Error 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'message1' at line 1
+[ERROR] 2023/10/26 17:25:58 log.go:43: error executing MySQL query: Error 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'message2' at line 1
+[INFO] 2023/10/26 17:53:38 log.go:30: Log File Created
+[INFO] 2023/10/26 17:56:18 log.go:30: Log File Created
+[INFO] 2023/10/26 17:58:18 log.go:30: Log File Created
+[INFO] 2023/10/26 18:02:28 log.go:30: Log File Created
+[INFO] 2023/10/26 18:08:25 log.go:30: Log File Created
+[INFO] 2023/10/26 18:09:06 log.go:30: Log File Created
+[INFO] 2023/10/26 18:09:27 log.go:30: Log File Created
+[INFO] 2023/10/26 18:09:57 log.go:30: Log File Created
+[ERROR] 2023/10/26 18:09:57 log.go:43: error executing MySQL query: ExecQuery: could not match actual sql: "INSERT INTO ContactActivity (ContactsID, CampaignID, ActivityType, ActivityDate) VALUES ('d1d7033fae6341ab94dcabe01ee9d2cc7f69235ee08acfec', 86, 1, '2023-09-01 00:00:00'),('d1d7033fae6341ab94dcabe01ee9d2cc7f69235ee08acfec', 86, 3, '2023-09-02 00:00:00');" with expected regexp "INSERT INTO ContactActivity (ContactsID, CampaignID, ActivityType, ActivityDate) VALUES('d1d7033fae6341ab94dcabe01ee9d2cc7f69235ee08acfec', 86, 1, '2023-09-01 00:00:00'),('d1d7033fae6341ab94dcabe01ee9d2cc7f69235ee08acfec', 86, 3, '2023-09-02 00:00:00')"
+[ERROR] 2023/10/26 18:09:57 log.go:43: error executing MySQL query: ExecQuery: could not match actual sql: "INSERT INTO ContactActivity (ContactsID, CampaignID, ActivityType, ActivityDate) VALUES message1;" with expected regexp "INSERT INTO ContactActivity (ContactsID, CampaignID, ActivityType, ActivityDate) VALUES('d1d7033fae6341ab94dcabe01ee9d2cc7f69235ee08acfec', 86, 1, '2023-09-01 00:00:00'),('d1d7033fae6341ab94dcabe01ee9d2cc7f69235ee08acfec', 86, 3, '2023-09-02 00:00:00')"
+[INFO] 2023/10/26 18:11:10 log.go:30: Log File Created
+[ERROR] 2023/10/26 18:11:10 log.go:43: error executing MySQL query: ExecQuery: could not match actual sql: "INSERT INTO ContactActivity (ContactsID, CampaignID, ActivityType, ActivityDate) VALUES ('d1d7033fae6341ab94dcabe01ee9d2cc7f69235ee08acfec', 86, 1, '2023-09-01 00:00:00');" with expected regexp "INSERT INTO ContactActivity (ContactsID, CampaignID, ActivityType, ActivityDate) VALUES('d1d7033fae6341ab94dcabe01ee9d2cc7f69235ee08acfec', 86, 1, '2023-09-01 00:00:00'),"
+[ERROR] 2023/10/26 18:11:10 log.go:43: error executing MySQL query: ExecQuery: could not match actual sql: "INSERT INTO ContactActivity (ContactsID, CampaignID, ActivityType, ActivityDate) VALUES message1;" with expected regexp "INSERT INTO ContactActivity (ContactsID, CampaignID, ActivityType, ActivityDate) VALUES('d1d7033fae6341ab94dcabe01ee9d2cc7f69235ee08acfec', 86, 1, '2023-09-01 00:00:00'),"
+[INFO] 2023/10/26 18:12:56 log.go:30: Log File Created
+[ERROR] 2023/10/26 18:12:56 log.go:43: error executing MySQL query: ExecQuery: could not match actual sql: "INSERT INTO ContactActivity (ContactsID, CampaignID, ActivityType, ActivityDate) VALUES ('d1d7033fae6341ab94dcabe01ee9d2cc7f69235ee08acfec', 86, 1, '2023-09-01 00:00:00');" with expected regexp "INSERT INTO ContactActivity (ContactsID, CampaignID, ActivityType, ActivityDate) VALUES('d1d7033fae6341ab94dcabe01ee9d2cc7f69235ee08acfec', 86, 1, '2023-09-01 00:00:00'),"
+[ERROR] 2023/10/26 18:12:56 log.go:43: error executing MySQL query: ExecQuery: could not match actual sql: "INSERT INTO ContactActivity (ContactsID, CampaignID, ActivityType, ActivityDate) VALUES message1;" with expected regexp "INSERT INTO ContactActivity (ContactsID, CampaignID, ActivityType, ActivityDate) VALUES('d1d7033fae6341ab94dcabe01ee9d2cc7f69235ee08acfec', 86, 1, '2023-09-01 00:00:00'),"
+[INFO] 2023/10/26 18:20:50 log.go:30: Log File Created
+[INFO] 2023/10/26 18:21:31 log.go:30: Log File Created
+[INFO] 2023/10/26 18:22:33 log.go:30: Log File Created

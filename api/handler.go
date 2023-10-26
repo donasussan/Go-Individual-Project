@@ -135,7 +135,9 @@ func GetCountOfPeople() ([]types.Count, error) {
 		"WHERE (JSONExtractString(co.Details, 'country') IN ('USA', 'UK')) " +
 		"AND (co.ID IN (SELECT ContactsID " +
 		"FROM dona_campaign.ContactActivity WHERE opened >= 30))"
-	rows, err := services.GetQueryResultFromClickhouse(query)
+	db, err := services.ReturnClickhouseDB()
+
+	rows, err := services.GetQueryResultFromClickhouse(query, db)
 	if err != nil {
 		logs.NewLog.Error(fmt.Sprint("Error getting clickhouse Query", err))
 	}
@@ -161,8 +163,9 @@ func GetEntireResultData() ([]types.ResultData, error) {
 		"WHERE (JSONExtractString(co.Details, 'country') IN ('USA', 'UK')) " +
 		"AND (co.ID IN (SELECT ContactsID " +
 		"FROM dona_campaign.ContactActivity WHERE opened >= 30))"
+	db, err := services.ReturnClickhouseDB()
 
-	rows, err := services.GetQueryResultFromClickhouse(query)
+	rows, err := services.GetQueryResultFromClickhouse(query, db)
 	if err != nil {
 		logs.NewLog.Error(fmt.Sprint("Error getting clickhouse Query", err))
 	}
@@ -174,7 +177,6 @@ func GetEntireResultData() ([]types.ResultData, error) {
 			logs.NewLog.Info("Cannot create a struct for this user")
 			continue
 		}
-		fmt.Printf("ID: %s, Email: %s, Country: %s\n", ID, Email, Country)
 		result := types.ResultData{
 			ID:      ID,
 			Email:   Email,

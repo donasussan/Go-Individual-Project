@@ -41,7 +41,8 @@ func TestHandleFileUpload_Success(t *testing.T) {
 	requestBody := &bytes.Buffer{}
 	writer := multipart.NewWriter(requestBody)
 	part, _ := writer.CreateFormFile("uploadedfile", "/home/user/go_learn/data_stream/sampledata/sample.csv")
-	fileContent := []byte("name,email,details\nDona,dona@gmail.com,\"{\"\"dob\"\": \"\"1990-12-05\"\", \"\"city\"\": \"\"City2\"\", \"\"country\"\": \"\"Country2\"\"}\"\n")
+	fileContent := []byte("name,email,details\nDona,dona@gmail.com,\"{\"\"dob\"\": \"\"1990-12-05\"\", " +
+		"s\"\"city\"\": \"\"City2\"\", \"\"country\"\": \"\"Country2\"\"}\"\n")
 	part.Write(fileContent)
 	writer.Close()
 
@@ -86,7 +87,8 @@ func TestHandleFileUpload_InvalidFileName(t *testing.T) {
 	requestBody := &bytes.Buffer{}
 	writer := multipart.NewWriter(requestBody)
 	part, _ := writer.CreateFormFile("uploadedfile", "inva!id.csv")
-	fileContent := []byte("name,email,details\nDona,dona@gmail.com,\"{\"\"dob\"\": \"\"1990-12-05\"\", \"\"city\"\": \"\"City2\"\", \"\"country\"\": \"\"Country2\"\"}\"\n")
+	fileContent := []byte("name,email,details\nDona,dona@gmail.com,\"{\"\"dob\"\": \"\"1990-12-05\"\"," +
+		"\"\"city\"\": \"\"City2\"\", \"\"country\"\": \"\"Country2\"\"}\"\n")
 	part.Write(fileContent)
 	writer.Close()
 
@@ -112,6 +114,40 @@ func TestEntireQueryDisplay(t *testing.T) {
 
 	if rr.Code != http.StatusOK {
 		t.Errorf("Expected status %d, but got %d", http.StatusOK, rr.Code)
+	}
+
+}
+
+func TestGetCountOfPeople(t *testing.T) {
+	counts, err := GetCountOfPeople()
+	if err != nil {
+		t.Errorf("Error should be nil, got %v", err)
+	}
+	if len(counts) < 1 {
+		t.Error("Expected at least one Count struct, got none")
+	}
+	for _, count := range counts {
+		if count.Count < 0 {
+			t.Errorf("Count should be non-negative, got %d", count.Count)
+		}
+	}
+}
+
+func TestGetEntireResultData(t *testing.T) {
+	results, err := GetEntireResultData()
+	if err != nil {
+		t.Errorf("Error should be nil, got %v", err)
+	}
+	if len(results) < 1 {
+		t.Error("Expected at least one ResultData struct, got none")
+	}
+	for _, result := range results {
+		if result.ID == "" || result.Email == "" {
+			t.Errorf("Invalid ResultData format for ID: %s, Email: %s", result.ID, result.Email)
+		}
+		if result.Country != "USA" && result.Country != "UK" {
+			t.Errorf("Invalid 'Country' value: %s, expected 'US' or 'UK'", result.Country)
+		}
 	}
 
 }

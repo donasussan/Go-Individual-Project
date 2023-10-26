@@ -104,3 +104,60 @@
 [ERROR] 2023/10/25 15:59:16 log.go:37: invalid number of columns in CSV record 1: [Sample file content]
 [INFO] 2023/10/25 16:02:00 log.go:30: Log File Created
 [INFO] 2023/10/25 16:02:00 log.go:30: Copied 115 bytes
+[INFO] 2023/10/26 10:22:30 log.go:30: Log File Created
+[INFO] 2023/10/26 10:22:30 log.go:30: Copied 115 bytes
+[INFO] 2023/10/26 10:22:30 log.go:30: Log File Created
+[ERROR] 2023/10/26 10:22:30 log.go:37: invalid email in CSV record 1: email
+[ERROR] 2023/10/26 10:22:30 log.go:37: invalid details in CSV record 1: details
+[INFO] 2023/10/26 10:22:30 log.go:30: Copied 0 bytes
+[ERROR] 2023/10/26 10:22:30 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/94890efc-da29-42b2-8a53-c2069ed07efc-nodata.csv
+[INFO] 2023/10/26 10:22:30 log.go:30: Log File Created
+[INFO] 2023/10/26 10:22:30 log.go:30: Copied 115 bytes
+[ERROR] 2023/10/26 10:22:30 log.go:37: invalid email in CSV record 1: email
+[ERROR] 2023/10/26 10:22:30 log.go:37: invalid details in CSV record 1: details
+[INFO] 2023/10/26 10:23:21 log.go:30: Log File Created
+[INFO] 2023/10/26 10:23:21 log.go:30: Copied 115 bytes
+[ERROR] 2023/10/26 10:23:21 log.go:37: invalid email in CSV record 1: email
+[ERROR] 2023/10/26 10:23:21 log.go:37: invalid details in CSV record 1: details
+[INFO] 2023/10/26 10:23:22 log.go:30: Log File Created
+[INFO] 2023/10/26 10:23:22 log.go:30: Copied 0 bytes
+[ERROR] 2023/10/26 10:23:22 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/580f21c0-8a2f-451a-a0c3-a4052b082cea-nodata.csv
+[INFO] 2023/10/26 10:23:23 log.go:30: Log File Created
+[INFO] 2023/10/26 10:23:23 log.go:30: Copied 115 bytes
+[ERROR] 2023/10/26 10:23:23 log.go:37: invalid email in CSV record 1: email
+[ERROR] 2023/10/26 10:23:23 log.go:37: invalid details in CSV record 1: details
+[INFO] 2023/10/26 10:44:44 log.go:30: Log File Created
+[INFO] 2023/10/26 10:44:44 log.go:30: Copied 115 bytes
+[INFO] 2023/10/26 10:44:44 log.go:30: Log File Created
+[INFO] 2023/10/26 10:44:44 log.go:30: Copied 0 bytes
+[ERROR] 2023/10/26 10:44:44 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/4f5fae13-6ae5-4ed4-8cf9-8c9baee6846b-nodata.csv
+[INFO] 2023/10/26 10:44:44 log.go:30: Log File Created
+[INFO] 2023/10/26 10:44:44 log.go:30: Copied 115 bytes
+[ERROR] 2023/10/26 10:44:44 log.go:37: invalid email in CSV record 1: email
+[ERROR] 2023/10/26 10:44:44 log.go:37: invalid details in CSV record 1: details
+[ERROR] 2023/10/26 10:44:44 log.go:37: invalid email in CSV record 1: email
+[ERROR] 2023/10/26 10:44:44 log.go:37: invalid details in CSV record 1: details
+[INFO] 2023/10/26 11:52:31 log.go:30: Log File Created
+[INFO] 2023/10/26 11:52:31 log.go:30: Copied 115 bytes
+[INFO] 2023/10/26 11:52:31 log.go:30: Log File Created
+[INFO] 2023/10/26 11:52:31 log.go:30: Copied 0 bytes
+[ERROR] 2023/10/26 11:52:31 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/cbcf7aa3-27bc-4684-af2c-ada9e8017ba8-nodata.csv
+[INFO] 2023/10/26 11:52:31 log.go:30: Log File Created
+[INFO] 2023/10/26 11:52:31 log.go:30: Copied 115 bytes
+[ERROR] 2023/10/26 11:52:31 log.go:37: invalid email in CSV record 1: email
+[ERROR] 2023/10/26 11:52:31 log.go:37: invalid details in CSV record 1: details
+[ERROR] 2023/10/26 11:52:31 log.go:37: invalid email in CSV record 1: email
+[ERROR] 2023/10/26 11:52:31 log.go:37: invalid details in CSV record 1: details
+[INFO] 2023/10/26 18:35:34 log.go:30: Log File Created
+[INFO] 2023/10/26 18:35:34 log.go:30: Copied 116 bytes
+[INFO] 2023/10/26 18:35:34 log.go:30: Log File Created
+[INFO] 2023/10/26 18:35:34 log.go:30: Copied 0 bytes
+[ERROR] 2023/10/26 18:35:34 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/503c40aa-869c-43c9-a570-f662b5cddb8f-nodata.csv
+[ERROR] 2023/10/26 18:35:34 log.go:37: invalid email in CSV record 1: email
+[ERROR] 2023/10/26 18:35:34 log.go:37: invalid details in CSV record 1: details
+[INFO] 2023/10/26 18:35:34 log.go:30: Log File Created
+[ERROR] 2023/10/26 18:35:34 log.go:37: invalid details in CSV record 2: {"dob": "1990-12-05", s"city": "City2", "country": "Country2"}
+[INFO] 2023/10/26 18:35:34 log.go:30: Copied 114 bytes
+[ERROR] 2023/10/26 18:35:34 log.go:37: invalid email in CSV record 1: email
+[ERROR] 2023/10/26 18:35:34 log.go:37: invalid details in CSV record 1: details
+[ERROR] 2023/10/26 18:35:34 log.go:37: invalid details in CSV record 2: {"dob": "1990-12-05","city": "City2", "country": "Country2"}

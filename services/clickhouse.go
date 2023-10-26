@@ -19,7 +19,7 @@ func ConnectClickhouse() (*config.ClickHouseConnector, error) {
 	clickhouseConnector := config.ClickHouseConnector{Config: clickhouseConfig}
 	return &clickhouseConnector, nil
 }
-func GetQueryResultFromClickhouse(query string) (*sql.Rows, error) {
+func ReturnClickhouseDB() (*sql.DB, error) {
 	clickhouseConnector, err := ConnectClickhouse()
 	if err != nil {
 		logs.NewLog.Errorf(fmt.Sprint(err))
@@ -28,9 +28,12 @@ func GetQueryResultFromClickhouse(query string) (*sql.Rows, error) {
 	db, err := clickhouseConnector.Connect()
 	if err != nil {
 		logs.NewLog.Errorf(fmt.Sprint(err))
-		return nil, err
+		return db, err
 	}
-	defer db.Close()
+	return db, err
+}
+func GetQueryResultFromClickhouse(query string, db *sql.DB) (*sql.Rows, error) {
+
 	rows, err := db.Query(query)
 	if err != nil {
 		logs.NewLog.Errorf(fmt.Sprint(err))
