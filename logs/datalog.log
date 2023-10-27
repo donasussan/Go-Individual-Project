@@ -30,3 +30,7 @@
 [INFO] 2023/10/26 12:22:46 log.go:30: This is an info message
 [WARNING] 2023/10/26 12:22:46 log.go:34: This is a warning message
 [ERROR] 2023/10/26 12:22:46 log.go:37: This is an error message
+[INFO] 2023/10/27 15:58:18 log.go:30: Log File Created
+[INFO] 2023/10/27 15:58:18 log.go:30: This is an info message
+[WARNING] 2023/10/27 15:58:18 log.go:34: This is a warning message
+[ERROR] 2023/10/27 15:58:18 log.go:37: This is an error message

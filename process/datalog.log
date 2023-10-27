@@ -5882,3 +5882,26 @@
 [ERROR] 2023/10/26 18:38:18 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry 'e753299c3e2f416389b3a09b2c70581f4dce35a69caa79d5' for key 'Contacts.PRIMARY'
 [ERROR] 2023/10/26 18:38:19 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry 'd781353bebbc429795eefc9db0fbd24c59f50789b9adb1fe' for key 'Contacts.PRIMARY'
 [ERROR] 2023/10/26 18:38:19 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry 'd781353bebbc429795eefc9db0fbd24c59f50789b9adb1fe' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/26 18:38:43 log.go:43: error executing MySQL query: Error 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '324a87ae7c224249abe3dafe949948d13c15e358b6908a8d'', 49, 1, '0001-01-01 00:00:00'' at line 1
+[ERROR] 2023/10/26 18:38:43 log.go:43: Error inserting activity data into MySQL: Error 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '324a87ae7c224249abe3dafe949948d13c15e358b6908a8d'', 49, 1, '0001-01-01 00:00:00'' at line 1
+[ERROR] 2023/10/26 18:39:01 log.go:43: error executing MySQL query: Error 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '0826d0bae25349608f7f47bf7b26c57d8cd106ca24066a61'', 39, 1, '0001-01-01 00:00:00'' at line 1
+[ERROR] 2023/10/26 18:39:01 log.go:43: Error inserting activity data into MySQL: Error 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '0826d0bae25349608f7f47bf7b26c57d8cd106ca24066a61'', 39, 1, '0001-01-01 00:00:00'' at line 1
+[INFO] 2023/10/27 15:58:00 log.go:30: Log File Created
+[ERROR] 2023/10/27 15:58:00 log.go:37: file does not exist: non_existent_file.csv
+[ERROR] 2023/10/27 15:58:00 log.go:37: file is empty: /home/user/go_learn/data_stream/sampledata/nodata.csv
+[ERROR] 2023/10/27 15:58:00 log.go:37: unsupported file type, please upload .csv file
+
+[INFO] 2023/10/27 15:58:38 log.go:30: Log File Created
+[INFO] 2023/10/27 15:58:55 log.go:30: Log File Created
+[INFO] 2023/10/27 15:59:14 log.go:30: Log File Created
+[ERROR] 2023/10/27 15:59:14 log.go:37: file does not exist: non_existent_file.csv
+[ERROR] 2023/10/27 15:59:14 log.go:37: file is empty: /home/user/go_learn/data_stream/sampledata/nodata.csv
+[ERROR] 2023/10/27 15:59:14 log.go:37: unsupported file type, please upload .csv file
+
+[INFO] 2023/10/27 15:59:14 log.go:30: Log File Created
+[ERROR] 2023/10/27 15:59:14 log.go:37: invalid number of columns in CSV record 2: [Name Email]
+[ERROR] 2023/10/27 15:59:14 log.go:37: invalid name in CSV record 3: 
+[ERROR] 2023/10/27 15:59:14 log.go:37: invalid email in CSV record 4: invalid-email
+[ERROR] 2023/10/27 15:59:14 log.go:37: invalid details in CSV record 5: 
+[INFO] 2023/10/27 18:13:29 log.go:30: Log File Created
+[INFO] 2023/10/27 18:18:20 log.go:30: Log File Created

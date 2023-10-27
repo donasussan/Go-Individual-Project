@@ -19,7 +19,10 @@ func ConnectMySQL() (*config.MySQLConnector, error) {
 	mysqlConnector := config.MySQLConnector{Config: mysqlConfig}
 	return &mysqlConnector, nil
 }
-func EstablishMySQLConnection() (*sql.DB, error) {
+
+type MySQLDBConnector struct{}
+
+func (c *MySQLDBConnector) EstablishMySQLConnection() (*sql.DB, error) {
 	mysqlConnector, err := ConnectMySQL()
 	if err != nil {
 		logs.NewLog.Error(fmt.Sprintf("error configuring MySQL: %v", err))

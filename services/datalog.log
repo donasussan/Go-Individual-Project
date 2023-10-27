@@ -89,3 +89,265 @@
 [INFO] 2023/10/26 18:20:50 log.go:30: Log File Created
 [INFO] 2023/10/26 18:21:31 log.go:30: Log File Created
 [INFO] 2023/10/26 18:22:33 log.go:30: Log File Created
+[INFO] 2023/10/27 11:03:31 log.go:30: Log File Created
+[ERROR] 2023/10/27 11:03:31 log.go:43: error executing MySQL query: near "message1": syntax error
+[ERROR] 2023/10/27 11:03:31 log.go:43: error executing MySQL query: near "message1": syntax error
+[INFO] 2023/10/27 11:04:44 log.go:30: Log File Created
+[ERROR] 2023/10/27 11:04:44 log.go:43: error executing MySQL query: near "message1": syntax error
+[INFO] 2023/10/27 15:56:53 log.go:30: Log File Created
+[INFO] 2023/10/27 15:56:54 log.go:30: Log File Created
+[ERROR] 2023/10/27 15:56:55 log.go:37: Error creating new consumer
+[INFO] 2023/10/27 15:56:55 log.go:30: Log File Created
+[ERROR] 2023/10/27 15:56:55 log.go:43: near "error_query": syntax error
+[INFO] 2023/10/27 15:56:55 log.go:30: Log File Created
+[ERROR] 2023/10/27 15:56:55 log.go:43: error executing MySQL query: near "message1": syntax error
+[INFO] 2023/10/27 15:58:16 log.go:30: Log File Created
+[INFO] 2023/10/27 15:58:17 log.go:30: Log File Created
+[ERROR] 2023/10/27 15:58:17 log.go:37: Error creating new consumer
+[INFO] 2023/10/27 15:58:17 log.go:30: Log File Created
+[ERROR] 2023/10/27 15:58:17 log.go:43: near "error_query": syntax error
+[INFO] 2023/10/27 15:58:17 log.go:30: Log File Created
+[ERROR] 2023/10/27 15:58:17 log.go:43: error executing MySQL query: near "message1": syntax error
+[INFO] 2023/10/27 16:20:43 log.go:30: Log File Created
+[INFO] 2023/10/27 16:36:20 log.go:30: Log File Created
+[INFO] 2023/10/27 16:36:51 log.go:30: Log File Created
+[INFO] 2023/10/27 16:38:20 log.go:30: Log File Created
+[INFO] 2023/10/27 16:40:48 log.go:30: Log File Created
+[INFO] 2023/10/27 16:41:24 log.go:30: Log File Created
+[INFO] 2023/10/27 16:42:38 log.go:30: Log File Created
+[INFO] 2023/10/27 16:42:52 log.go:30: Log File Created
+[INFO] 2023/10/27 16:47:35 log.go:30: Log File Created
+[INFO] 2023/10/27 16:48:05 log.go:30: Log File Created
+[INFO] 2023/10/27 16:48:27 log.go:30: Log File Created
+[INFO] 2023/10/27 16:48:45 log.go:30: Log File Created
+[INFO] 2023/10/27 16:49:26 log.go:30: Log File Created
+[INFO] 2023/10/27 17:27:33 log.go:30: Log File Created
+[INFO] 2023/10/27 17:35:41 log.go:30: Log File Created
+[INFO] 2023/10/27 17:37:54 log.go:30: Log File Created
+[INFO] 2023/10/27 17:38:50 log.go:30: Log File Created
+[INFO] 2023/10/27 17:41:18 log.go:30: Log File Created
+[INFO] 2023/10/27 17:41:19 log.go:30: Log File Created
+[INFO] 2023/10/27 17:41:21 log.go:30: Log File Created
+[INFO] 2023/10/27 17:41:26 log.go:30: Log File Created
+[INFO] 2023/10/27 17:41:27 log.go:30: Log File Created
+[INFO] 2023/10/27 17:41:28 log.go:30: Log File Created
+[INFO] 2023/10/27 17:41:29 log.go:30: Log File Created
+[INFO] 2023/10/27 17:41:30 log.go:30: Log File Created
+[INFO] 2023/10/27 17:41:32 log.go:30: Log File Created
+[INFO] 2023/10/27 17:45:57 log.go:30: Log File Created
+[INFO] 2023/10/27 17:46:07 log.go:30: Log File Created
+[INFO] 2023/10/27 17:56:03 log.go:30: Log File Created
+[INFO] 2023/10/27 17:56:42 log.go:30: Log File Created
+[INFO] 2023/10/27 17:57:23 log.go:30: Log File Created
+[INFO] 2023/10/27 17:58:06 log.go:30: Log File Created
+[INFO] 2023/10/27 17:58:22 log.go:30: Log File Created
+[INFO] 2023/10/27 17:59:17 log.go:30: Log File Created
+[INFO] 2023/10/27 17:59:56 log.go:30: Log File Created
+[ERROR] 2023/10/27 17:59:56 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry 'e2c5b99071aa481dad7ead833ad9966f87456ae4006eb999' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 17:59:56 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry 'e2c5b99071aa481dad7ead833ad9966f87456ae4006eb999' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 17:59:56 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '9585611f215f45e6ac607b7acf1a90067cc4a743145a5880' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 17:59:56 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '9585611f215f45e6ac607b7acf1a90067cc4a743145a5880' for key 'Contacts.PRIMARY'
+[INFO] 2023/10/27 18:00:13 log.go:30: Log File Created
+[ERROR] 2023/10/27 18:00:13 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '23b73dbac09449448e8634158ff31c7772451fe9e6130aa3' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:13 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '23b73dbac09449448e8634158ff31c7772451fe9e6130aa3' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:13 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '02dc9fcd9bf447a48a75f58332e581a7a3cdc221294720ee' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:13 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '02dc9fcd9bf447a48a75f58332e581a7a3cdc221294720ee' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:13 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '51f962ffa42d400888cf5323fa47a21166557d96f661bb3a' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:13 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '51f962ffa42d400888cf5323fa47a21166557d96f661bb3a' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:13 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '58ff788892cc4b09a337153e78894397f9fc4479801fafcc' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:13 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '58ff788892cc4b09a337153e78894397f9fc4479801fafcc' for key 'Contacts.PRIMARY'
+[INFO] 2023/10/27 18:00:22 log.go:30: Log File Created
+[INFO] 2023/10/27 18:00:30 log.go:30: Log File Created
+[ERROR] 2023/10/27 18:00:30 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry 'f70538c7fd8044c49b1a5de7474f766f508a890f179498e2' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry 'f70538c7fd8044c49b1a5de7474f766f508a890f179498e2' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '9fc820f298b14033ab93d55f69e890d229c429ebd4b75a24' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '9fc820f298b14033ab93d55f69e890d229c429ebd4b75a24' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '95700a77388347dd801a53c5f0337237dd7c6bc33b46900d' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '95700a77388347dd801a53c5f0337237dd7c6bc33b46900d' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '53f6ac6cef654ab7b8289e40496936a158263a66688e232d' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '53f6ac6cef654ab7b8289e40496936a158263a66688e232d' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '3e07c743bbef48a8b5d70ca04a6be618231547abfa6da21c' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '3e07c743bbef48a8b5d70ca04a6be618231547abfa6da21c' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '42b5248c7000458e92b30c00b17fec3cc802159eed81fb11' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '42b5248c7000458e92b30c00b17fec3cc802159eed81fb11' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '38f4032fffc446c08305c32e7d9b682d5645cfff277a295c' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '38f4032fffc446c08305c32e7d9b682d5645cfff277a295c' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '75baca1dc60a4842a23e1f0adb51aa33e14de22c2ed943c2' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '75baca1dc60a4842a23e1f0adb51aa33e14de22c2ed943c2' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry 'dbf92ddb08174e7aa1f7269a821febaaab1937576440d9e4' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry 'dbf92ddb08174e7aa1f7269a821febaaab1937576440d9e4' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '19b34148f05b4e5b95f772c06814836646195367196536b0' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '19b34148f05b4e5b95f772c06814836646195367196536b0' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '83ed10e87d7d43c3a5479b54377b33545ecfc4252abeca24' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '83ed10e87d7d43c3a5479b54377b33545ecfc4252abeca24' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '618d1c3dad94411e989c53725e000e39f5c52e613ab4fa81' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '618d1c3dad94411e989c53725e000e39f5c52e613ab4fa81' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '84c36bd69b4b4046ae5779dd1d8a9b1f9967d0143dcda867' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '84c36bd69b4b4046ae5779dd1d8a9b1f9967d0143dcda867' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '45a37f73d1ab4e2fa4bd1d1563e8d48af5870bffd5f3834c' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '45a37f73d1ab4e2fa4bd1d1563e8d48af5870bffd5f3834c' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '9605f4bf53d34e238b72e29476a7e3536f85157786d45728' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '9605f4bf53d34e238b72e29476a7e3536f85157786d45728' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '853de858d6d24a84b7598399ec28db39adf0a404029578e8' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '853de858d6d24a84b7598399ec28db39adf0a404029578e8' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry 'dc54271de2d643a4b01a593cc9b390670e60455c5de5eef3' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry 'dc54271de2d643a4b01a593cc9b390670e60455c5de5eef3' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '3835941ae76e4cd28e0d867ea13b3b7ad5641e8a6bbec1dc' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '3835941ae76e4cd28e0d867ea13b3b7ad5641e8a6bbec1dc' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry 'e1ce6cfa9f9c45f1b65cc0973cfd35c2940a21f2ef27c8f6' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry 'e1ce6cfa9f9c45f1b65cc0973cfd35c2940a21f2ef27c8f6' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '4e81c82e4b824711ad0cf08ba21cf7dc7bb2702ebf3be409' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:00:30 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '4e81c82e4b824711ad0cf08ba21cf7dc7bb2702ebf3be409' for key 'Contacts.PRIMARY'
+[INFO] 2023/10/27 18:02:54 log.go:30: Log File Created
+[INFO] 2023/10/27 18:02:55 log.go:30: Log File Created
+[ERROR] 2023/10/27 18:02:56 log.go:37: Error creating new consumer
+[INFO] 2023/10/27 18:02:56 log.go:30: Log File Created
+[ERROR] 2023/10/27 18:02:56 log.go:43: near "error_query": syntax error
+[INFO] 2023/10/27 18:02:56 log.go:30: Log File Created
+[INFO] 2023/10/27 18:02:56 log.go:30: Log File Created
+[INFO] 2023/10/27 18:03:28 log.go:30: Log File Created
+[INFO] 2023/10/27 18:03:29 log.go:30: Log File Created
+[ERROR] 2023/10/27 18:03:29 log.go:37: Error creating new consumer
+[INFO] 2023/10/27 18:03:29 log.go:30: Log File Created
+[ERROR] 2023/10/27 18:03:29 log.go:43: near "error_query": syntax error
+[INFO] 2023/10/27 18:03:29 log.go:30: Log File Created
+[INFO] 2023/10/27 18:03:29 log.go:30: Log File Created
+[INFO] 2023/10/27 18:04:05 log.go:30: Log File Created
+[INFO] 2023/10/27 18:04:05 log.go:30: Log File Created
+[ERROR] 2023/10/27 18:04:06 log.go:37: Error creating new consumer
+[INFO] 2023/10/27 18:04:06 log.go:30: Log File Created
+[ERROR] 2023/10/27 18:04:06 log.go:43: near "error_query": syntax error
+[INFO] 2023/10/27 18:04:06 log.go:30: Log File Created
+[ERROR] 2023/10/27 18:04:06 log.go:43: error executing MySQL query: table ContactActivity has no column named ContactsID
+[ERROR] 2023/10/27 18:04:06 log.go:43: error executing MySQL query: near "message1": syntax error
+[INFO] 2023/10/27 18:04:06 log.go:30: Log File Created
+[INFO] 2023/10/27 18:04:31 log.go:30: Log File Created
+[INFO] 2023/10/27 18:04:32 log.go:30: Log File Created
+[ERROR] 2023/10/27 18:04:33 log.go:37: Error creating new consumer
+[INFO] 2023/10/27 18:04:33 log.go:30: Log File Created
+[ERROR] 2023/10/27 18:04:33 log.go:43: near "error_query": syntax error
+[INFO] 2023/10/27 18:04:33 log.go:30: Log File Created
+[ERROR] 2023/10/27 18:04:33 log.go:43: error executing MySQL query: near "message1": syntax error
+[INFO] 2023/10/27 18:04:33 log.go:30: Log File Created
+[INFO] 2023/10/27 18:05:10 log.go:30: Log File Created
+[INFO] 2023/10/27 18:05:11 log.go:30: Log File Created
+[ERROR] 2023/10/27 18:05:12 log.go:37: Error creating new consumer
+[INFO] 2023/10/27 18:05:12 log.go:30: Log File Created
+[ERROR] 2023/10/27 18:05:12 log.go:43: near "error_query": syntax error
+[INFO] 2023/10/27 18:05:12 log.go:30: Log File Created
+[ERROR] 2023/10/27 18:05:12 log.go:43: error executing MySQL query: near "message1": syntax error
+[INFO] 2023/10/27 18:05:12 log.go:30: Log File Created
+[ERROR] 2023/10/27 18:05:12 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry 'f70538c7fd8044c49b1a5de7474f766f508a890f179498e2' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry 'f70538c7fd8044c49b1a5de7474f766f508a890f179498e2' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '9fc820f298b14033ab93d55f69e890d229c429ebd4b75a24' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '9fc820f298b14033ab93d55f69e890d229c429ebd4b75a24' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '95700a77388347dd801a53c5f0337237dd7c6bc33b46900d' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '95700a77388347dd801a53c5f0337237dd7c6bc33b46900d' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '53f6ac6cef654ab7b8289e40496936a158263a66688e232d' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '53f6ac6cef654ab7b8289e40496936a158263a66688e232d' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '3e07c743bbef48a8b5d70ca04a6be618231547abfa6da21c' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '3e07c743bbef48a8b5d70ca04a6be618231547abfa6da21c' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '42b5248c7000458e92b30c00b17fec3cc802159eed81fb11' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '42b5248c7000458e92b30c00b17fec3cc802159eed81fb11' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '38f4032fffc446c08305c32e7d9b682d5645cfff277a295c' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '38f4032fffc446c08305c32e7d9b682d5645cfff277a295c' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '75baca1dc60a4842a23e1f0adb51aa33e14de22c2ed943c2' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '75baca1dc60a4842a23e1f0adb51aa33e14de22c2ed943c2' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry 'dbf92ddb08174e7aa1f7269a821febaaab1937576440d9e4' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry 'dbf92ddb08174e7aa1f7269a821febaaab1937576440d9e4' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '19b34148f05b4e5b95f772c06814836646195367196536b0' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '19b34148f05b4e5b95f772c06814836646195367196536b0' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '83ed10e87d7d43c3a5479b54377b33545ecfc4252abeca24' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '83ed10e87d7d43c3a5479b54377b33545ecfc4252abeca24' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '618d1c3dad94411e989c53725e000e39f5c52e613ab4fa81' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '618d1c3dad94411e989c53725e000e39f5c52e613ab4fa81' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '84c36bd69b4b4046ae5779dd1d8a9b1f9967d0143dcda867' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '84c36bd69b4b4046ae5779dd1d8a9b1f9967d0143dcda867' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '45a37f73d1ab4e2fa4bd1d1563e8d48af5870bffd5f3834c' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '45a37f73d1ab4e2fa4bd1d1563e8d48af5870bffd5f3834c' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '9605f4bf53d34e238b72e29476a7e3536f85157786d45728' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '9605f4bf53d34e238b72e29476a7e3536f85157786d45728' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '853de858d6d24a84b7598399ec28db39adf0a404029578e8' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '853de858d6d24a84b7598399ec28db39adf0a404029578e8' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry 'dc54271de2d643a4b01a593cc9b390670e60455c5de5eef3' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry 'dc54271de2d643a4b01a593cc9b390670e60455c5de5eef3' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '3835941ae76e4cd28e0d867ea13b3b7ad5641e8a6bbec1dc' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '3835941ae76e4cd28e0d867ea13b3b7ad5641e8a6bbec1dc' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry 'e1ce6cfa9f9c45f1b65cc0973cfd35c2940a21f2ef27c8f6' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry 'e1ce6cfa9f9c45f1b65cc0973cfd35c2940a21f2ef27c8f6' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '4e81c82e4b824711ad0cf08ba21cf7dc7bb2702ebf3be409' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:05:12 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '4e81c82e4b824711ad0cf08ba21cf7dc7bb2702ebf3be409' for key 'Contacts.PRIMARY'
+[INFO] 2023/10/27 18:08:52 log.go:30: Log File Created
+[INFO] 2023/10/27 18:08:53 log.go:30: Log File Created
+[ERROR] 2023/10/27 18:08:54 log.go:37: Error creating new consumer
+[INFO] 2023/10/27 18:08:54 log.go:30: Log File Created
+[ERROR] 2023/10/27 18:08:54 log.go:43: near "error_query": syntax error
+[INFO] 2023/10/27 18:08:54 log.go:30: Log File Created
+[ERROR] 2023/10/27 18:08:54 log.go:43: error executing MySQL query: near "message1": syntax error
+[INFO] 2023/10/27 18:08:54 log.go:30: Log File Created
+[ERROR] 2023/10/27 18:08:54 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry 'f70538c7fd8044c49b1a5de7474f766f508a890f179498e2' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry 'f70538c7fd8044c49b1a5de7474f766f508a890f179498e2' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '9fc820f298b14033ab93d55f69e890d229c429ebd4b75a24' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '9fc820f298b14033ab93d55f69e890d229c429ebd4b75a24' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '95700a77388347dd801a53c5f0337237dd7c6bc33b46900d' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '95700a77388347dd801a53c5f0337237dd7c6bc33b46900d' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '53f6ac6cef654ab7b8289e40496936a158263a66688e232d' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '53f6ac6cef654ab7b8289e40496936a158263a66688e232d' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '3e07c743bbef48a8b5d70ca04a6be618231547abfa6da21c' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '3e07c743bbef48a8b5d70ca04a6be618231547abfa6da21c' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '42b5248c7000458e92b30c00b17fec3cc802159eed81fb11' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '42b5248c7000458e92b30c00b17fec3cc802159eed81fb11' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '38f4032fffc446c08305c32e7d9b682d5645cfff277a295c' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '38f4032fffc446c08305c32e7d9b682d5645cfff277a295c' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '75baca1dc60a4842a23e1f0adb51aa33e14de22c2ed943c2' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '75baca1dc60a4842a23e1f0adb51aa33e14de22c2ed943c2' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry 'dbf92ddb08174e7aa1f7269a821febaaab1937576440d9e4' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry 'dbf92ddb08174e7aa1f7269a821febaaab1937576440d9e4' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '19b34148f05b4e5b95f772c06814836646195367196536b0' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '19b34148f05b4e5b95f772c06814836646195367196536b0' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '83ed10e87d7d43c3a5479b54377b33545ecfc4252abeca24' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '83ed10e87d7d43c3a5479b54377b33545ecfc4252abeca24' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '618d1c3dad94411e989c53725e000e39f5c52e613ab4fa81' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '618d1c3dad94411e989c53725e000e39f5c52e613ab4fa81' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '84c36bd69b4b4046ae5779dd1d8a9b1f9967d0143dcda867' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '84c36bd69b4b4046ae5779dd1d8a9b1f9967d0143dcda867' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '45a37f73d1ab4e2fa4bd1d1563e8d48af5870bffd5f3834c' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '45a37f73d1ab4e2fa4bd1d1563e8d48af5870bffd5f3834c' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '9605f4bf53d34e238b72e29476a7e3536f85157786d45728' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '9605f4bf53d34e238b72e29476a7e3536f85157786d45728' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '853de858d6d24a84b7598399ec28db39adf0a404029578e8' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '853de858d6d24a84b7598399ec28db39adf0a404029578e8' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry 'dc54271de2d643a4b01a593cc9b390670e60455c5de5eef3' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry 'dc54271de2d643a4b01a593cc9b390670e60455c5de5eef3' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '3835941ae76e4cd28e0d867ea13b3b7ad5641e8a6bbec1dc' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '3835941ae76e4cd28e0d867ea13b3b7ad5641e8a6bbec1dc' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry 'e1ce6cfa9f9c45f1b65cc0973cfd35c2940a21f2ef27c8f6' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry 'e1ce6cfa9f9c45f1b65cc0973cfd35c2940a21f2ef27c8f6' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '4e81c82e4b824711ad0cf08ba21cf7dc7bb2702ebf3be409' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:08:54 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '4e81c82e4b824711ad0cf08ba21cf7dc7bb2702ebf3be409' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:15:47 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:15:47 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:15:47 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:15:47 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:15:47 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:15:47 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:15:47 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:15:47 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:15:47 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:15:47 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:15:47 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:15:47 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:19:15 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:19:15 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:19:15 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:19:15 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:19:15 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:19:15 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:19:16 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:19:16 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:19:16 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:19:16 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:19:16 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:19:16 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:19:16 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 18:19:16 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '' for key 'Contacts.PRIMARY'

@@ -5,8 +5,10 @@ import (
 	"datastream/config"
 	"datastream/database"
 	"datastream/logs"
+	"errors"
 	"testing"
 
+	"github.com/IBM/sarama"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
@@ -28,11 +30,11 @@ func TestNewKafkaProducers(t *testing.T) {
 	dataconfig := &config.KafkaConfig{
 		Broker: "localhost:9092",
 	}
-	producer1, producer2, err := NewKafkaProducers(dataconfig)
+	producer1, err := NewKafkaProducers(dataconfig)
 	if err != nil {
 		t.Errorf("Expected no error, but got an error: %v", err)
 	}
-	if producer1 == nil || producer2 == nil {
+	if producer1 == nil {
 		t.Errorf("Expected non-nil producers, but got nil")
 	}
 
@@ -41,7 +43,7 @@ func TestNewKafkaProducers(t *testing.T) {
 		ContactsTopic: "",
 		ActivityTopic: "",
 	}
-	_, _, err = NewKafkaProducers(invalidConfig)
+	_, err = NewKafkaProducers(invalidConfig)
 	if err == nil {
 		t.Error("Expected an error, but got no error")
 	}
@@ -181,6 +183,8 @@ func TestGetOutputFromClickHouse(t *testing.T) {
 }
 
 func TestInsertDataToSQLite(t *testing.T) {
+	logs.InsForLogging()
+
 	db, err := sql.Open("sqlite3", ":memory:")
 	if err != nil {
 		t.Fatalf("Failed to open SQLite database: %v", err)
@@ -189,7 +193,7 @@ func TestInsertDataToSQLite(t *testing.T) {
 
 	createTableSQL := `CREATE TABLE ContactActivity (
 		ContactsID varchar(250) NOT NULL,
-		CampaignID int NOT NULL,
+CampaignID int NOT NULL,
 		ActivityType int NOT NULL,
 		ActivityDate datetime NOT NULL
 	);`
@@ -223,21 +227,81 @@ func TestInsertDataToSQLite(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			for _, message := range tc.messages {
-				expectedQuery := tc.query + message
 
-				if tc.expectErr {
-					_, err := db.Exec(expectedQuery)
-					if err == nil {
-						t.Errorf("Expected an error but got none")
-					}
-				} else {
-					_, err := db.Exec(expectedQuery)
-					if err != nil {
-						t.Errorf("Expected no error but got: %v", err)
-					}
+			if tc.expectErr {
+				err := InsertDataToMySQL(tc.messages, tc.query, db)
+				if err == nil {
+					t.Errorf("Expected an error but got none")
+				}
+			} else {
+				err := InsertDataToMySQL(tc.messages, tc.query, db)
+				if err != nil {
+					t.Errorf("Expected no error but got: %v", err)
 				}
 			}
+
 		})
+	}
+}
+
+func TestSendMessage_Successful(t *testing.T) {
+	kh, _ := NewKafkaHandler()
+	topic := "newtopic"
+	message := "Success, Kafka!"
+	err1 := kh.SendMessage(topic, message)
+	if err1 != nil {
+		t.Errorf("Expected no error, but got: %v", err1)
+	}
+}
+
+func TestSendMessage_FailedTopic(t *testing.T) {
+	kh, _ := NewKafkaHandler()
+	topic := "/invalidtopic/"
+	message := "This should fail"
+	err1 := kh.SendMessage(topic, message)
+	if err1 == nil {
+		t.Error("Expected an error, but got nil")
+	}
+}
+
+type MockDBConnector struct {
+	mock.Mock
+}
+
+func (m *MockDBConnector) EstablishMySQLConnection() (*sql.DB, error) {
+
+	return nil, errors.New("failed")
+}
+
+type KafkaConsumer interface {
+	ConsumePartition(topic string, partition int32, offset int64) (chan *sarama.ConsumerMessage, chan error)
+	Messages() <-chan *sarama.ConsumerMessage
+}
+
+type KafkaConsumerWrapper struct {
+	sarama.Consumer
+}
+
+// func TestConsumeMessageWithEstablishError(t *testing.T) {
+// 	logs.InsForLogging()
+
+// 	mockDBConnector := new(MockDBConnector)
+
+// 	kh := &KafkaHandler{
+// 		consumer: &KafkaConsumerWrapper{},
+// 	}
+// 	kh.dbConnector = mockDBConnector
+// 	fmt.Println(kh.dbConnector)
+
+// 	kh.ConsumeMessage("contacts23")
+
+//		mockDBConnector.AssertExpectations(t)
+//	}
+func BenchmarkConsumeMessage(b *testing.B) {
+	logs.InsForLogging()
+	kafkaHandler, _ := NewKafkaHandler()
+
+	for i := 0; i < b.N; i++ {
+		kafkaHandler.ConsumeMessage("contacts26")
 	}
 }

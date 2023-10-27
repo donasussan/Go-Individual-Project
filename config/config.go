@@ -14,7 +14,9 @@ type DBConnector interface {
 	Connect() (*sql.DB, error)
 	Close() error
 }
-
+type MySQLConnect interface {
+	EstablishMySQLConnection() (*sql.DB, error)
+}
 type MySQLConfig struct {
 	Username string
 	Password string

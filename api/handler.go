@@ -11,6 +11,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"testing"
 
 	"github.com/google/uuid"
 )
@@ -164,6 +165,10 @@ func GetEntireResultData() ([]types.ResultData, error) {
 		"AND (co.ID IN (SELECT ContactsID " +
 		"FROM dona_campaign.ContactActivity WHERE opened >= 30))"
 	db, err := services.ReturnClickhouseDB()
+	if err != nil {
+		logs.NewLog.Errorf(fmt.Sprintf("Error connecting to MySQL %v", err))
+		return nil, err
+	}
 
 	rows, err := services.GetQueryResultFromClickhouse(query, db)
 	if err != nil {
@@ -188,5 +193,12 @@ func GetEntireResultData() ([]types.ResultData, error) {
 		logs.NewLog.Errorf(fmt.Sprint(err))
 		return nil, err
 	}
-	return results, nil
+	return results, err
+}
+func BenchmarkGetEntireResultData(b *testing.B) {
+
+	for i := 0; i < b.N; i++ {
+		GetEntireResultData()
+
+	}
 }

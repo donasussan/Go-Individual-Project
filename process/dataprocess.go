@@ -8,7 +8,6 @@ import (
 	"encoding/csv"
 	"errors"
 	"fmt"
-	"html/template"
 	"io"
 	"os"
 	"regexp"
@@ -18,8 +17,6 @@ import (
 
 	"github.com/google/uuid"
 )
-
-var FileUploaded = template.Must(template.ParseFiles("templates/HomePage.html"))
 
 func generateRandomID() (string, error) {
 	uuidObj, err := uuid.NewRandom()
@@ -130,6 +127,10 @@ func validateCSVRecord(lineNumber int, record []string) []error {
 	return errors
 }
 func CSVReadToDataInsertion(filename string, batchSize int) error {
+	kh, err := services.NewKafkaHandler()
+	if err != nil {
+		logs.NewLog.Fatalf(fmt.Sprintf("Error creating Kafka handler: %v", err))
+	}
 	uploadedfile, err := os.Open(filename)
 	reader := csv.NewReader(uploadedfile)
 	contactsBatches := make([]types.Contacts, 0)
@@ -169,7 +170,7 @@ func CSVReadToDataInsertion(filename string, batchSize int) error {
 			wg.Add(1)
 			go func(batch []types.Contacts) {
 				defer wg.Done()
-				activityProcess(batch)
+				activityProcess(batch, kh)
 				printContactsBatch(batch, lineNumber)
 			}(contactsBatches)
 			contactsBatches = make([]types.Contacts, 0)
@@ -181,29 +182,29 @@ func CSVReadToDataInsertion(filename string, batchSize int) error {
 		printContactsBatch(contactsBatches, lineNumber)
 	}
 	wg.Wait()
-	go SendKafkaConsumerActivityToMySQL()
+	go SendKafkaConsumerActivityToMySQL(kh)
+	go SendKafkaConsumerContactsToMySQL(kh)
 
-	SendKafkaConsumerContactsToMySQL()
 	return err
 }
 func printContactsBatch(batch []types.Contacts, lineNumber int) {
 	fmt.Printf("Batch at line %d inserted to Kafka\n", lineNumber)
 }
-func activityProcess(contacts []types.Contacts) {
+func activityProcess(contacts []types.Contacts, kh *services.KafkaHandler) {
 	for _, contact := range contacts {
 		statusContact, activitiesSlice, _ := ReturnContactsAndActivitiesStructs(contact)
-		contactsData, _ := getContactsDataString(statusContact)
+		contactsData := getContactsDataString(statusContact)
 		activityDetails := getActivityDetailsString(activitiesSlice)
-		err := SendDataToKafkaProducers(contactsData, activityDetails)
+		err := SendDataToKafkaProducers(kh, contactsData, activityDetails)
 		if err != nil {
 			logs.NewLog.Error(fmt.Sprint("Error sending data to Kafka", err))
 		}
 	}
 }
-func getContactsDataString(statusContact types.ContactStatus) (string, string) {
+func getContactsDataString(statusContact types.ContactStatus) string {
 	statusInfo := fmt.Sprintf("('%s', '%s','%s', '%s', %d),", statusContact.Contact.ID, statusContact.Contact.Name,
 		statusContact.Contact.Email, statusContact.Contact.Details, statusContact.Status)
-	return statusInfo, ""
+	return statusInfo
 }
 func getActivityDetailsString(activities []types.ContactActivity) string {
 	var details string
@@ -215,18 +216,14 @@ func getActivityDetailsString(activities []types.ContactActivity) string {
 	return details
 }
 
-func SendDataToKafkaProducers(ContactsData string, ActivityData string) error {
-	producer1, producer2, kafkaConfig, err := services.KafkaConfigAndCreateProducers()
-	if err != nil {
-		logs.NewLog.Fatalf(fmt.Sprintf("Error creating Kafka producers: %v", err))
-		return err
-	}
-	err1 := services.SendMessage(producer1, kafkaConfig.ContactsTopic, ContactsData)
+func SendDataToKafkaProducers(kh *services.KafkaHandler, ContactsData string, ActivityData string) error {
+
+	err1 := kh.SendMessage(kh.Config.ContactsTopic, ContactsData)
 	if err1 != nil {
 		logs.NewLog.Fatalf(fmt.Sprintf("Error sending message to Topic1: %v", err1))
 		return err1
 	}
-	err2 := services.SendMessage(producer2, kafkaConfig.ActivityTopic, ActivityData)
+	err2 := kh.SendMessage(kh.Config.ActivityTopic, ActivityData)
 	if err2 != nil {
 		logs.NewLog.Fatalf(fmt.Sprintf("Error sending message to Topic2: %v", err2))
 		return err2
@@ -234,23 +231,12 @@ func SendDataToKafkaProducers(ContactsData string, ActivityData string) error {
 	return nil
 }
 
-func SendKafkaConsumerContactsToMySQL() error {
-	consumer, kafkaConfig, err := services.KafkaConfigAndCreateConsumer()
-	if err != nil {
-		logs.NewLog.Errorf(fmt.Sprintf("Error creating Kafka consumer: %v", err))
-		return err
-	}
-	defer consumer.Close()
-	services.ConsumeMessage(consumer, kafkaConfig.ContactsTopic)
-	return nil
+func SendKafkaConsumerContactsToMySQL(kh *services.KafkaHandler) {
+
+	kh.ConsumeMessage(kh.Config.ContactsTopic)
 }
-func SendKafkaConsumerActivityToMySQL() error {
-	consumer, kafkaConfig, err := services.KafkaConfigAndCreateConsumer()
-	if err != nil {
-		logs.NewLog.Errorf(fmt.Sprintf("Error creating Kafka consumer: %v", err))
-		return err
-	}
-	defer consumer.Close()
-	services.ConsumeMessage(consumer, kafkaConfig.ActivityTopic)
-	return nil
+
+func SendKafkaConsumerActivityToMySQL(kh *services.KafkaHandler) {
+
+	kh.ConsumeMessage(kh.Config.ActivityTopic)
 }

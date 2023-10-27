@@ -1,15 +1,12 @@
 package process
 
 import (
-	"datastream/config"
 	"datastream/logs"
 	"datastream/services"
 	"datastream/types"
 	"reflect"
 	"testing"
 	"time"
-
-	"github.com/IBM/sarama"
 )
 
 func TestValidateUploadedFileFormat(t *testing.T) {
@@ -173,7 +170,7 @@ func TestGetContactsDataString(t *testing.T) {
 		},
 		Status: 1,
 	}
-	contactsData, _ := getContactsDataString(statusContact)
+	contactsData := getContactsDataString(statusContact)
 	expectedContactsData := "('123', 'Dona','dona@example.com', 'jsondata', 1),"
 	if contactsData != expectedContactsData {
 		t.Errorf("Expected ContactsData: %s, but got: %s", expectedContactsData, contactsData)
@@ -229,73 +226,49 @@ func TestReturnContactsAndActivitiesStructs(t *testing.T) {
 		t.Errorf("Error is not nil: %v", err)
 	}
 }
+func BenchmarkActivityProcess(b *testing.B) {
+	contacts := []types.Contacts{
+		{
+			Name:    "Dona",
+			Email:   "dona@gmail.com",
+			Details: "details",
+		},
+		{
+			Name:    "John",
+			Email:   "john@gmail.com",
+			Details: "details",
+		},
+	}
 
-type MockKafkaService struct{}
-
-func (m *MockKafkaService) KafkaConfigAndCreateProducers() (producer1 sarama.SyncProducer, producer2 sarama.SyncProducer,
-	kafkaConfig config.KafkaConfig, err error) {
-	producera, producerb, kafkaConfig, err := services.KafkaConfigAndCreateProducers()
-	return producera, producerb, kafkaConfig, err
+	kh, _ := services.NewKafkaHandler()
+	for i := 0; i < b.N; i++ {
+		activityProcess(contacts, kh)
+	}
 }
+func BenchmarkReturnContactsAndActivitiesStructs(b *testing.B) {
+	contactsData := types.Contacts{
+		ID:      "sampleID",
+		Name:    "Dona",
+		Email:   "dona@gmail.com",
+		Details: "details",
+	}
 
-func (m *MockKafkaService) SendMessage(producer sarama.SyncProducer, topic string, data string) error {
-	err := services.SendMessage(producer, topic, data)
-	return err
+	for i := 0; i < b.N; i++ {
+		ReturnContactsAndActivitiesStructs(contactsData)
+	}
 }
+func BenchmarkSendDataToKafkaProducers(b *testing.B) {
+	kh := &services.KafkaHandler{}
 
-// func TestSendDataToKafkaProducers(t *testing.T) {
-// 	mockKafkaService := &MockKafkaService{}
+	contactsData := "contacts_data"
+	activityData := "activity_data"
 
-// 	err := SendDataToKafkaProducers(mockKafkaService, "ContactsData", "ActivityData")
-// 	if err != nil {
-// 		t.Errorf("Expected no error, but got an error: %v", err)
-// 	}
+	b.ResetTimer()
 
-// 	mockKafkaService.err = errors.New("Producer creation error")
-// 	err = SendDataToKafkaProducers(mockKafkaService, "ContactsData", "ActivityData")
-// 	if err == nil {
-// 		t.Error("Expected an error, but got no error")
-// 	}
-
-//		services = &RealKafkaService{}
-//	}
-// func TestSendKafkaConsumerContactsToMySQL(t *testing.T) {
-// 	services.KafkaConfigAndCreateConsumer = func() (sarama.Consumer, KafkaConfig, error) {
-// 		return &mockConsumer{}, KafkaConfig{
-// 			ContactsTopic: "contacts",
-// 		}, nil
-// 	}
-
-// 	err := SendKafkaConsumerContactsToMySQL()
-
-// 	if err != nil {
-// 		t.Errorf("Expected no error, but got: %v", err)
-// 	}
-// }
-
-// func TestSendKafkaConsumerActivityToMySQL(t *testing.T) {
-// 	services.KafkaConfigAndCreateConsumer = func() (sarama.Consumer, KafkaConfig, error) {
-// 		return &mockConsumer{}, KafkaConfig{
-// 			ActivityTopic: "activity",
-// 		}, nil
-// 	}
-
-// 	err := SendKafkaConsumerActivityToMySQL()
-
-// 	if err != nil {
-// 		t.Errorf("Expected no error, but got: %v", err)
-// 	}
-// }
-
-// type mockConsumer struct{}
-
-// func (c *mockConsumer) ConsumePartition(string, int32, int64) (sarama.PartitionConsumer, error) {
-// 	return nil, errors.New("not implemented")
-// }
-
-// func (c *mockConsumer) Close() error {
-// 	return nil
-// }
-
-// func (c *mockConsumer) AsyncClose() {
-// }
+	for i := 0; i < b.N; i++ {
+		err := SendDataToKafkaProducers(kh, contactsData, activityData)
+		if err != nil {
+			b.Fatalf("Error sending data to Kafka: %v", err)
+		}
+	}
+}

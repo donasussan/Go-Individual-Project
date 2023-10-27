@@ -161,3 +161,47 @@
 [ERROR] 2023/10/26 18:35:34 log.go:37: invalid email in CSV record 1: email
 [ERROR] 2023/10/26 18:35:34 log.go:37: invalid details in CSV record 1: details
 [ERROR] 2023/10/26 18:35:34 log.go:37: invalid details in CSV record 2: {"dob": "1990-12-05","city": "City2", "country": "Country2"}
+[INFO] 2023/10/27 15:58:14 log.go:30: Log File Created
+[INFO] 2023/10/27 15:58:14 log.go:30: Copied 116 bytes
+[INFO] 2023/10/27 15:58:14 log.go:30: Log File Created
+[INFO] 2023/10/27 15:58:14 log.go:30: Copied 0 bytes
+[ERROR] 2023/10/27 15:58:14 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/88df6f7d-4cad-4e29-b161-700780c33a23-nodata.csv
+[INFO] 2023/10/27 15:58:14 log.go:30: Log File Created
+[INFO] 2023/10/27 15:58:14 log.go:30: Copied 114 bytes
+[ERROR] 2023/10/27 15:58:14 log.go:37: invalid email in CSV record 1: email
+[ERROR] 2023/10/27 15:58:14 log.go:37: invalid details in CSV record 1: details
+[ERROR] 2023/10/27 15:58:14 log.go:37: invalid details in CSV record 2: {"dob": "1990-12-05","city": "City2", "country": "Country2"}
+[ERROR] 2023/10/27 15:58:14 log.go:37: invalid email in CSV record 1: email
+[ERROR] 2023/10/27 15:58:14 log.go:37: invalid details in CSV record 1: details
+[ERROR] 2023/10/27 15:58:14 log.go:37: invalid details in CSV record 2: {"dob": "1990-12-05", s"city": "City2", "country": "Country2"}
+[INFO] 2023/10/27 17:46:19 log.go:30: Log File Created
+[INFO] 2023/10/27 17:46:19 log.go:30: Copied 116 bytes
+[INFO] 2023/10/27 17:46:19 log.go:30: Log File Created
+[INFO] 2023/10/27 17:46:19 log.go:30: Copied 0 bytes
+[ERROR] 2023/10/27 17:46:19 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/b4ad376e-d889-4998-bd3d-d98e7313de00-nodata.csv
+[INFO] 2023/10/27 17:46:19 log.go:30: Log File Created
+[INFO] 2023/10/27 17:46:19 log.go:30: Copied 114 bytes
+[ERROR] 2023/10/27 17:46:19 log.go:37: invalid email in CSV record 1: email
+[ERROR] 2023/10/27 17:46:19 log.go:37: invalid details in CSV record 1: details
+[ERROR] 2023/10/27 17:46:19 log.go:37: invalid details in CSV record 2: {"dob": "1990-12-05", s"city": "City2", "country": "Country2"}
+[ERROR] 2023/10/27 17:46:19 log.go:37: invalid email in CSV record 1: email
+[ERROR] 2023/10/27 17:46:19 log.go:37: invalid details in CSV record 1: details
+[ERROR] 2023/10/27 17:46:19 log.go:37: invalid details in CSV record 2: {"dob": "1990-12-05","city": "City2", "country": "Country2"}
+[ERROR] 2023/10/27 17:46:19 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry 'f70538c7fd8044c49b1a5de7474f766f508a890f179498e2' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 17:46:19 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry 'f70538c7fd8044c49b1a5de7474f766f508a890f179498e2' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 17:46:19 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry 'f70538c7fd8044c49b1a5de7474f766f508a890f179498e2' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 17:46:19 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry 'f70538c7fd8044c49b1a5de7474f766f508a890f179498e2' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 17:46:19 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '9fc820f298b14033ab93d55f69e890d229c429ebd4b75a24' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 17:46:19 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '9fc820f298b14033ab93d55f69e890d229c429ebd4b75a24' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 17:46:19 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '95700a77388347dd801a53c5f0337237dd7c6bc33b46900d' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 17:46:19 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '95700a77388347dd801a53c5f0337237dd7c6bc33b46900d' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 17:46:19 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '9fc820f298b14033ab93d55f69e890d229c429ebd4b75a24' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 17:46:19 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '9fc820f298b14033ab93d55f69e890d229c429ebd4b75a24' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 17:46:19 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '53f6ac6cef654ab7b8289e40496936a158263a66688e232d' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 17:46:19 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '53f6ac6cef654ab7b8289e40496936a158263a66688e232d' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 17:46:19 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '95700a77388347dd801a53c5f0337237dd7c6bc33b46900d' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 17:46:19 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '95700a77388347dd801a53c5f0337237dd7c6bc33b46900d' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 17:46:19 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '53f6ac6cef654ab7b8289e40496936a158263a66688e232d' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 17:46:19 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '53f6ac6cef654ab7b8289e40496936a158263a66688e232d' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 17:46:19 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '3e07c743bbef48a8b5d70ca04a6be618231547abfa6da21c' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/27 17:46:19 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '3e07c743bbef48a8b5d70ca04a6be618231547abfa6da21c' for key 'Contacts.PRIMARY'

@@ -37,7 +37,6 @@ func TestRefreshQuery(t *testing.T) {
 }
 func TestHandleFileUpload_Success(t *testing.T) {
 	logs.InsForLogging()
-
 	requestBody := &bytes.Buffer{}
 	writer := multipart.NewWriter(requestBody)
 	part, _ := writer.CreateFormFile("uploadedfile", "/home/user/go_learn/data_stream/sampledata/sample.csv")
@@ -45,17 +44,13 @@ func TestHandleFileUpload_Success(t *testing.T) {
 		"s\"\"city\"\": \"\"City2\"\", \"\"country\"\": \"\"Country2\"\"}\"\n")
 	part.Write(fileContent)
 	writer.Close()
-
 	req, err := http.NewRequest("POST", "/upload", requestBody)
 	if err != nil {
 		t.Fatal(err)
 	}
 	req.Header.Set("Content-Type", writer.FormDataContentType())
-
 	rr := httptest.NewRecorder()
-
 	HandleFileUpload(rr, req)
-
 	if rr.Code != http.StatusSeeOther {
 		t.Errorf("Expected status code %d, got %d", http.StatusSeeOther, rr.Code)
 	}
@@ -83,7 +78,6 @@ func TestHandleFileUpload_EmptyFile(t *testing.T) {
 }
 func TestHandleFileUpload_InvalidFileName(t *testing.T) {
 	logs.InsForLogging()
-
 	requestBody := &bytes.Buffer{}
 	writer := multipart.NewWriter(requestBody)
 	part, _ := writer.CreateFormFile("uploadedfile", "inva!id.csv")
@@ -91,17 +85,13 @@ func TestHandleFileUpload_InvalidFileName(t *testing.T) {
 		"\"\"city\"\": \"\"City2\"\", \"\"country\"\": \"\"Country2\"\"}\"\n")
 	part.Write(fileContent)
 	writer.Close()
-
 	req, err := http.NewRequest("POST", "/upload", requestBody)
 	if err != nil {
 		t.Fatal(err)
 	}
 	req.Header.Set("Content-Type", writer.FormDataContentType())
-
 	rr := httptest.NewRecorder()
-
 	HandleFileUpload(rr, req)
-
 	if rr.Code != http.StatusBadRequest {
 		t.Errorf("Expected status code %d, got %d", http.StatusBadRequest, rr.Code)
 	}

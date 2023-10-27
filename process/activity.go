@@ -198,6 +198,7 @@ func SeparateContactActivities(activityString string, numColumns int) ([]types.C
 			campaignID, err := strconv.Atoi(parts[1])
 			if err != nil {
 				logs.NewLog.Error(fmt.Sprintf("Error converting CampaignID: %v", err))
+				fmt.Println(parts[1])
 				return nil, err
 			}
 			activityType, err := strconv.Atoi(parts[2])
