@@ -13,10 +13,9 @@ import (
 )
 
 type KafkaHandler struct {
-	producer1   sarama.SyncProducer
-	consumer    sarama.Consumer
-	Config      config.KafkaConfig
-	dbConnector config.MySQLConnect
+	producer1 sarama.SyncProducer
+	consumer  sarama.Consumer
+	Config    config.KafkaConfig
 }
 
 func NewKafkaProducers(config *config.KafkaConfig) (sarama.SyncProducer, error) {
@@ -60,10 +59,9 @@ func NewKafkaHandler() (*KafkaHandler, error) {
 	}
 
 	return &KafkaHandler{
-		producer1:   producer1,
-		consumer:    consumer,
-		Config:      kafkaConfig,
-		dbConnector: &MySQLDBConnector{},
+		producer1: producer1,
+		consumer:  consumer,
+		Config:    kafkaConfig,
 	}, nil
 }
 
@@ -80,7 +78,7 @@ func (kh *KafkaHandler) SendMessage(topic string, message string) error {
 }
 
 func (kh *KafkaHandler) ConsumeMessage(topic string) {
-	partitionConsumer, err := kh.consumer.ConsumePartition(topic, 0, sarama.OffsetOldest)
+	partitionConsumer, err := kh.consumer.ConsumePartition(topic, 0, sarama.OffsetNewest)
 	if err != nil {
 		logs.NewLog.Error("Error creating partition consumer")
 		return
@@ -95,14 +93,10 @@ func (kh *KafkaHandler) ConsumeMessage(topic string) {
 		messageCount++
 
 		if messageCount%100 == 0 {
-			db, err := kh.dbConnector.EstablishMySQLConnection()
-			if err != nil {
-				logs.NewLog.Error(fmt.Sprintf("Error establishing MySQL connection %v", err))
-			}
+
 			if strings.Contains(topic, "contacts") {
 				query := "INSERT INTO Contacts(ID, Name, Email, Details, Status) VALUES"
-				err := InsertDataToMySQL(messages, query, db)
-				fmt.Println("hi")
+				err := InsertDataToMySQL(messages, query)
 
 				messages = make([]string, 0)
 				if err != nil {
@@ -110,7 +104,7 @@ func (kh *KafkaHandler) ConsumeMessage(topic string) {
 				}
 			} else {
 				query := "INSERT INTO ContactActivity (ContactsID, CampaignID, ActivityType,ActivityDate)VALUES"
-				err := InsertDataToMySQL(messages, query, db)
+				err := InsertDataToMySQL(messages, query)
 				messages = make([]string, 0)
 				if err != nil {
 					logs.NewLog.Errorf(fmt.Sprintf("Error inserting activity data into MySQL: %v", err))

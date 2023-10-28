@@ -12,7 +12,6 @@ import (
 	"os"
 	"regexp"
 	"strings"
-	"sync"
 	"unicode"
 
 	"github.com/google/uuid"
@@ -112,21 +111,18 @@ func validateCSVRecord(lineNumber int, record []string) []error {
 	if !isValidName(name) {
 		logs.NewLog.Error(fmt.Sprintf("invalid name in CSV record %d: %s", lineNumber, name))
 		errors = append(errors, fmt.Errorf("invalid name in CSV record %d: %s", lineNumber, name))
-
 	}
 	if !isValidEmail(email) {
 		logs.NewLog.Error(fmt.Sprintf("invalid email in CSV record %d: %s", lineNumber, email))
 		errors = append(errors, fmt.Errorf("invalid email in CSV record %d: %s", lineNumber, email))
-
 	}
 	if !isValidDetails(details) {
 		logs.NewLog.Error(fmt.Sprintf("invalid details in CSV record %d: %s", lineNumber, details))
 		errors = append(errors, fmt.Errorf("invalid details in CSV record %d: %s", lineNumber, details))
-
 	}
 	return errors
 }
-func CSVReadToDataInsertion(filename string, batchSize int) error {
+func CSVReadToDataInsertion(filename string, batchSize int, doneChan chan struct{}) error {
 	kh, err := services.NewKafkaHandler()
 	if err != nil {
 		logs.NewLog.Fatalf(fmt.Sprintf("Error creating Kafka handler: %v", err))
@@ -136,7 +132,7 @@ func CSVReadToDataInsertion(filename string, batchSize int) error {
 	contactsBatches := make([]types.Contacts, 0)
 	rowCount := 0
 	lineNumber := 0
-	var wg sync.WaitGroup
+
 	for {
 		lineNumber++
 		record, err := reader.Read()
@@ -166,30 +162,20 @@ func CSVReadToDataInsertion(filename string, batchSize int) error {
 		rowCount++
 		contactsBatches = append(contactsBatches, contact)
 
-		if rowCount >= batchSize {
-			wg.Add(1)
-			go func(batch []types.Contacts) {
-				defer wg.Done()
-				activityProcess(batch, kh)
-				printContactsBatch(batch, lineNumber)
-			}(contactsBatches)
-			contactsBatches = make([]types.Contacts, 0)
-			rowCount = 0
-		}
+		go func(batch []types.Contacts) {
+			activityProcess(batch, kh)
+		}(contactsBatches)
+		contactsBatches = make([]types.Contacts, 0)
+		rowCount = 0
 	}
-
-	if len(contactsBatches) > 0 {
-		printContactsBatch(contactsBatches, lineNumber)
-	}
-	wg.Wait()
-	go SendKafkaConsumerActivityToMySQL(kh)
+	doneChan <- struct{}{}
+	logs.NewLog.Errorf(fmt.Sprintln("Data Inserted to Kafka"))
 	go SendKafkaConsumerContactsToMySQL(kh)
 
+	SendKafkaConsumerActivityToMySQL(kh)
 	return err
 }
-func printContactsBatch(batch []types.Contacts, lineNumber int) {
-	fmt.Printf("Batch at line %d inserted to Kafka\n", lineNumber)
-}
+
 func activityProcess(contacts []types.Contacts, kh *services.KafkaHandler) {
 	for _, contact := range contacts {
 		statusContact, activitiesSlice, _ := ReturnContactsAndActivitiesStructs(contact)

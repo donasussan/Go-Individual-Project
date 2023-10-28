@@ -4,6 +4,20 @@
 <head>
 	<title>File Upload</title>
 	<link rel="stylesheet" type="text/css" href="/static/HomePage.css">
+	<script>
+		window.onload = function () {
+			var urlParams = new URLSearchParams(window.location.search);
+			var successMessage = urlParams.get("success");
+			var successDiv = document.getElementById("success-message");
+
+			if (successMessage && successMessage !== null) {
+				successDiv.innerText = successMessage;
+				successDiv.style.display = "block";
+			} else {
+				successDiv.style.display = "none";
+			}
+		}
+	</script>
 </head>
 
 <body>
@@ -16,7 +30,8 @@
 		{{if .Error}}
 		<p style="color: red;">Error: {{.Error}}</p>
 		{{end}}
-		<a href="refreshQuery">Show Query Page</a>
+		<div id="success-message"></div>
+		<a href="refreshQuery">Show Result Page</a>
 	</div>
 </body>
 

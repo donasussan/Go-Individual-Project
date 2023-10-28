@@ -11,7 +11,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
-	"testing"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -35,6 +35,8 @@ func HomePageHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func HandleFileUpload(w http.ResponseWriter, r *http.Request) {
+	doneChan := make(chan struct{})
+
 	uploadedFile, header, err := r.FormFile("uploadedfile")
 
 	if err != nil {
@@ -85,13 +87,18 @@ func HandleFileUpload(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	go func() {
-		err := process.CSVReadToDataInsertion(filePath, 100)
+		err := process.CSVReadToDataInsertion(filePath, 100, doneChan)
 		if err != nil {
 			logs.NewLog.Error(fmt.Sprintf("Error processing uploaded file: %v", err))
 		}
 	}()
-
-	http.Redirect(w, r, "/HomePage.html", http.StatusSeeOther)
+	select {
+	case <-doneChan:
+		http.Redirect(w, r, "/HomePage.html?success=File+uploaded+successfully", http.StatusSeeOther)
+	case <-time.After(5 * time.Second):
+		logs.NewLog.Error("Processing took too long.")
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+	}
 }
 
 func EntireQueryDisplay(w http.ResponseWriter, r *http.Request) {
@@ -136,9 +143,7 @@ func GetCountOfPeople() ([]types.Count, error) {
 		"WHERE (JSONExtractString(co.Details, 'country') IN ('USA', 'UK')) " +
 		"AND (co.ID IN (SELECT ContactsID " +
 		"FROM dona_campaign.ContactActivity WHERE opened >= 30))"
-	db, err := services.ReturnClickhouseDB()
-
-	rows, err := services.GetQueryResultFromClickhouse(query, db)
+	rows, err := services.GetQueryResultFromClickhouse(query)
 	if err != nil {
 		logs.NewLog.Error(fmt.Sprint("Error getting clickhouse Query", err))
 	}
@@ -164,15 +169,9 @@ func GetEntireResultData() ([]types.ResultData, error) {
 		"WHERE (JSONExtractString(co.Details, 'country') IN ('USA', 'UK')) " +
 		"AND (co.ID IN (SELECT ContactsID " +
 		"FROM dona_campaign.ContactActivity WHERE opened >= 30))"
-	db, err := services.ReturnClickhouseDB()
+	rows, err := services.GetQueryResultFromClickhouse(query)
 	if err != nil {
-		logs.NewLog.Errorf(fmt.Sprintf("Error connecting to MySQL %v", err))
-		return nil, err
-	}
-
-	rows, err := services.GetQueryResultFromClickhouse(query, db)
-	if err != nil {
-		logs.NewLog.Error(fmt.Sprint("Error getting clickhouse Query", err))
+		logs.NewLog.Error(fmt.Sprint("Error getting clickhouse Query Result", err))
 	}
 	var results []types.ResultData
 	for rows.Next() {
@@ -194,11 +193,4 @@ func GetEntireResultData() ([]types.ResultData, error) {
 		return nil, err
 	}
 	return results, err
-}
-func BenchmarkGetEntireResultData(b *testing.B) {
-
-	for i := 0; i < b.N; i++ {
-		GetEntireResultData()
-
-	}
 }

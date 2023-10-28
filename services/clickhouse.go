@@ -11,7 +11,6 @@ import (
 func ConnectClickhouse() (*config.ClickHouseConnector, error) {
 
 	configData, err := database.LoadDatabaseConfig("clickhouse")
-	fmt.Println(configData)
 	if err != nil {
 		logs.NewLog.Error(fmt.Sprintf("Error loading database config: %v", err))
 	}
@@ -32,8 +31,11 @@ func ReturnClickhouseDB() (*sql.DB, error) {
 	}
 	return db, err
 }
-func GetQueryResultFromClickhouse(query string, db *sql.DB) (*sql.Rows, error) {
-
+func GetQueryResultFromClickhouse(query string) (*sql.Rows, error) {
+	db, err := ReturnClickhouseDB()
+	if err != nil {
+		logs.NewLog.Errorf(fmt.Sprintf("Could not connect to Clickhouse,%v", err))
+	}
 	rows, err := db.Query(query)
 	if err != nil {
 		logs.NewLog.Errorf(fmt.Sprint(err))

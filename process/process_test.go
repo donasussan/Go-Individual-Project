@@ -193,10 +193,51 @@ func TestGetActivityDetailsString(t *testing.T) {
 		t.Errorf("Expected ActivityDetails: %s, but got: %s", expectedActivityDetails, activityDetails)
 	}
 }
-func BenchmarkCSVReadToDataInsertionWithMemory(b *testing.B) {
+func TestCSVReadToDataInsertion(t *testing.T) {
+	donechannel := make(chan struct{})
+
+	logs.InsForLogging()
+
+	filename := "/home/user/go_learn/data_stream/sampledata/200countries.csv"
+	batchSize := 10
+	err := CSVReadToDataInsertion(filename, batchSize, donechannel)
+
+	if err != nil {
+		t.Errorf("Expected no error, but got an error: %v", err)
+	}
+}
+func TestCSVReadToDataInsertion_File_Error(t *testing.T) {
+	donechannel := make(chan struct{})
+
+	logs.InsForLogging()
+
+	filename := "/home/user/go_learn/data_stream/sampledata/multicountries"
+	batchSize := 10
+	err := CSVReadToDataInsertion(filename, batchSize, donechannel)
+
+	if err == nil {
+		t.Errorf("Expected error, but got nil: %v", err)
+	}
+}
+func TestCSVReadToDataInsertion_batchsizeMax(t *testing.T) {
+	donechannel := make(chan struct{})
+
+	logs.InsForLogging()
+
+	filename := "/home/user/go_learn/data_stream/sampledata/10000data.csv"
+	batchSize := 100
+	err := CSVReadToDataInsertion(filename, batchSize, donechannel)
+
+	if err != nil {
+		t.Errorf("Expected nil, but got error: %v", err)
+	}
+}
+func BenchmarkCSVReadToDataInsertion(b *testing.B) {
+	donechannel := make(chan struct{})
+
 	logs.InsForLogging()
 	for i := 0; i < b.N; i++ {
-		err := CSVReadToDataInsertion("/home/user/go_learn/data_stream/sampledata/multicountries.csv", 100)
+		err := CSVReadToDataInsertion("/home/user/go_learn/data_stream/sampledata/multicountries.csv", 100, donechannel)
 		if err != nil {
 			b.Fatalf("Benchmark failed: %v", err)
 		}
@@ -226,6 +267,18 @@ func TestReturnContactsAndActivitiesStructs(t *testing.T) {
 		t.Errorf("Error is not nil: %v", err)
 	}
 }
+func BenchmarkReturnContactsAndActivitiesStructs(b *testing.B) {
+	contactsData := types.Contacts{
+		ID:      "sampleID",
+		Name:    "Dona",
+		Email:   "dona@gmail.com",
+		Details: "details",
+	}
+
+	for i := 0; i < b.N; i++ {
+		ReturnContactsAndActivitiesStructs(contactsData)
+	}
+}
 func BenchmarkActivityProcess(b *testing.B) {
 	contacts := []types.Contacts{
 		{
@@ -245,26 +298,25 @@ func BenchmarkActivityProcess(b *testing.B) {
 		activityProcess(contacts, kh)
 	}
 }
-func BenchmarkReturnContactsAndActivitiesStructs(b *testing.B) {
-	contactsData := types.Contacts{
-		ID:      "sampleID",
-		Name:    "Dona",
-		Email:   "dona@gmail.com",
-		Details: "details",
+func TestSendDataToKafkaProducers_Success(t *testing.T) {
+	kh, _ := services.NewKafkaHandler()
+
+	ContactsData := "ContactsData"
+	ActivityData := "ActivityData"
+
+	err := SendDataToKafkaProducers(kh, ContactsData, ActivityData)
+
+	if err != nil {
+		t.Errorf("Expected no error, but got: %v", err)
 	}
 
-	for i := 0; i < b.N; i++ {
-		ReturnContactsAndActivitiesStructs(contactsData)
-	}
 }
-func BenchmarkSendDataToKafkaProducers(b *testing.B) {
-	kh := &services.KafkaHandler{}
 
+func BenchmarkSendDataToKafkaProducers(b *testing.B) {
+	kh, _ := services.NewKafkaHandler()
 	contactsData := "contacts_data"
 	activityData := "activity_data"
-
 	b.ResetTimer()
-
 	for i := 0; i < b.N; i++ {
 		err := SendDataToKafkaProducers(kh, contactsData, activityData)
 		if err != nil {

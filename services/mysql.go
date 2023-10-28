@@ -20,9 +20,7 @@ func ConnectMySQL() (*config.MySQLConnector, error) {
 	return &mysqlConnector, nil
 }
 
-type MySQLDBConnector struct{}
-
-func (c *MySQLDBConnector) EstablishMySQLConnection() (*sql.DB, error) {
+func EstablishMySQLConnection() (*sql.DB, error) {
 	mysqlConnector, err := ConnectMySQL()
 	if err != nil {
 		logs.NewLog.Error(fmt.Sprintf("error configuring MySQL: %v", err))
@@ -35,7 +33,11 @@ func (c *MySQLDBConnector) EstablishMySQLConnection() (*sql.DB, error) {
 	}
 	return db, nil
 }
-func InsertDataToMySQL(messages []string, query string, db *sql.DB) error {
+func InsertDataToMySQL(messages []string, query string) error {
+	db, err := EstablishMySQLConnection()
+	if err != nil {
+		logs.NewLog.Error(fmt.Sprintf("Error establishing MySQL connection %v", err))
+	}
 	filteredMessages := make([]string, 0, len(messages))
 	for _, message := range messages {
 		message = strings.TrimRight(message, ",")

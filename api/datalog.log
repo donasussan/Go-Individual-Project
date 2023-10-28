@@ -1,207 +1,1059 @@
-[INFO] 2023/10/25 13:38:29 log.go:30: Log File Created
-[INFO] 2023/10/25 13:38:29 log.go:30: Copied 18 bytes
-[ERROR] 2023/10/25 13:38:29 log.go:37: unsupported file type, please upload .csv file
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:51 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:52 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:25:53 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:05 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:06 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:57 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:57 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:57 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:57 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:57 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:57 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:57 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:57 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:57 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:57 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:57 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:57 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:57 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:57 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:57 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:58 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:59 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:59 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:59 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:59 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:59 log.go:30: Log File Created
+[INFO] 2023/10/28 12:26:59 log.go:30: Log File Created
+[INFO] 2023/10/28 15:35:26 log.go:30: Log File Created
+[INFO] 2023/10/28 15:35:26 log.go:30: Copied 116 bytes
+[ERROR] 2023/10/28 15:35:26 log.go:37: invalid email in CSV record 1: email
+[ERROR] 2023/10/28 15:35:26 log.go:37: invalid details in CSV record 1: details
+[ERROR] 2023/10/28 15:35:26 log.go:37: invalid details in CSV record 2: {"dob": "1990-12-05", s"city": "City2", "country": "Country2"}
+[ERROR] 2023/10/28 15:35:31 log.go:37: Processing took too long.
+[INFO] 2023/10/28 15:35:34 log.go:30: Log File Created
+[INFO] 2023/10/28 15:35:34 log.go:30: Copied 116 bytes
+[ERROR] 2023/10/28 15:35:34 log.go:37: invalid email in CSV record 1: email
+[ERROR] 2023/10/28 15:35:34 log.go:37: invalid details in CSV record 1: details
+[ERROR] 2023/10/28 15:35:34 log.go:37: invalid details in CSV record 2: {"dob": "1990-12-05", s"city": "City2", "country": "Country2"}
+[ERROR] 2023/10/28 15:35:39 log.go:37: Processing took too long.
+[INFO] 2023/10/28 15:35:45 log.go:30: Log File Created
+[INFO] 2023/10/28 15:35:45 log.go:30: Copied 116 bytes
+[ERROR] 2023/10/28 15:35:45 log.go:37: invalid email in CSV record 1: email
+[ERROR] 2023/10/28 15:35:45 log.go:37: invalid details in CSV record 1: details
+[ERROR] 2023/10/28 15:35:45 log.go:37: invalid details in CSV record 2: {"dob": "1990-12-05", s"city": "City2", "country": "Country2"}
+[ERROR] 2023/10/28 15:35:50 log.go:37: Processing took too long.
+[INFO] 2023/10/28 15:36:47 log.go:30: Log File Created
+[INFO] 2023/10/28 15:36:47 log.go:30: Log File Created
+[INFO] 2023/10/28 15:36:47 log.go:30: Log File Created
+[INFO] 2023/10/28 15:36:47 log.go:30: Log File Created
+[INFO] 2023/10/28 15:36:47 log.go:30: Copied 116 bytes
+[ERROR] 2023/10/28 15:36:47 log.go:37: invalid email in CSV record 1: email
+[ERROR] 2023/10/28 15:36:47 log.go:37: invalid details in CSV record 1: details
+[ERROR] 2023/10/28 15:36:47 log.go:37: invalid details in CSV record 2: {"dob": "1990-12-05", s"city": "City2", "country": "Country2"}
+[ERROR] 2023/10/28 15:36:52 log.go:37: Processing took too long.
+[INFO] 2023/10/28 15:36:52 log.go:30: Log File Created
+[INFO] 2023/10/28 15:36:52 log.go:30: Copied 0 bytes
+[ERROR] 2023/10/28 15:36:52 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/9d935cf1-deda-42f8-bf59-5ac3c38cef57-nodata.csv
+[INFO] 2023/10/28 15:36:52 log.go:30: Log File Created
+[INFO] 2023/10/28 15:36:52 log.go:30: Copied 114 bytes
+[ERROR] 2023/10/28 15:36:52 log.go:37: invalid email in CSV record 1: email
+[ERROR] 2023/10/28 15:36:52 log.go:37: invalid details in CSV record 1: details
+[ERROR] 2023/10/28 15:36:52 log.go:37: invalid details in CSV record 2: {"dob": "1990-12-05","city": "City2", "country": "Country2"}
+[ERROR] 2023/10/28 15:36:57 log.go:37: Processing took too long.
+[INFO] 2023/10/28 15:36:57 log.go:30: Log File Created
+[INFO] 2023/10/28 15:36:57 log.go:30: Log File Created
+[INFO] 2023/10/28 15:36:57 log.go:30: Log File Created
+[INFO] 2023/10/28 15:36:57 log.go:30: Log File Created
+[INFO] 2023/10/28 15:36:57 log.go:30: Log File Created
+[INFO] 2023/10/28 15:36:57 log.go:30: Log File Created
+[INFO] 2023/10/28 15:36:57 log.go:30: Log File Created
+[INFO] 2023/10/28 15:36:57 log.go:30: Log File Created
+[INFO] 2023/10/28 15:36:57 log.go:30: Log File Created
+[INFO] 2023/10/28 15:37:23 log.go:30: Log File Created
+[INFO] 2023/10/28 15:37:23 log.go:30: Log File Created
+[INFO] 2023/10/28 15:37:23 log.go:30: Log File Created
+[INFO] 2023/10/28 15:37:32 log.go:30: Log File Created
+[INFO] 2023/10/28 15:37:32 log.go:30: Log File Created
+[INFO] 2023/10/28 15:37:32 log.go:30: Log File Created
+[INFO] 2023/10/28 15:37:37 log.go:30: Log File Created
+[INFO] 2023/10/28 15:37:37 log.go:30: Copied 116 bytes
+[ERROR] 2023/10/28 15:37:37 log.go:37: invalid email in CSV record 1: email
+[ERROR] 2023/10/28 15:37:37 log.go:37: invalid details in CSV record 1: details
+[ERROR] 2023/10/28 15:37:37 log.go:37: invalid details in CSV record 2: {"dob": "1990-12-05", s"city": "City2", "country": "Country2"}
+[ERROR] 2023/10/28 15:37:42 log.go:37: Processing took too long.
+[INFO] 2023/10/28 15:37:54 log.go:30: Log File Created
+[INFO] 2023/10/28 15:37:54 log.go:30: Copied 115 bytes
+[ERROR] 2023/10/28 15:37:54 log.go:37: invalid email in CSV record 1: email
+[ERROR] 2023/10/28 15:37:54 log.go:37: invalid details in CSV record 1: details
+[ERROR] 2023/10/28 15:37:59 log.go:37: Processing took too long.
+[INFO] 2023/10/28 15:38:26 log.go:30: Log File Created
+[INFO] 2023/10/28 15:38:26 log.go:30: Copied 115 bytes
+[ERROR] 2023/10/28 15:38:26 log.go:37: invalid email in CSV record 1: email
+[ERROR] 2023/10/28 15:38:26 log.go:37: invalid details in CSV record 1: details
+[ERROR] 2023/10/28 15:38:31 log.go:37: Processing took too long.
+[INFO] 2023/10/28 15:38:53 log.go:30: Log File Created
+[INFO] 2023/10/28 15:38:53 log.go:30: Copied 0 bytes
+[ERROR] 2023/10/28 15:38:53 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/a04e2b09-3d70-4d18-9b92-925c869b1020-nodata.csv
+[INFO] 2023/10/28 15:39:18 log.go:30: Log File Created
+[INFO] 2023/10/28 15:39:18 log.go:30: Copied 115 bytes
+[ERROR] 2023/10/28 15:39:18 log.go:37: invalid email in CSV record 1: email
+[ERROR] 2023/10/28 15:39:18 log.go:37: invalid details in CSV record 1: details
+[ERROR] 2023/10/28 15:39:23 log.go:37: Processing took too long.
+[INFO] 2023/10/28 15:39:47 log.go:30: Log File Created
+[INFO] 2023/10/28 15:39:47 log.go:30: Copied 118 bytes
+[ERROR] 2023/10/28 15:39:47 log.go:37: invalid email in CSV record 1: email
+[ERROR] 2023/10/28 15:39:47 log.go:37: invalid details in CSV record 1: details
+[ERROR] 2023/10/28 15:39:52 log.go:37: Processing took too long.
+[INFO] 2023/10/28 15:40:49 log.go:30: Log File Created
+[INFO] 2023/10/28 15:40:49 log.go:30: Copied 0 bytes
+[ERROR] 2023/10/28 15:40:49 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/38debeb5-dea3-46c9-bce7-a05a6b71ec78-sample.csv
+[INFO] 2023/10/28 15:41:15 log.go:30: Log File Created
+[ERROR] 2023/10/28 15:41:15 log.go:37: Error retrieving file: unexpected EOF
+[INFO] 2023/10/28 15:41:46 log.go:30: Log File Created
+[ERROR] 2023/10/28 15:41:46 log.go:37: Error retrieving file: unexpected EOF
+[INFO] 2023/10/28 15:41:47 log.go:30: Log File Created
+[ERROR] 2023/10/28 15:41:47 log.go:37: Error retrieving file: unexpected EOF
+[INFO] 2023/10/28 15:41:48 log.go:30: Log File Created
+[ERROR] 2023/10/28 15:41:48 log.go:37: Error retrieving file: unexpected EOF
+[INFO] 2023/10/28 15:43:56 log.go:30: Log File Created
+[INFO] 2023/10/28 15:43:56 log.go:30: Copied 0 bytes
+[ERROR] 2023/10/28 15:43:56 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/0ec07946-7993-43be-801d-eea35d0c1cbf-200countries.csv
+[INFO] 2023/10/28 15:44:59 log.go:30: Log File Created
+[INFO] 2023/10/28 15:44:59 log.go:30: Copied 0 bytes
+[ERROR] 2023/10/28 15:44:59 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/e6a5a1e1-a7bf-448c-9108-867570102115-200countries1.csv
+[INFO] 2023/10/28 15:48:34 log.go:30: Log File Created
+[INFO] 2023/10/28 15:48:34 log.go:30: Copied 115 bytes
+[ERROR] 2023/10/28 15:48:34 log.go:37: invalid email in CSV record 1: email
+[ERROR] 2023/10/28 15:48:34 log.go:37: invalid details in CSV record 1: details
+[ERROR] 2023/10/28 15:48:39 log.go:37: Processing took too long.
+[INFO] 2023/10/28 15:48:44 log.go:30: Log File Created
+[INFO] 2023/10/28 15:48:44 log.go:30: Copied 96 bytes
+[ERROR] 2023/10/28 15:48:49 log.go:37: Processing took too long.
+[INFO] 2023/10/28 15:49:09 log.go:30: Log File Created
+[INFO] 2023/10/28 15:49:09 log.go:30: Copied 96 bytes
+[ERROR] 2023/10/28 15:49:14 log.go:37: Processing took too long.
+[INFO] 2023/10/28 16:15:29 log.go:30: Log File Created
+[INFO] 2023/10/28 16:15:29 log.go:30: Copied 96 bytes
+[INFO] 2023/10/28 16:15:32 log.go:30: Log File Created
+[INFO] 2023/10/28 16:15:32 log.go:30: Copied 0 bytes
+[ERROR] 2023/10/28 16:15:32 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/6fae1e86-e25e-4dc4-9451-0189dea61dd9-nodata.csv
+[INFO] 2023/10/28 16:15:32 log.go:30: Log File Created
+[INFO] 2023/10/28 16:15:32 log.go:30: Copied 114 bytes
+[ERROR] 2023/10/28 16:15:32 log.go:37: invalid email in CSV record 1: email
+[ERROR] 2023/10/28 16:15:32 log.go:37: invalid details in CSV record 1: details
+[ERROR] 2023/10/28 16:15:32 log.go:37: invalid details in CSV record 2: {"dob": "1990-12-05","city": "City2", "country": "Country2"}
+[INFO] 2023/10/28 16:16:09 log.go:30: Log File Created
+[INFO] 2023/10/28 16:16:09 log.go:30: Copied 96 bytes
+[INFO] 2023/10/28 16:16:21 log.go:30: Log File Created
+[INFO] 2023/10/28 16:16:21 log.go:30: Copied 0 bytes
+[ERROR] 2023/10/28 16:16:21 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/a812b0f9-76b9-4ae6-94aa-dfc68f1efcdc-nodata.csv
+[INFO] 2023/10/28 17:38:03 log.go:30: Log File Created
+[INFO] 2023/10/28 17:38:03 log.go:30: Copied 96 bytes
+[ERROR] 2023/10/28 17:38:03 log.go:43: Contacts Inserted to Kafka
 
-[INFO] 2023/10/25 13:38:29 log.go:30: Copied 0 bytes
-[ERROR] 2023/10/25 13:38:29 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/7a72a46e-9448-475e-b945-3e58ebb98bb5-empty.txt
-[INFO] 2023/10/25 13:38:29 log.go:30: Copied 15 bytes
-[ERROR] 2023/10/25 13:38:29 log.go:37: unsupported file type, please upload .csv file
+[INFO] 2023/10/28 17:38:03 log.go:30: Log File Created
+[INFO] 2023/10/28 17:38:03 log.go:30: Copied 0 bytes
+[ERROR] 2023/10/28 17:38:03 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/40976dbe-d68f-4d9d-a978-a2e4cb7ace89-nodata.csv
+[ERROR] 2023/10/28 17:38:03 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry 'c863e8216408426685c52dc69562c59e871c25995d85b76c' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/28 17:38:03 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry 'c863e8216408426685c52dc69562c59e871c25995d85b76c' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/28 17:38:03 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '35dbc522a1ac46e2b611e827e50ebd65fdf52b264d79ac48' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/28 17:38:03 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '35dbc522a1ac46e2b611e827e50ebd65fdf52b264d79ac48' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/28 17:38:03 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry 'e35d2f8d7b8047979f1a0c6ff3ea33a6841bc61f08e529bf' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/28 17:38:03 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry 'e35d2f8d7b8047979f1a0c6ff3ea33a6841bc61f08e529bf' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/28 17:38:03 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '5f391042a6bc4f93b255e8ab7e980dfea9aa9c75c163356b' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/28 17:38:03 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '5f391042a6bc4f93b255e8ab7e980dfea9aa9c75c163356b' for key 'Contacts.PRIMARY'
+[INFO] 2023/10/28 17:38:38 log.go:30: Log File Created
+[INFO] 2023/10/28 17:38:38 log.go:30: Copied 96 bytes
+[ERROR] 2023/10/28 17:38:38 log.go:43: Contacts Inserted to Kafka
 
-[INFO] 2023/10/25 13:38:29 log.go:30: Copied 18 bytes
-[ERROR] 2023/10/25 13:38:29 log.go:37: unsupported file type, please upload .csv file
+[INFO] 2023/10/28 17:38:38 log.go:30: Log File Created
+[INFO] 2023/10/28 17:38:38 log.go:30: Copied 0 bytes
+[ERROR] 2023/10/28 17:38:38 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/5511c379-454f-4e16-b277-612045515de8-nodata.csv
+[ERROR] 2023/10/28 17:38:39 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry 'c863e8216408426685c52dc69562c59e871c25995d85b76c' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/28 17:38:39 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry 'c863e8216408426685c52dc69562c59e871c25995d85b76c' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/28 17:38:39 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '35dbc522a1ac46e2b611e827e50ebd65fdf52b264d79ac48' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/28 17:38:39 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '35dbc522a1ac46e2b611e827e50ebd65fdf52b264d79ac48' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/28 17:38:39 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry 'e35d2f8d7b8047979f1a0c6ff3ea33a6841bc61f08e529bf' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/28 17:38:39 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry 'e35d2f8d7b8047979f1a0c6ff3ea33a6841bc61f08e529bf' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/28 17:38:39 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '5f391042a6bc4f93b255e8ab7e980dfea9aa9c75c163356b' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/28 17:38:39 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '5f391042a6bc4f93b255e8ab7e980dfea9aa9c75c163356b' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/28 17:38:39 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry 'd4e8b9140030468abf7d54a92a9a5cc1dff7d79c4bfd4cbc' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/28 17:38:39 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry 'd4e8b9140030468abf7d54a92a9a5cc1dff7d79c4bfd4cbc' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/28 17:38:39 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '0287e1e33d0e46dc8d97b722e9f808130c216c9dd41ab809' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/28 17:38:39 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '0287e1e33d0e46dc8d97b722e9f808130c216c9dd41ab809' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/28 17:38:39 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '6a8c8054032747c7a674e1caa21f2ff510b7a5395572f5bd' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/28 17:38:39 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '6a8c8054032747c7a674e1caa21f2ff510b7a5395572f5bd' for key 'Contacts.PRIMARY'
+[INFO] 2023/10/28 17:41:19 log.go:30: Log File Created
+[INFO] 2023/10/28 17:41:19 log.go:30: Copied 96 bytes
+[ERROR] 2023/10/28 17:41:19 log.go:43: Contacts Inserted to Kafka
 
-[INFO] 2023/10/25 13:38:29 log.go:30: Copied 18 bytes
-[ERROR] 2023/10/25 13:38:29 log.go:37: unsupported file type, please upload .csv file
+[INFO] 2023/10/28 17:41:19 log.go:30: Log File Created
+[INFO] 2023/10/28 17:41:19 log.go:30: Copied 0 bytes
+[ERROR] 2023/10/28 17:41:19 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/f8f785f6-fbb9-4ea5-affd-2e1595aeb9b1-nodata.csv
+[ERROR] 2023/10/28 17:41:19 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry 'c863e8216408426685c52dc69562c59e871c25995d85b76c' for key 'Contacts.PRIMARY'
+[ERROR] 2023/10/28 17:41:19 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry 'c863e8216408426685c52dc69562c59e871c25995d85b76c' for key 'Contacts.PRIMARY'
+[INFO] 2023/10/28 18:25:15 log.go:30: Log File Created
+[INFO] 2023/10/28 18:25:15 log.go:30: Copied 96 bytes
+[ERROR] 2023/10/28 18:25:15 log.go:43: Data Inserted to Kafka
 
-[INFO] 2023/10/25 13:38:29 log.go:30: Copied 18 bytes
-[ERROR] 2023/10/25 13:38:29 log.go:37: unsupported file type, please upload .csv file
-
-[INFO] 2023/10/25 13:38:29 log.go:30: Copied 18 bytes
-[ERROR] 2023/10/25 13:38:29 log.go:37: unsupported file type, please upload .csv file
-
-[INFO] 2023/10/25 13:38:29 log.go:30: Copied 18 bytes
-[ERROR] 2023/10/25 13:38:29 log.go:37: unsupported file type, please upload .csv file
-
-[ERROR] 2023/10/25 13:38:29 log.go:37: Error retrieving file: http: no such file
-[INFO] 2023/10/25 13:38:29 log.go:30: Copied 18 bytes
-[ERROR] 2023/10/25 13:38:29 log.go:37: unsupported file type, please upload .csv file
-
-[INFO] 2023/10/25 13:41:10 log.go:30: Log File Created
-[INFO] 2023/10/25 13:41:10 log.go:30: Copied 18 bytes
-[INFO] 2023/10/25 13:41:10 log.go:30: Copied 0 bytes
-[ERROR] 2023/10/25 13:41:10 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/4998ffa4-65bf-421e-bc43-4488f47e9a96-nodata.csv
-[INFO] 2023/10/25 13:41:10 log.go:30: Copied 15 bytes
-[ERROR] 2023/10/25 13:41:10 log.go:37: unsupported file type, please upload .csv file
-
-[ERROR] 2023/10/25 13:41:10 log.go:37: invalid number of columns in CSV record 1: [Test file contents]
-[INFO] 2023/10/25 13:41:25 log.go:30: Log File Created
-[INFO] 2023/10/25 13:41:25 log.go:30: Copied 18 bytes
-[ERROR] 2023/10/25 13:41:25 log.go:37: invalid number of columns in CSV record 1: [Test file contents]
-[INFO] 2023/10/25 13:45:56 log.go:30: Log File Created
-[INFO] 2023/10/25 13:45:56 log.go:30: Copied 96 bytes
-[INFO] 2023/10/25 13:45:56 log.go:30: Copied 0 bytes
-[ERROR] 2023/10/25 13:45:56 log.go:37: failed to read CSV: parse error on line 1, column 23: bare " in non-quoted-field
-[ERROR] 2023/10/25 13:45:56 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/33f310a8-36e3-4d05-9aaa-c60b0cffd216-nodata.csv
-[ERROR] 2023/10/25 13:45:56 log.go:37: Error processing uploaded file: parse error on line 1, column 23: bare " in non-quoted-field
-[INFO] 2023/10/25 13:45:56 log.go:30: Copied 15 bytes
-[ERROR] 2023/10/25 13:45:56 log.go:37: unsupported file type, please upload .csv file
-
-[INFO] 2023/10/25 13:45:56 log.go:30: Copied 18 bytes
-[ERROR] 2023/10/25 13:45:56 log.go:37: unsupported file type, please upload .csv file
-
-[INFO] 2023/10/25 13:45:56 log.go:30: Copied 18 bytes
-[ERROR] 2023/10/25 13:45:56 log.go:37: unsupported file type, please upload .csv file
-
-[INFO] 2023/10/25 13:45:56 log.go:30: Copied 96 bytes
-[ERROR] 2023/10/25 13:45:56 log.go:37: unsupported file type, please upload .csv file
-
-[ERROR] 2023/10/25 13:45:56 log.go:37: Error retrieving file: http: no such file
-[INFO] 2023/10/25 13:46:16 log.go:30: Log File Created
-[INFO] 2023/10/25 13:46:16 log.go:30: Copied 96 bytes
-[ERROR] 2023/10/25 13:46:16 log.go:37: failed to read CSV: parse error on line 1, column 23: bare " in non-quoted-field
-[ERROR] 2023/10/25 13:46:16 log.go:37: Error processing uploaded file: parse error on line 1, column 23: bare " in non-quoted-field
-[INFO] 2023/10/25 13:46:16 log.go:30: Copied 15 bytes
-[ERROR] 2023/10/25 13:46:16 log.go:37: unsupported file type, please upload .csv file
-
-[INFO] 2023/10/25 13:46:16 log.go:30: Copied 18 bytes
-[ERROR] 2023/10/25 13:46:16 log.go:37: unsupported file type, please upload .csv file
-
-[INFO] 2023/10/25 13:46:16 log.go:30: Copied 18 bytes
-[ERROR] 2023/10/25 13:46:16 log.go:37: unsupported file type, please upload .csv file
-
-[INFO] 2023/10/25 13:46:16 log.go:30: Copied 96 bytes
-[ERROR] 2023/10/25 13:46:16 log.go:37: unsupported file type, please upload .csv file
-
-[ERROR] 2023/10/25 13:46:16 log.go:37: Error retrieving file: http: no such file
-[INFO] 2023/10/25 15:08:54 log.go:30: Log File Created
-[INFO] 2023/10/25 15:08:54 log.go:30: Copied 96 bytes
-[INFO] 2023/10/25 15:08:54 log.go:30: Copied 18 bytes
-[ERROR] 2023/10/25 15:08:54 log.go:37: unsupported file type, please upload .csv file
-
-[INFO] 2023/10/25 15:08:54 log.go:30: Copied 18 bytes
-[ERROR] 2023/10/25 15:08:54 log.go:37: unsupported file type, please upload .csv file
-
-[INFO] 2023/10/25 15:08:54 log.go:30: Copied 96 bytes
-[ERROR] 2023/10/25 15:08:54 log.go:37: unsupported file type, please upload .csv file
-
-[ERROR] 2023/10/25 15:08:54 log.go:37: Error retrieving file: http: no such file
-[INFO] 2023/10/25 15:45:49 log.go:30: Log File Created
-[INFO] 2023/10/25 15:45:49 log.go:30: Copied 19 bytes
-[INFO] 2023/10/25 15:52:19 log.go:30: Log File Created
-[INFO] 2023/10/25 15:52:19 log.go:30: Copied 0 bytes
-[ERROR] 2023/10/25 15:52:19 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/c62d83e9-bf76-4aa6-aab4-4cd2ead38490-nodata.csv
-[INFO] 2023/10/25 15:54:56 log.go:30: Log File Created
-[INFO] 2023/10/25 15:54:56 log.go:30: Copied 0 bytes
-[ERROR] 2023/10/25 15:54:56 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/9294bc28-dfff-4d73-a64e-ac1e9cb97511-nodata.csv
-[INFO] 2023/10/25 15:56:48 log.go:30: Log File Created
-[INFO] 2023/10/25 15:56:48 log.go:30: Copied 0 bytes
-[ERROR] 2023/10/25 15:56:48 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/f00da331-846b-4d90-9ef5-457c78e56767-nodata.csv
-[INFO] 2023/10/25 15:58:19 log.go:30: Log File Created
-[INFO] 2023/10/25 15:58:19 log.go:30: Copied 0 bytes
-[ERROR] 2023/10/25 15:58:19 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/0e6cc024-1884-4410-a740-f3d2d65e1601-nodata.csv
-[INFO] 2023/10/25 15:59:16 log.go:30: Log File Created
-[INFO] 2023/10/25 15:59:16 log.go:30: Copied 19 bytes
-[ERROR] 2023/10/25 15:59:16 log.go:37: invalid number of columns in CSV record 1: [Sample file content]
-[INFO] 2023/10/25 16:02:00 log.go:30: Log File Created
-[INFO] 2023/10/25 16:02:00 log.go:30: Copied 115 bytes
-[INFO] 2023/10/26 10:22:30 log.go:30: Log File Created
-[INFO] 2023/10/26 10:22:30 log.go:30: Copied 115 bytes
-[INFO] 2023/10/26 10:22:30 log.go:30: Log File Created
-[ERROR] 2023/10/26 10:22:30 log.go:37: invalid email in CSV record 1: email
-[ERROR] 2023/10/26 10:22:30 log.go:37: invalid details in CSV record 1: details
-[INFO] 2023/10/26 10:22:30 log.go:30: Copied 0 bytes
-[ERROR] 2023/10/26 10:22:30 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/94890efc-da29-42b2-8a53-c2069ed07efc-nodata.csv
-[INFO] 2023/10/26 10:22:30 log.go:30: Log File Created
-[INFO] 2023/10/26 10:22:30 log.go:30: Copied 115 bytes
-[ERROR] 2023/10/26 10:22:30 log.go:37: invalid email in CSV record 1: email
-[ERROR] 2023/10/26 10:22:30 log.go:37: invalid details in CSV record 1: details
-[INFO] 2023/10/26 10:23:21 log.go:30: Log File Created
-[INFO] 2023/10/26 10:23:21 log.go:30: Copied 115 bytes
-[ERROR] 2023/10/26 10:23:21 log.go:37: invalid email in CSV record 1: email
-[ERROR] 2023/10/26 10:23:21 log.go:37: invalid details in CSV record 1: details
-[INFO] 2023/10/26 10:23:22 log.go:30: Log File Created
-[INFO] 2023/10/26 10:23:22 log.go:30: Copied 0 bytes
-[ERROR] 2023/10/26 10:23:22 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/580f21c0-8a2f-451a-a0c3-a4052b082cea-nodata.csv
-[INFO] 2023/10/26 10:23:23 log.go:30: Log File Created
-[INFO] 2023/10/26 10:23:23 log.go:30: Copied 115 bytes
-[ERROR] 2023/10/26 10:23:23 log.go:37: invalid email in CSV record 1: email
-[ERROR] 2023/10/26 10:23:23 log.go:37: invalid details in CSV record 1: details
-[INFO] 2023/10/26 10:44:44 log.go:30: Log File Created
-[INFO] 2023/10/26 10:44:44 log.go:30: Copied 115 bytes
-[INFO] 2023/10/26 10:44:44 log.go:30: Log File Created
-[INFO] 2023/10/26 10:44:44 log.go:30: Copied 0 bytes
-[ERROR] 2023/10/26 10:44:44 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/4f5fae13-6ae5-4ed4-8cf9-8c9baee6846b-nodata.csv
-[INFO] 2023/10/26 10:44:44 log.go:30: Log File Created
-[INFO] 2023/10/26 10:44:44 log.go:30: Copied 115 bytes
-[ERROR] 2023/10/26 10:44:44 log.go:37: invalid email in CSV record 1: email
-[ERROR] 2023/10/26 10:44:44 log.go:37: invalid details in CSV record 1: details
-[ERROR] 2023/10/26 10:44:44 log.go:37: invalid email in CSV record 1: email
-[ERROR] 2023/10/26 10:44:44 log.go:37: invalid details in CSV record 1: details
-[INFO] 2023/10/26 11:52:31 log.go:30: Log File Created
-[INFO] 2023/10/26 11:52:31 log.go:30: Copied 115 bytes
-[INFO] 2023/10/26 11:52:31 log.go:30: Log File Created
-[INFO] 2023/10/26 11:52:31 log.go:30: Copied 0 bytes
-[ERROR] 2023/10/26 11:52:31 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/cbcf7aa3-27bc-4684-af2c-ada9e8017ba8-nodata.csv
-[INFO] 2023/10/26 11:52:31 log.go:30: Log File Created
-[INFO] 2023/10/26 11:52:31 log.go:30: Copied 115 bytes
-[ERROR] 2023/10/26 11:52:31 log.go:37: invalid email in CSV record 1: email
-[ERROR] 2023/10/26 11:52:31 log.go:37: invalid details in CSV record 1: details
-[ERROR] 2023/10/26 11:52:31 log.go:37: invalid email in CSV record 1: email
-[ERROR] 2023/10/26 11:52:31 log.go:37: invalid details in CSV record 1: details
-[INFO] 2023/10/26 18:35:34 log.go:30: Log File Created
-[INFO] 2023/10/26 18:35:34 log.go:30: Copied 116 bytes
-[INFO] 2023/10/26 18:35:34 log.go:30: Log File Created
-[INFO] 2023/10/26 18:35:34 log.go:30: Copied 0 bytes
-[ERROR] 2023/10/26 18:35:34 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/503c40aa-869c-43c9-a570-f662b5cddb8f-nodata.csv
-[ERROR] 2023/10/26 18:35:34 log.go:37: invalid email in CSV record 1: email
-[ERROR] 2023/10/26 18:35:34 log.go:37: invalid details in CSV record 1: details
-[INFO] 2023/10/26 18:35:34 log.go:30: Log File Created
-[ERROR] 2023/10/26 18:35:34 log.go:37: invalid details in CSV record 2: {"dob": "1990-12-05", s"city": "City2", "country": "Country2"}
-[INFO] 2023/10/26 18:35:34 log.go:30: Copied 114 bytes
-[ERROR] 2023/10/26 18:35:34 log.go:37: invalid email in CSV record 1: email
-[ERROR] 2023/10/26 18:35:34 log.go:37: invalid details in CSV record 1: details
-[ERROR] 2023/10/26 18:35:34 log.go:37: invalid details in CSV record 2: {"dob": "1990-12-05","city": "City2", "country": "Country2"}
-[INFO] 2023/10/27 15:58:14 log.go:30: Log File Created
-[INFO] 2023/10/27 15:58:14 log.go:30: Copied 116 bytes
-[INFO] 2023/10/27 15:58:14 log.go:30: Log File Created
-[INFO] 2023/10/27 15:58:14 log.go:30: Copied 0 bytes
-[ERROR] 2023/10/27 15:58:14 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/88df6f7d-4cad-4e29-b161-700780c33a23-nodata.csv
-[INFO] 2023/10/27 15:58:14 log.go:30: Log File Created
-[INFO] 2023/10/27 15:58:14 log.go:30: Copied 114 bytes
-[ERROR] 2023/10/27 15:58:14 log.go:37: invalid email in CSV record 1: email
-[ERROR] 2023/10/27 15:58:14 log.go:37: invalid details in CSV record 1: details
-[ERROR] 2023/10/27 15:58:14 log.go:37: invalid details in CSV record 2: {"dob": "1990-12-05","city": "City2", "country": "Country2"}
-[ERROR] 2023/10/27 15:58:14 log.go:37: invalid email in CSV record 1: email
-[ERROR] 2023/10/27 15:58:14 log.go:37: invalid details in CSV record 1: details
-[ERROR] 2023/10/27 15:58:14 log.go:37: invalid details in CSV record 2: {"dob": "1990-12-05", s"city": "City2", "country": "Country2"}
-[INFO] 2023/10/27 17:46:19 log.go:30: Log File Created
-[INFO] 2023/10/27 17:46:19 log.go:30: Copied 116 bytes
-[INFO] 2023/10/27 17:46:19 log.go:30: Log File Created
-[INFO] 2023/10/27 17:46:19 log.go:30: Copied 0 bytes
-[ERROR] 2023/10/27 17:46:19 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/b4ad376e-d889-4998-bd3d-d98e7313de00-nodata.csv
-[INFO] 2023/10/27 17:46:19 log.go:30: Log File Created
-[INFO] 2023/10/27 17:46:19 log.go:30: Copied 114 bytes
-[ERROR] 2023/10/27 17:46:19 log.go:37: invalid email in CSV record 1: email
-[ERROR] 2023/10/27 17:46:19 log.go:37: invalid details in CSV record 1: details
-[ERROR] 2023/10/27 17:46:19 log.go:37: invalid details in CSV record 2: {"dob": "1990-12-05", s"city": "City2", "country": "Country2"}
-[ERROR] 2023/10/27 17:46:19 log.go:37: invalid email in CSV record 1: email
-[ERROR] 2023/10/27 17:46:19 log.go:37: invalid details in CSV record 1: details
-[ERROR] 2023/10/27 17:46:19 log.go:37: invalid details in CSV record 2: {"dob": "1990-12-05","city": "City2", "country": "Country2"}
-[ERROR] 2023/10/27 17:46:19 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry 'f70538c7fd8044c49b1a5de7474f766f508a890f179498e2' for key 'Contacts.PRIMARY'
-[ERROR] 2023/10/27 17:46:19 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry 'f70538c7fd8044c49b1a5de7474f766f508a890f179498e2' for key 'Contacts.PRIMARY'
-[ERROR] 2023/10/27 17:46:19 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry 'f70538c7fd8044c49b1a5de7474f766f508a890f179498e2' for key 'Contacts.PRIMARY'
-[ERROR] 2023/10/27 17:46:19 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry 'f70538c7fd8044c49b1a5de7474f766f508a890f179498e2' for key 'Contacts.PRIMARY'
-[ERROR] 2023/10/27 17:46:19 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '9fc820f298b14033ab93d55f69e890d229c429ebd4b75a24' for key 'Contacts.PRIMARY'
-[ERROR] 2023/10/27 17:46:19 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '9fc820f298b14033ab93d55f69e890d229c429ebd4b75a24' for key 'Contacts.PRIMARY'
-[ERROR] 2023/10/27 17:46:19 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '95700a77388347dd801a53c5f0337237dd7c6bc33b46900d' for key 'Contacts.PRIMARY'
-[ERROR] 2023/10/27 17:46:19 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '95700a77388347dd801a53c5f0337237dd7c6bc33b46900d' for key 'Contacts.PRIMARY'
-[ERROR] 2023/10/27 17:46:19 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '9fc820f298b14033ab93d55f69e890d229c429ebd4b75a24' for key 'Contacts.PRIMARY'
-[ERROR] 2023/10/27 17:46:19 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '9fc820f298b14033ab93d55f69e890d229c429ebd4b75a24' for key 'Contacts.PRIMARY'
-[ERROR] 2023/10/27 17:46:19 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '53f6ac6cef654ab7b8289e40496936a158263a66688e232d' for key 'Contacts.PRIMARY'
-[ERROR] 2023/10/27 17:46:19 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '53f6ac6cef654ab7b8289e40496936a158263a66688e232d' for key 'Contacts.PRIMARY'
-[ERROR] 2023/10/27 17:46:19 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '95700a77388347dd801a53c5f0337237dd7c6bc33b46900d' for key 'Contacts.PRIMARY'
-[ERROR] 2023/10/27 17:46:19 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '95700a77388347dd801a53c5f0337237dd7c6bc33b46900d' for key 'Contacts.PRIMARY'
-[ERROR] 2023/10/27 17:46:19 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '53f6ac6cef654ab7b8289e40496936a158263a66688e232d' for key 'Contacts.PRIMARY'
-[ERROR] 2023/10/27 17:46:19 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '53f6ac6cef654ab7b8289e40496936a158263a66688e232d' for key 'Contacts.PRIMARY'
-[ERROR] 2023/10/27 17:46:19 log.go:43: error executing MySQL query: Error 1062 (23000): Duplicate entry '3e07c743bbef48a8b5d70ca04a6be618231547abfa6da21c' for key 'Contacts.PRIMARY'
-[ERROR] 2023/10/27 17:46:19 log.go:43: Error inserting contact data into MySQL: Error 1062 (23000): Duplicate entry '3e07c743bbef48a8b5d70ca04a6be618231547abfa6da21c' for key 'Contacts.PRIMARY'
+[INFO] 2023/10/28 18:25:15 log.go:30: Log File Created
+[INFO] 2023/10/28 18:25:15 log.go:30: Copied 0 bytes
+[ERROR] 2023/10/28 18:25:15 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/68d55e3f-ce4e-41fc-896a-105b6397f767-nodata.csv

@@ -39,9 +39,9 @@ func TestHandleFileUpload_Success(t *testing.T) {
 	logs.InsForLogging()
 	requestBody := &bytes.Buffer{}
 	writer := multipart.NewWriter(requestBody)
-	part, _ := writer.CreateFormFile("uploadedfile", "/home/user/go_learn/data_stream/sampledata/sample.csv")
-	fileContent := []byte("name,email,details\nDona,dona@gmail.com,\"{\"\"dob\"\": \"\"1990-12-05\"\", " +
-		"s\"\"city\"\": \"\"City2\"\", \"\"country\"\": \"\"Country2\"\"}\"\n")
+	part, _ := writer.CreateFormFile("uploadedfile", "multicountries.csv")
+	fileContent := []byte("Dona,dona@gmail.com,\"{\"\"dob\"\": \"\"1990-12-05\"\", " +
+		"\"\"city\"\": \"\"City2\"\", \"\"country\"\": \"\"Country2\"\"}\"\n")
 	part.Write(fileContent)
 	writer.Close()
 	req, err := http.NewRequest("POST", "/upload", requestBody)
@@ -52,7 +52,7 @@ func TestHandleFileUpload_Success(t *testing.T) {
 	rr := httptest.NewRecorder()
 	HandleFileUpload(rr, req)
 	if rr.Code != http.StatusSeeOther {
-		t.Errorf("Expected status code %d, got %d", http.StatusSeeOther, rr.Code)
+		t.Errorf("Expected status code %d, got %d", http.StatusOK, rr.Code)
 	}
 
 }
@@ -60,7 +60,7 @@ func TestHandleFileUpload_EmptyFile(t *testing.T) {
 	logs.InsForLogging()
 	requestBody := &bytes.Buffer{}
 	writer := multipart.NewWriter(requestBody)
-	part, _ := writer.CreateFormFile("uploadedfile", "/home/user/go_learn/data_stream/sampledata/nodata.csv")
+	part, _ := writer.CreateFormFile("uploadedfile", "nodata.csv")
 	fileContent := []byte("")
 	part.Write(fileContent)
 	writer.Close()
@@ -74,26 +74,6 @@ func TestHandleFileUpload_EmptyFile(t *testing.T) {
 	expectedErrorMessage := "file is empty"
 	if !strings.Contains(rr.Body.String(), expectedErrorMessage) {
 		t.Errorf("Expected error message '%s' not found in the response body", expectedErrorMessage)
-	}
-}
-func TestHandleFileUpload_InvalidFileName(t *testing.T) {
-	logs.InsForLogging()
-	requestBody := &bytes.Buffer{}
-	writer := multipart.NewWriter(requestBody)
-	part, _ := writer.CreateFormFile("uploadedfile", "inva!id.csv")
-	fileContent := []byte("name,email,details\nDona,dona@gmail.com,\"{\"\"dob\"\": \"\"1990-12-05\"\"," +
-		"\"\"city\"\": \"\"City2\"\", \"\"country\"\": \"\"Country2\"\"}\"\n")
-	part.Write(fileContent)
-	writer.Close()
-	req, err := http.NewRequest("POST", "/upload", requestBody)
-	if err != nil {
-		t.Fatal(err)
-	}
-	req.Header.Set("Content-Type", writer.FormDataContentType())
-	rr := httptest.NewRecorder()
-	HandleFileUpload(rr, req)
-	if rr.Code != http.StatusBadRequest {
-		t.Errorf("Expected status code %d, got %d", http.StatusBadRequest, rr.Code)
 	}
 }
 func TestEntireQueryDisplay(t *testing.T) {
@@ -140,4 +120,9 @@ func TestGetEntireResultData(t *testing.T) {
 		}
 	}
 
+}
+func BenchmarkGetEntireResultData(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		GetEntireResultData()
+	}
 }

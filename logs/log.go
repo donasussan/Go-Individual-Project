@@ -46,6 +46,7 @@ func (l *SimpleLogger) Errorf(message string) {
 var NewLog *SimpleLogger
 
 func InsForLogging() {
+
 	var err error
 	NewLog, err = NewSimpleLogger("datalog.log")
 	if err != nil {

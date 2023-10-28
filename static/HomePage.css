@@ -73,3 +73,8 @@ h1 {
     font-size: 14px;
     margin-top: 10px;
 }
+
+#success-message {
+    display: none;
+    /* Initially hide the success message */
+}
