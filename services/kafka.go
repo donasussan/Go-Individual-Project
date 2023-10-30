@@ -6,7 +6,6 @@ import (
 	"datastream/logs"
 	"errors"
 	"fmt"
-	"strings"
 
 	"github.com/IBM/sarama"
 	_ "github.com/go-sql-driver/mysql"
@@ -16,6 +15,7 @@ type KafkaHandler struct {
 	producer1 sarama.SyncProducer
 	consumer  sarama.Consumer
 	Config    config.KafkaConfig
+	offset    int64
 }
 
 func NewKafkaProducers(config *config.KafkaConfig) (sarama.SyncProducer, error) {
@@ -43,7 +43,7 @@ func NewKafkaHandler() (*KafkaHandler, error) {
 	kafkaConfig, ok := configData.(config.KafkaConfig)
 	if !ok {
 		logs.NewLog.Error("Invalid database type: expected 'kafka'")
-		return nil, errors.New("Invalid database type: expected 'kafka'")
+		return nil, errors.New("invalid database type: expected 'kafka'")
 	}
 
 	producer1, err := NewKafkaProducers(&kafkaConfig)
@@ -62,59 +62,42 @@ func NewKafkaHandler() (*KafkaHandler, error) {
 		producer1: producer1,
 		consumer:  consumer,
 		Config:    kafkaConfig,
+		offset:    sarama.OffsetNewest,
 	}, nil
 }
 
-func (kh *KafkaHandler) SendMessage(topic string, message string) error {
+func (kafkahandler *KafkaHandler) SendMessage(topic string, message string) error {
 	producerMessage := &sarama.ProducerMessage{
 		Topic: topic,
 		Value: sarama.StringEncoder(message),
 	}
-	_, _, err := kh.producer1.SendMessage(producerMessage)
+	_, _, err := kafkahandler.producer1.SendMessage(producerMessage)
 	if err != nil {
 		return err
 	}
 	return nil
 }
+func (kafkahandler *KafkaHandler) ConsumeMessage(topic string) (string, error) {
+	config := sarama.NewConfig()
+	config.Consumer.Offsets.AutoCommit.Enable = false
 
-func (kh *KafkaHandler) ConsumeMessage(topic string) {
-	partitionConsumer, err := kh.consumer.ConsumePartition(topic, 0, sarama.OffsetNewest)
+	partitionConsumer, err := kafkahandler.consumer.ConsumePartition(topic, 0, kafkahandler.offset)
 	if err != nil {
-		logs.NewLog.Error("Error creating partition consumer")
-		return
+		logs.NewLog.Errorf(fmt.Sprint("Error creating partition consumer: ", err))
+		return "", err
 	}
 	defer partitionConsumer.Close()
-	var messages []string
-	messageCount := 0
 
 	for msg := range partitionConsumer.Messages() {
 		message := string(msg.Value)
-		messages = append(messages, message)
-		messageCount++
-
-		if messageCount%100 == 0 {
-
-			if strings.Contains(topic, "contacts") {
-				query := "INSERT INTO Contacts(ID, Name, Email, Details, Status) VALUES"
-				err := InsertDataToMySQL(messages, query)
-
-				messages = make([]string, 0)
-				if err != nil {
-					logs.NewLog.Errorf(fmt.Sprintf("Error inserting contact data into MySQL: %v", err))
-				}
-			} else {
-				query := "INSERT INTO ContactActivity (ContactsID, CampaignID, ActivityType,ActivityDate)VALUES"
-				err := InsertDataToMySQL(messages, query)
-				messages = make([]string, 0)
-				if err != nil {
-					logs.NewLog.Errorf(fmt.Sprintf("Error inserting activity data into MySQL: %v", err))
-				}
-			}
-		}
+		kafkahandler.offset = msg.Offset + 1
+		return message, nil
 	}
+
+	return "", errors.New("0 messages received")
 }
 
-func (kh *KafkaHandler) Close() {
-	kh.producer1.Close()
-	kh.consumer.Close()
+func (kafkahandler *KafkaHandler) Close() {
+	kafkahandler.producer1.Close()
+	kafkahandler.consumer.Close()
 }

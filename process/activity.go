@@ -173,19 +173,13 @@ func ReturnContactsAndActivitiesStructs(contactsData types.Contacts) (types.Cont
 		Status:  flag,
 		Contact: contact,
 	}
-	resultSeparateCh := make(chan []types.ContactActivity, 4)
-	go RunSeparateContactActivities(activityString, 4, resultSeparateCh)
-	MultiActivities := <-resultSeparateCh
-	close(resultSeparateCh)
-	return StatusContact, MultiActivities, nil
-}
 
-func RunSeparateContactActivities(activityString string, numColumns int, resultCh chan []types.ContactActivity) {
-	multiActivities, err := SeparateContactActivities(activityString, numColumns)
+	MultiActivities, err := SeparateContactActivities(activityString, 4)
 	if err != nil {
 		logs.NewLog.Error("Error Separating Contacts")
 	}
-	resultCh <- multiActivities
+
+	return StatusContact, MultiActivities, err
 }
 
 func SeparateContactActivities(activityString string, numColumns int) ([]types.ContactActivity, error) {
