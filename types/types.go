@@ -20,6 +20,18 @@ type ContactStatus struct {
 	Status  int
 }
 
+type ActivityData struct {
+	Column1 string
+	Column2 int
+	Column3 int
+	Column4 string
+}
+type ContactMessageData struct {
+	Column1 string
+	Column2 string
+	Column3 string
+	Column4 string
+}
 type ResultData struct {
 	ID      string `json:"ID"`
 	Email   string `json:"Email"`

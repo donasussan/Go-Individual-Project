@@ -123,7 +123,7 @@ func validateCSVRecord(lineNumber int, record []string) []error {
 	return errors
 }
 func CSVReadToDataInsertion(filename string, batchSize int, doneChan chan struct{}) error {
-	kafkahandler, err := services.NewKafkaHandler()
+	kh, err := services.NewKafkaHandler()
 	if err != nil {
 		logs.NewLog.Fatalf(fmt.Sprintf("Error creating Kafka handler: %v", err))
 	}
@@ -163,25 +163,24 @@ func CSVReadToDataInsertion(filename string, batchSize int, doneChan chan struct
 		contactsBatches = append(contactsBatches, contact)
 
 		go func(batch []types.Contacts) {
-			activityProcess(batch, kafkahandler)
+			activityProcess(batch, kh)
 		}(contactsBatches)
 		contactsBatches = make([]types.Contacts, 0)
 		rowCount = 0
 	}
 	doneChan <- struct{}{}
 	logs.NewLog.Errorf(fmt.Sprintln("Data Inserted to Kafka"))
-	go SendKafkaConsumerContactsToMySQL(kafkahandler)
-
-	SendKafkaConsumerActivityToMySQL()
+	go SendKafkaConsumerActivityToMySQL()
+	go SendKafkaConsumerContactsToMySQL()
 	return err
 }
 
-func activityProcess(contacts []types.Contacts, kafkahandler *services.KafkaHandler) {
+func activityProcess(contacts []types.Contacts, kh *services.KafkaHandler) {
 	for _, contact := range contacts {
 		statusContact, activitiesSlice, _ := ReturnContactsAndActivitiesStructs(contact)
 		contactsData := getContactsDataString(statusContact)
 		activityDetails := getActivityDetailsString(activitiesSlice)
-		err := SendDataToKafkaProducers(kafkahandler, contactsData, activityDetails)
+		err := SendDataToKafkaProducers(kh, contactsData, activityDetails)
 		if err != nil {
 			logs.NewLog.Error(fmt.Sprint("Error sending data to Kafka", err))
 		}
@@ -202,72 +201,81 @@ func getActivityDetailsString(activities []types.ContactActivity) string {
 	return details
 }
 
-func SendDataToKafkaProducers(kafkahandler *services.KafkaHandler, ContactsData string, ActivityData string) error {
+func SendDataToKafkaProducers(kh *services.KafkaHandler, ContactsData string, ActivityData string) error {
 
-	err1 := kafkahandler.SendMessage(kafkahandler.Config.ContactsTopic, ContactsData)
+	err1 := kh.SendMessage(kh.Config.ContactsTopic, ContactsData)
 	if err1 != nil {
 		logs.NewLog.Fatalf(fmt.Sprintf("Error sending message to Topic1: %v", err1))
 		return err1
 	}
-	err2 := kafkahandler.SendMessage(kafkahandler.Config.ActivityTopic, ActivityData)
+	err2 := kh.SendMessage(kh.Config.ActivityTopic, ActivityData)
 	if err2 != nil {
 		logs.NewLog.Fatalf(fmt.Sprintf("Error sending message to Topic2: %v", err2))
 		return err2
 	}
 	return nil
 }
-func SendKafkaConsumerContactsToMySQL(kafkahandler *services.KafkaHandler) {
+func SendKafkaConsumerContactsToMySQL() {
+	db, err := services.EstablishMySQLConnection()
+	if err != nil {
+		logs.NewLog.Error(fmt.Sprintf("Error establishing MySQL connection %v", err))
+	}
+	kh_contacts, _ := services.NewKafkaHandler()
 	messages := []string{}
 	messageCount := 0
 
 	for {
-		message, err := kafkahandler.ConsumeMessage(kafkahandler.Config.ContactsTopic)
+		message, err := kh_contacts.ConsumeMessage(kh_contacts.Config.ContactsTopic)
 		if err != nil {
 			logs.NewLog.Error("Error consuming messages")
 		}
 		if message != "" {
 			messages = append(messages, message)
 			messageCount++
-			query := "INSERT INTO Contacts(ID, Name, Email, Details, Status) VALUES"
-			filteredMessages := make([]string, 0)
+			if messageCount%100 == 0 {
+				query := "INSERT INTO Contacts(ID, Name, Email, Details, Status) VALUES"
+				filteredMessages := make([]string, 0)
 
-			for i, msg := range messages {
-				if i == len(messages)-1 {
-					msg = strings.TrimRight(msg, ",")
+				for i, msg := range messages {
+					if i == len(messages)-1 {
+						msg = strings.TrimRight(msg, ",")
+					}
+					filteredMessages = append(filteredMessages, msg)
 				}
-				filteredMessages = append(filteredMessages, msg)
-			}
 
-			for i, msg := range filteredMessages {
-				filteredMessages[i] = strings.Trim(msg, "[]")
-			}
+				for i, msg := range filteredMessages {
+					filteredMessages[i] = strings.Trim(msg, "[]")
+				}
 
-			query = fmt.Sprintf("%s %s;", query, strings.Join(filteredMessages, ""))
-			fmt.Println(query)
-			err := services.InsertDataToMySQL(query)
-			messages = make([]string, 0)
-			if err != nil {
-				logs.NewLog.Errorf(fmt.Sprintf("Error inserting contacts data into MySQL: %v", err))
+				query = fmt.Sprintf("%s %s;", query, strings.Join(filteredMessages, ""))
+				err := services.InsertDataToMySQL(db, query)
+
+				messages = make([]string, 0)
+				if err != nil {
+					logs.NewLog.Errorf(fmt.Sprintf("Error inserting contacts data into MySQL: %v", err))
+				}
 			}
 		}
 	}
 }
-
 func SendKafkaConsumerActivityToMySQL() {
-	kafkahandlernew, _ := services.NewKafkaHandler()
+	khnew, _ := services.NewKafkaHandler()
+	db, err := services.EstablishMySQLConnection()
+	if err != nil {
+		logs.NewLog.Error(fmt.Sprintf("Error establishing MySQL connection %v", err))
+	}
 
 	messages := []string{}
 	messageCount := 0
 
 	for {
-		message, err := kafkahandlernew.ConsumeMessage(kafkahandlernew.Config.ActivityTopic)
+		message, err := khnew.ConsumeMessage(khnew.Config.ActivityTopic)
 		if err != nil {
 			logs.NewLog.Error("Error consuming messages")
 		}
 		if message != "" {
 			messages = append(messages, message)
 			messageCount++
-
 			query := "INSERT INTO ContactActivity (ContactsID, CampaignID, ActivityType, ActivityDate) VALUES"
 			filteredMessages := make([]string, len(messages))
 
@@ -286,7 +294,7 @@ func SendKafkaConsumerActivityToMySQL() {
 			}
 
 			query = fmt.Sprintf("%s %s;", query, strings.Join(filteredMessages, ""))
-			err := services.InsertDataToMySQL(query)
+			err := services.InsertDataToMySQL(db, query)
 
 			messages = make([]string, 0)
 			if err != nil {

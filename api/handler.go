@@ -38,7 +38,6 @@ func HandleFileUpload(w http.ResponseWriter, r *http.Request) {
 	doneChan := make(chan struct{})
 
 	uploadedFile, header, err := r.FormFile("uploadedfile")
-
 	if err != nil {
 		logs.NewLog.Error(fmt.Sprintf("Error retrieving file: %v", err))
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
@@ -88,10 +87,12 @@ func HandleFileUpload(w http.ResponseWriter, r *http.Request) {
 	}
 	go func() {
 		err := process.CSVReadToDataInsertion(filePath, 100, doneChan)
+
 		if err != nil {
 			logs.NewLog.Error(fmt.Sprintf("Error processing uploaded file: %v", err))
 		}
 	}()
+
 	select {
 	case <-doneChan:
 		http.Redirect(w, r, "/HomePage.html?success=File+uploaded+successfully", http.StatusSeeOther)

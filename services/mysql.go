@@ -32,14 +32,10 @@ func EstablishMySQLConnection() (*sql.DB, error) {
 	}
 	return db, nil
 }
-func InsertDataToMySQL(query string) error {
-	db, err := EstablishMySQLConnection()
+func InsertDataToMySQL(db *sql.DB, query string) error {
+	_, err := db.Exec(query)
 	if err != nil {
-		logs.NewLog.Error(fmt.Sprintf("Error establishing MySQL connection %v", err))
-	}
-	_, err1 := db.Exec(query)
-	if err1 != nil {
-		logs.NewLog.Errorf(fmt.Sprintf("error executing MySQL query: %v", err1))
+		logs.NewLog.Errorf(fmt.Sprintf("error executing MySQL query: %v", err))
 		return err
 	}
 	return nil
