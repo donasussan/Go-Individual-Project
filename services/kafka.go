@@ -62,7 +62,7 @@ func NewKafkaHandler() (*KafkaHandler, error) {
 		producer1: producer1,
 		consumer:  consumer,
 		Config:    kafkaConfig,
-		offset:    sarama.OffsetNewest,
+		offset:    sarama.OffsetOldest,
 	}, nil
 }
 

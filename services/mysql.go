@@ -6,6 +6,7 @@ import (
 	"datastream/database"
 	"datastream/logs"
 	"fmt"
+	"strings"
 )
 
 func ConnectMySQL() (*config.MySQLConnector, error) {
@@ -32,11 +33,31 @@ func EstablishMySQLConnection() (*sql.DB, error) {
 	}
 	return db, nil
 }
-func InsertDataToMySQL(db *sql.DB, query string) error {
-	_, err := db.Exec(query)
+func InsertDataIntoTable(db *sql.DB, tableName string, data map[string]interface{}) error {
+	var columns []string
+	var placeholders []string
+	var values []interface{}
+
+	for column, value := range data {
+		columns = append(columns, column)
+		placeholders = append(placeholders, "?")
+		values = append(values, value)
+	}
+
+	sqlStatement := fmt.Sprintf("INSERT INTO %s (%s) VALUES (%s)",
+		tableName, strings.Join(columns, ", "), strings.Join(placeholders, ", "))
+
+	stmt, err := db.Prepare(sqlStatement)
 	if err != nil {
-		logs.NewLog.Errorf(fmt.Sprintf("error executing MySQL query: %v", err))
 		return err
 	}
+	defer stmt.Close()
+	fmt.Println(values...)
+
+	_, err = stmt.Exec(values...)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }

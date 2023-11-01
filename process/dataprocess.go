@@ -169,6 +169,7 @@ func CSVReadToDataInsertion(filename string, batchSize int, doneChan chan struct
 	}
 
 	doneChan <- struct{}{}
+	logs.NewLog.Info(fmt.Sprintln("Data Inserted to Kafka"))
 
 	go SendKafkaConsumerActivityToMySQL()
 	go SendKafkaConsumerContactsToMySQL()
@@ -182,22 +183,20 @@ func activityProcess(contacts []types.Contacts, KafkaHandlerIns *services.KafkaH
 		contactsData := getContactsDataString(statusContact)
 		activityDetails := getActivityDetailsString(activitiesSlice)
 		err := SendDataToKafkaProducers(KafkaHandlerIns, contactsData, activityDetails)
-		logs.NewLog.Info(fmt.Sprintln("Data Inserted to Kafka"))
-
 		if err != nil {
 			logs.NewLog.Error(fmt.Sprint("Error sending data to Kafka", err))
 		}
 	}
 }
 func getContactsDataString(statusContact types.ContactStatus) string {
-	statusInfo := fmt.Sprintf("('%s', '%s','%s', '%s', %d),", statusContact.Contact.ID, statusContact.Contact.Name,
-		statusContact.Contact.Email, statusContact.Contact.Details, statusContact.Status)
+	statusInfo := fmt.Sprintf("%s,%s,%s,%d,%s;", statusContact.Contact.ID, statusContact.Contact.Name,
+		statusContact.Contact.Email, statusContact.Status, statusContact.Contact.Details)
 	return statusInfo
 }
 func getActivityDetailsString(activities []types.ContactActivity) string {
 	var details string
 	for _, activity := range activities {
-		details += fmt.Sprintf("('%s', %d, %d, '%s'),", activity.Contactid, activity.Campaignid,
+		details += fmt.Sprintf("%s,%d,%d,%s;", activity.Contactid, activity.Campaignid,
 			activity.Activitytype, activity.Activitydate.Format("2006-01-02 15:04:05"))
 
 	}
@@ -218,14 +217,13 @@ func SendDataToKafkaProducers(KafkaHandlerIns *services.KafkaHandler, ContactsDa
 	}
 	return nil
 }
+
 func SendKafkaConsumerContactsToMySQL() {
 	db, err := services.EstablishMySQLConnection()
 	if err != nil {
-		logs.NewLog.Error(fmt.Sprintf("Error establishing MySQL connection %v", err))
+		logs.NewLog.Error(fmt.Sprintf("Error establishing MySQL connection: %v", err))
 	}
 	KafkaHandlerIns_contacts, _ := services.NewKafkaHandler()
-	messages := []string{}
-	messageCount := 0
 
 	for {
 		message, err := KafkaHandlerIns_contacts.ConsumeMessage(KafkaHandlerIns_contacts.Config.ContactsTopic)
@@ -233,30 +231,26 @@ func SendKafkaConsumerContactsToMySQL() {
 			logs.NewLog.Error("Error consuming messages")
 		}
 		if message != "" {
-			messages = append(messages, message)
-			messageCount++
-			if messageCount%100 == 0 {
-				query := "INSERT INTO Contacts(ID, Name, Email, Details, Status) VALUES"
-				filteredMessages := make([]string, 0)
+			parts := strings.Split(message, ";")
 
-				for i, msg := range messages {
-					if i == len(messages)-1 {
-						msg = strings.TrimRight(msg, ",")
+			for _, part := range parts {
+				values := strings.SplitN(part, ",", 5)
+
+				if len(values) == 5 {
+					keyValuePairs := make(map[string]interface{})
+					keyValuePairs["ID"] = values[0]
+					keyValuePairs["Name"] = values[1]
+					keyValuePairs["Email"] = values[2]
+					keyValuePairs["Status"] = values[3]
+					keyValuePairs["Details"] = values[4]
+
+					err := services.InsertDataIntoTable(db, "Contacts", keyValuePairs)
+
+					if err != nil {
+						logs.NewLog.Error(fmt.Sprintf("Error inserting data into MySQL: %v", err))
 					}
-					filteredMessages = append(filteredMessages, msg)
-				}
-
-				for i, msg := range filteredMessages {
-					filteredMessages[i] = strings.Trim(msg, "[]")
-				}
-
-				query = fmt.Sprintf("%s %s;", query, strings.Join(filteredMessages, ""))
-				err := services.InsertDataToMySQL(db, query)
-				fmt.Println(query)
-
-				messages = make([]string, 0)
-				if err != nil {
-					logs.NewLog.Errorf(fmt.Sprintf("Error inserting contacts data into MySQL: %v", err))
+				} else {
+					logs.NewLog.Error("Invalid part format")
 				}
 			}
 		}
@@ -266,11 +260,8 @@ func SendKafkaConsumerActivityToMySQL() {
 	KafkaHandlerIns_Activity, _ := services.NewKafkaHandler()
 	db, err := services.EstablishMySQLConnection()
 	if err != nil {
-		logs.NewLog.Error(fmt.Sprintf("Error establishing MySQL connection %v", err))
+		logs.NewLog.Error(fmt.Sprintf("Error establishing MySQL connection: %v", err))
 	}
-
-	messages := []string{}
-	messageCount := 0
 
 	for {
 		message, err := KafkaHandlerIns_Activity.ConsumeMessage(KafkaHandlerIns_Activity.Config.ActivityTopic)
@@ -278,31 +269,26 @@ func SendKafkaConsumerActivityToMySQL() {
 			logs.NewLog.Error("Error consuming messages")
 		}
 		if message != "" {
-			messages = append(messages, message)
-			messageCount++
-			query := "INSERT INTO ContactActivity (ContactsID, CampaignID, ActivityType, ActivityDate) VALUES"
-			filteredMessages := make([]string, len(messages))
+			parts := strings.Split(message, ";")
 
-			for i, msg := range messages {
-				filteredMessages = make([]string, 0)
+			for _, part := range parts {
+				values := strings.SplitN(part, ",", 4)
 
-				if i == len(messages)-1 {
-					msg = strings.TrimRight(msg, ",")
+				if len(values) == 4 {
+					keyValuePairs := make(map[string]interface{})
+					keyValuePairs["ContactsID"] = values[0]
+					keyValuePairs["CampaignID"] = values[1]
+					keyValuePairs["ActivityType"] = values[2]
+					keyValuePairs["ActivityDate"] = values[3]
 
+					err := services.InsertDataIntoTable(db, "ContactActivity", keyValuePairs)
+
+					if err != nil {
+						logs.NewLog.Error(fmt.Sprintf("Error inserting data into MySQL: %v", err))
+					}
+				} else {
+					logs.NewLog.Error("Invalid part format")
 				}
-				filteredMessages = append(filteredMessages, msg)
-
-			}
-			for i, msg := range filteredMessages {
-				filteredMessages[i] = strings.Trim(msg, "[]")
-			}
-
-			query = fmt.Sprintf("%s %s;", query, strings.Join(filteredMessages, ""))
-			err := services.InsertDataToMySQL(db, query)
-
-			messages = make([]string, 0)
-			if err != nil {
-				logs.NewLog.Errorf(fmt.Sprintf("Error inserting activity data into MySQL: %v", err))
 			}
 		}
 	}
