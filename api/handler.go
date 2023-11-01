@@ -36,7 +36,6 @@ func HomePageHandler(w http.ResponseWriter, r *http.Request) {
 
 func HandleFileUpload(w http.ResponseWriter, r *http.Request) {
 	doneChan := make(chan struct{})
-
 	uploadedFile, header, err := r.FormFile("uploadedfile")
 	if err != nil {
 		logs.NewLog.Error(fmt.Sprintf("Error retrieving file: %v", err))
@@ -49,32 +48,27 @@ func HandleFileUpload(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	defer uploadedFile.Close()
-
 	fileNameWithUUID := fmt.Sprintf("%s-%s", uuid.New(), header.Filename)
 	filePath := filepath.Join("/home/user/go_learn/data_stream/uploadfiles", fileNameWithUUID)
-	outputFile, err := os.Create(filePath)
+	tempFile, err := os.Create(filePath)
 	if err != nil {
-		logs.NewLog.Error(fmt.Sprintf("Error creating the file: %v", err))
+		logs.NewLog.Error(fmt.Sprintf("Error creating the temporary file: %v", err))
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 	}
-	defer outputFile.Close()
-
-	written, err := io.Copy(outputFile, uploadedFile)
+	defer tempFile.Close()
+	written, err := io.Copy(tempFile, uploadedFile)
+	if written != header.Size {
+		logs.NewLog.Error("Not all bytes were copied")
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
 	if err != nil {
 		logs.NewLog.Error(fmt.Sprintf("Error copying file content: %v", err))
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 	}
 
-	if written != header.Size {
-		logs.NewLog.Error("Data copy verification failed: Number of bytes copied does not match the original file size")
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		return
-	} else {
-		logs.NewLog.Info(fmt.Sprintf("Copied %d bytes", written))
-	}
 	err = process.ValidateUploadedFileFormat(filePath)
 	if err != nil {
 		data := struct {
@@ -96,7 +90,7 @@ func HandleFileUpload(w http.ResponseWriter, r *http.Request) {
 	select {
 	case <-doneChan:
 		http.Redirect(w, r, "/HomePage.html?success=File+uploaded+successfully", http.StatusSeeOther)
-	case <-time.After(5 * time.Second):
+	case <-time.After(100 * time.Second):
 		logs.NewLog.Error("Processing took too long.")
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	}
