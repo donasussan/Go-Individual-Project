@@ -171,7 +171,7 @@ func TestGetContactsDataString(t *testing.T) {
 		Status: 1,
 	}
 	contactsData := getContactsDataString(statusContact)
-	expectedContactsData := "('123', 'Dona','dona@example.com', 'jsondata', 1),"
+	expectedContactsData := "123,Dona,dona@example.com,1,jsondata;"
 	if contactsData != expectedContactsData {
 		t.Errorf("Expected ContactsData: %s, but got: %s", expectedContactsData, contactsData)
 	}
@@ -188,7 +188,7 @@ func TestGetActivityDetailsString(t *testing.T) {
 		},
 	}
 	activityDetails := getActivityDetailsString(activities)
-	expectedActivityDetails := `('123', 456, 1, '2023-10-10 00:00:00'),`
+	expectedActivityDetails := `123,456,1,2023-10-10 00:00:00;`
 	if activityDetails != expectedActivityDetails {
 		t.Errorf("Expected ActivityDetails: %s, but got: %s", expectedActivityDetails, activityDetails)
 	}
