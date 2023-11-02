@@ -1069,3 +1069,8 @@
 [ERROR] 2023/11/01 18:08:50 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/20ec7bae-adbd-400f-9f3e-310c2512c9db-nodata.csv
 [ERROR] 2023/11/01 18:08:50 log.go:37: Error inserting data into MySQL: Error 1062 (23000): Duplicate entry '0571d5f1a6434a788566e4009efb21c19c07015693b176f6' for key 'Contacts.PRIMARY'
 [ERROR] 2023/11/01 18:08:50 log.go:37: Invalid part format
+[INFO] 2023/11/02 11:50:36 log.go:30: Log File Created
+[INFO] 2023/11/02 11:50:36 log.go:30: Data Inserted to Kafka
+
+[INFO] 2023/11/02 11:50:36 log.go:30: Log File Created
+[ERROR] 2023/11/02 11:50:36 log.go:37: file is empty: /home/user/go_learn/data_stream/uploadfiles/a8e5126d-380d-42e7-9467-8a29c4e2cf0c-nodata.csv

@@ -94,6 +94,22 @@ func BenchmarkConsumeMessage(b *testing.B) {
 	kafkaHandler, _ := NewKafkaHandler()
 
 	for i := 0; i < b.N; i++ {
-		kafkaHandler.ConsumeMessage("contacts31")
+		kafkaHandler.ConsumeMessage("contacts15")
+	}
+}
+func TestConsumeMessage(t *testing.T) {
+	logs.InsForLogging()
+	kafkahandler, _ := NewKafkaHandler()
+	testMessage := "Test message"
+
+	topic := "test-topic"
+	kafkahandler.SendMessage(topic, testMessage)
+	actualMessage, err := kafkahandler.ConsumeMessage(topic)
+
+	if err != nil {
+		t.Errorf("Expected no error, but got an error: %v", err)
+	}
+	if actualMessage != testMessage {
+		t.Errorf("Expected '%s', but got: %s", testMessage, actualMessage)
 	}
 }

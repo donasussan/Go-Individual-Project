@@ -13,7 +13,7 @@ func TestInsertDataIntoTable_ValidDataWithConversion(t *testing.T) {
 	}
 	defer db.Close()
 
-	values := []interface{}{1, 2, "Ty", "2023-11-01"}
+	values := []interface{}{"abcd", 2, 1, "2023-11-01"}
 
 	keyValuePairs := make(map[string]interface{})
 	keyValuePairs["ContactsID"] = values[0]
@@ -23,11 +23,9 @@ func TestInsertDataIntoTable_ValidDataWithConversion(t *testing.T) {
 
 	tableName := "ContactActivity"
 
-	err = services.InsertDataIntoTable(db, tableName, keyValuePairs)
+	err = InsertDataIntoTable(db, tableName, keyValuePairs)
 
 	if err != nil {
 		t.Errorf("Expected no error, but got an error: %v", err)
 	}
-
-	// Optionally, you can add more assertions to verify that the data was inserted correctly in the "ContactActivity" table.
 }

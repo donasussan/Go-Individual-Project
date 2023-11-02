@@ -132,6 +132,7 @@ func CSVReadToDataInsertion(filename string, batchSize int, doneChan chan struct
 	contactsBatches := make([]types.Contacts, 0)
 	rowCount := 0
 	lineNumber := 0
+	batchCount := 0
 
 	for {
 		lineNumber++
@@ -165,6 +166,8 @@ func CSVReadToDataInsertion(filename string, batchSize int, doneChan chan struct
 		if len(contactsBatches) == batchSize {
 			activityProcess(contactsBatches, KafkaHandlerIns)
 			contactsBatches = make([]types.Contacts, 0)
+			batchCount++
+			fmt.Printf("Processed %d batches to Kafka\n", batchCount)
 		}
 	}
 

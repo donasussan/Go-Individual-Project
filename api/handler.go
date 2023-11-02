@@ -5,6 +5,7 @@ import (
 	"datastream/process"
 	"datastream/services"
 	"datastream/types"
+	"errors"
 	"fmt"
 	"html/template"
 	"io"
@@ -18,7 +19,7 @@ import (
 
 var ModifyHomePage = template.Must(template.ParseFiles("templates/HomePage.html"))
 
-func ParsefileHTMLtemplates(htmlpage string) *template.Template {
+func ParseFileHTMLTemplates(htmlpage string) *template.Template {
 	tmpl, err := template.ParseFiles(htmlpage)
 	if err != nil {
 		return nil
@@ -27,7 +28,7 @@ func ParsefileHTMLtemplates(htmlpage string) *template.Template {
 }
 
 func HomePageHandler(w http.ResponseWriter, r *http.Request) {
-	tmpl := ParsefileHTMLtemplates("templates/HomePage.html")
+	tmpl := ParseFileHTMLTemplates("templates/HomePage.html")
 	err := tmpl.Execute(w, nil)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -36,53 +37,33 @@ func HomePageHandler(w http.ResponseWriter, r *http.Request) {
 
 func HandleFileUpload(w http.ResponseWriter, r *http.Request) {
 	doneChan := make(chan struct{})
+
 	uploadedFile, header, err := r.FormFile("uploadedfile")
 	if err != nil {
-		logs.NewLog.Error(fmt.Sprintf("Error retrieving file: %v", err))
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		handleError(w, "Error retrieving file: %v", err, http.StatusInternalServerError)
 		return
 	}
+
 	if header.Filename == "" {
-		err := fmt.Errorf("invalid file name")
-		logs.NewLog.Error(err.Error())
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		handleError(w, "Invalid file name", nil, http.StatusBadRequest)
 		return
 	}
-	fileNameWithUUID := fmt.Sprintf("%s-%s", uuid.New(), header.Filename)
+
+	fileNameWithUUID := generateUniqueFileName(header.Filename)
 	filePath := filepath.Join("/home/user/go_learn/data_stream/uploadfiles", fileNameWithUUID)
-	tempFile, err := os.Create(filePath)
-	if err != nil {
-		logs.NewLog.Error(fmt.Sprintf("Error creating the temporary file: %v", err))
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		return
-	}
-	defer tempFile.Close()
-	written, err := io.Copy(tempFile, uploadedFile)
-	if written != header.Size {
-		logs.NewLog.Error("Not all bytes were copied")
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		return
-	}
-	if err != nil {
-		logs.NewLog.Error(fmt.Sprintf("Error copying file content: %v", err))
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+
+	if err := saveUploadedFile(uploadedFile, filePath, header.Size); err != nil {
+		handleError(w, "Error saving uploaded file: %v", err, http.StatusInternalServerError)
 		return
 	}
 
-	err = process.ValidateUploadedFileFormat(filePath)
-	if err != nil {
-		data := struct {
-			Error string
-		}{
-			Error: err.Error(),
-		}
-		ModifyHomePage.ExecuteTemplate(w, "HomePage.html", data)
+	if err := process.ValidateUploadedFileFormat(filePath); err != nil {
+		displayErrorPage(w, err)
 		return
 	}
+
 	go func() {
-		err := process.CSVReadToDataInsertion(filePath, 100, doneChan)
-
-		if err != nil {
+		if err := processCSVFile(filePath, doneChan); err != nil {
 			logs.NewLog.Error(fmt.Sprintf("Error processing uploaded file: %v", err))
 		}
 	}()
@@ -90,19 +71,50 @@ func HandleFileUpload(w http.ResponseWriter, r *http.Request) {
 	select {
 	case <-doneChan:
 		http.Redirect(w, r, "/HomePage.html?success=File+uploaded+successfully", http.StatusSeeOther)
-	case <-time.After(100 * time.Second):
-		logs.NewLog.Error("Processing took too long.")
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+	case <-time.After(500 * time.Second):
+		handleError(w, "We are experiencing some technical difficulties!", nil, http.StatusInternalServerError)
 	}
+}
+
+func generateUniqueFileName(originalName string) string {
+	return fmt.Sprintf("%s-%s", uuid.New(), originalName)
+}
+
+func saveUploadedFile(uploadedFile io.Reader, filePath string, expectedSize int64) error {
+	tempFile, err := os.Create(filePath)
+	if err != nil {
+		return err
+	}
+	defer tempFile.Close()
+
+	written, err := io.Copy(tempFile, uploadedFile)
+	if written != expectedSize {
+		return errors.New("not all bytes were copied")
+	}
+	return err
+}
+
+func processCSVFile(filePath string, doneChan chan struct{}) error {
+	return process.CSVReadToDataInsertion(filePath, 100, doneChan)
+}
+
+func displayErrorPage(w http.ResponseWriter, err error) {
+	data := struct {
+		Error string
+	}{
+		Error: err.Error(),
+	}
+	ModifyHomePage.ExecuteTemplate(w, "HomePage.html", data)
 }
 
 func EntireQueryDisplay(w http.ResponseWriter, r *http.Request) {
 	results, err := GetEntireResultData()
 	if err != nil {
-		logs.NewLog.Error(fmt.Sprintf("Error getting Result%v", http.StatusInternalServerError))
+		handleError(w, "Error getting Result", err, http.StatusInternalServerError)
 		return
 	}
-	tmpl := ParsefileHTMLtemplates("templates/ResultPage.html")
+
+	tmpl := ParseFileHTMLTemplates("templates/ResultPage.html")
 	data := struct {
 		Results []types.ResultData
 	}{
@@ -110,15 +122,15 @@ func EntireQueryDisplay(w http.ResponseWriter, r *http.Request) {
 	}
 	err = tmpl.Execute(w, data)
 	if err != nil {
-		logs.NewLog.Error(fmt.Sprintf("Internal Server Error %v", http.StatusInternalServerError))
+		handleError(w, "Internal Server Error", err, http.StatusInternalServerError)
 	}
 }
 
 func RefreshQuery(w http.ResponseWriter, r *http.Request) {
-	tmpl := ParsefileHTMLtemplates("templates/QueryView.html")
+	tmpl := ParseFileHTMLTemplates("templates/QueryView.html")
 	results, err := GetCountOfPeople()
 	if err != nil {
-		logs.NewLog.Error(fmt.Sprintf("Error getting Result %v", http.StatusInternalServerError))
+		handleError(w, "Error getting Result", err, http.StatusInternalServerError)
 		return
 	}
 	data := struct {
@@ -128,9 +140,17 @@ func RefreshQuery(w http.ResponseWriter, r *http.Request) {
 	}
 	err = tmpl.Execute(w, data)
 	if err != nil {
-		logs.NewLog.Error(fmt.Sprintf("Internal Server Error %v", http.StatusInternalServerError))
+		handleError(w, "Internal Server Error", err, http.StatusInternalServerError)
 	}
+}
 
+func handleError(w http.ResponseWriter, message string, err error, statusCode int) {
+	if err != nil {
+		logs.NewLog.Error(fmt.Sprintf(message, err))
+	} else {
+		logs.NewLog.Error(message)
+	}
+	http.Error(w, message, statusCode)
 }
 
 func GetCountOfPeople() ([]types.Count, error) {
@@ -140,8 +160,10 @@ func GetCountOfPeople() ([]types.Count, error) {
 		"FROM dona_campaign.ContactActivity WHERE opened >= 30))"
 	rows, err := services.GetQueryResultFromClickhouse(query)
 	if err != nil {
-		logs.NewLog.Error(fmt.Sprint("Error getting clickhouse Query", err))
+		handleError(nil, "Error getting clickhouse Query", err, http.StatusInternalServerError)
+		return nil, err
 	}
+
 	var results []types.Count
 	for rows.Next() {
 		var Count int
@@ -152,7 +174,7 @@ func GetCountOfPeople() ([]types.Count, error) {
 		results = append(results, result)
 	}
 	if err := rows.Err(); err != nil {
-		logs.NewLog.Errorf(fmt.Sprint(err))
+		handleError(nil, fmt.Sprint(err), nil, http.StatusInternalServerError)
 		return nil, err
 	}
 	return results, nil
@@ -166,8 +188,10 @@ func GetEntireResultData() ([]types.ResultData, error) {
 		"FROM dona_campaign.ContactActivity WHERE opened >= 30))"
 	rows, err := services.GetQueryResultFromClickhouse(query)
 	if err != nil {
-		logs.NewLog.Error(fmt.Sprint("Error getting clickhouse Query Result", err))
+		handleError(nil, "Error getting clickhouse Query Result", err, http.StatusInternalServerError)
+		return nil, err
 	}
+
 	var results []types.ResultData
 	for rows.Next() {
 		var ID, Email, Country string
@@ -184,7 +208,7 @@ func GetEntireResultData() ([]types.ResultData, error) {
 		results = append(results, result)
 	}
 	if err := rows.Err(); err != nil {
-		logs.NewLog.Errorf(fmt.Sprint(err))
+		handleError(nil, fmt.Sprint(err), nil, http.StatusInternalServerError)
 		return nil, err
 	}
 	return results, err
