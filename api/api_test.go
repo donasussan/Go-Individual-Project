@@ -126,3 +126,32 @@ func BenchmarkGetEntireResultData(b *testing.B) {
 		GetEntireResultData()
 	}
 }
+
+func createTestRequest() (*http.Request, *httptest.ResponseRecorder, error) {
+	requestBody := &bytes.Buffer{}
+	writer := multipart.NewWriter(requestBody)
+
+	part, _ := writer.CreateFormFile("uploadedfile", "data.csv")
+	fileContent := []byte("Dona,dona@gmail.com,\"{\"\"dob\"\": \"\"1990-12-05\"\", " +
+		"\"\"city\"\": \"\"City2\"\", \"\"country\"\": \"\"Country2\"\"}\"\n")
+	part.Write(fileContent)
+	writer.Close()
+
+	req := httptest.NewRequest("POST", "/upload", requestBody)
+	req.Header.Set("Content-Type", writer.FormDataContentType())
+
+	w := httptest.NewRecorder()
+
+	return req, w, nil
+}
+func BenchmarkHandleFileUpload(b *testing.B) {
+	logs.InsForLogging()
+	for i := 0; i < b.N; i++ {
+		req, w, err := createTestRequest()
+		if err != nil {
+			b.Fatalf("Failed to create request: %v", err)
+		}
+
+		HandleFileUpload(w, req)
+	}
+}

@@ -21,7 +21,7 @@ func TestInsertDataIntoTable_ValidDataWithConversion(t *testing.T) {
 	keyValuePairs["ActivityType"] = values[2]
 	keyValuePairs["ActivityDate"] = values[3]
 
-	tableName := "ContactActivity"
+	tableName := "test_ContactActivity"
 
 	err = InsertDataIntoTable(db, tableName, keyValuePairs)
 

@@ -22,3 +22,23 @@
 [INFO] 2023/11/02 11:51:07 log.go:30: This is an info message
 [WARNING] 2023/11/02 11:51:07 log.go:34: This is a warning message
 [ERROR] 2023/11/02 11:51:07 log.go:37: This is an error message
+[INFO] 2023/11/02 14:24:30 log.go:30: Log File Created
+[INFO] 2023/11/02 14:24:30 log.go:30: This is an info message
+[WARNING] 2023/11/02 14:24:30 log.go:34: This is a warning message
+[ERROR] 2023/11/02 14:24:30 log.go:37: This is an error message
+[INFO] 2023/11/02 15:57:38 log.go:30: Log File Created
+[INFO] 2023/11/02 15:57:38 log.go:30: This is an info message
+[WARNING] 2023/11/02 15:57:38 log.go:34: This is a warning message
+[ERROR] 2023/11/02 15:57:38 log.go:37: This is an error message
+[INFO] 2023/11/02 16:46:23 log.go:30: Log File Created
+[INFO] 2023/11/02 16:46:23 log.go:30: This is an info message
+[WARNING] 2023/11/02 16:46:23 log.go:34: This is a warning message
+[ERROR] 2023/11/02 16:46:23 log.go:37: This is an error message
+[INFO] 2023/11/02 16:46:49 log.go:30: Log File Created
+[INFO] 2023/11/02 16:46:49 log.go:30: This is an info message
+[WARNING] 2023/11/02 16:46:49 log.go:34: This is a warning message
+[ERROR] 2023/11/02 16:46:49 log.go:37: This is an error message
+[INFO] 2023/11/02 17:07:19 log.go:30: Log File Created
+[INFO] 2023/11/02 17:07:19 log.go:30: This is an info message
+[WARNING] 2023/11/02 17:07:19 log.go:34: This is a warning message
+[ERROR] 2023/11/02 17:07:19 log.go:37: This is an error message

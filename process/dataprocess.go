@@ -227,7 +227,7 @@ func SendKafkaConsumerContactsToMySQL() {
 		logs.NewLog.Error(fmt.Sprintf("Error establishing MySQL connection: %v", err))
 	}
 	KafkaHandlerIns_contacts, _ := services.NewKafkaHandler()
-
+	fmt.Println("Inserting Contacts to MySQL...")
 	for {
 		message, err := KafkaHandlerIns_contacts.ConsumeMessage(KafkaHandlerIns_contacts.Config.ContactsTopic)
 		if err != nil {
@@ -252,8 +252,6 @@ func SendKafkaConsumerContactsToMySQL() {
 					if err != nil {
 						logs.NewLog.Error(fmt.Sprintf("Error inserting data into MySQL: %v", err))
 					}
-				} else {
-					logs.NewLog.Error("Invalid part format")
 				}
 			}
 		}
@@ -265,6 +263,7 @@ func SendKafkaConsumerActivityToMySQL() {
 	if err != nil {
 		logs.NewLog.Error(fmt.Sprintf("Error establishing MySQL connection: %v", err))
 	}
+	fmt.Println("Inserting Activity to MySQL...")
 
 	for {
 		message, err := KafkaHandlerIns_Activity.ConsumeMessage(KafkaHandlerIns_Activity.Config.ActivityTopic)
@@ -289,8 +288,6 @@ func SendKafkaConsumerActivityToMySQL() {
 					if err != nil {
 						logs.NewLog.Error(fmt.Sprintf("Error inserting data into MySQL: %v", err))
 					}
-				} else {
-					logs.NewLog.Error("Invalid part format")
 				}
 			}
 		}

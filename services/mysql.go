@@ -52,7 +52,6 @@ func InsertDataIntoTable(db *sql.DB, tableName string, data map[string]interface
 		return err
 	}
 	defer stmt.Close()
-	logs.NewLog.Info("Inserted to MySQL")
 	_, err = stmt.Exec(values...)
 	if err != nil {
 		return err
